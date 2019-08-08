@@ -17,7 +17,6 @@ class UserController: HttpServlet() {
         resp.writer.write("Users!")
     }
 
-    override fun doPost(req: HttpServletRequest?, resp: HttpServletResponse?) {
 
         val user = User("123","",0,"",0)
 
