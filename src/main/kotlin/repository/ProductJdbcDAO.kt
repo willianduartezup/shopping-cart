@@ -1,4 +1,6 @@
-package domain
+package repository
+
+import domain.Product
 
 class ProductJdbcDAO: ProductDAO {
     override fun get(id: String): Product {

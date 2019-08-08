@@ -1,4 +1,4 @@
-package domain
+package repository
 
 interface CrudDAO<E, ID> {
 
