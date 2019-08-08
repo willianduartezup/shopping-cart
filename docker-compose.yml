@@ -5,7 +5,7 @@ services:
     container_name: postgres
     image: postgres
     environment:
-      POSTGRES_DB: shopping-cart
+      POSTGRES_DB: shopping-cart-db
       POSTGRES_USER: postgres 
       POSTGRES_PASSWORD: postgres
     ports:

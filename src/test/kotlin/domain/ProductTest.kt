@@ -1,6 +1,7 @@
 package domain
 
 import infra.exception.ValidationException
+import main.kotlin.repository.ConnectionFactory
 import org.junit.BeforeClass
 import org.junit.Test
 import repository.DAOFactory
@@ -20,10 +21,17 @@ class ProductTest {
             println("insert......")
             val product = Product(id, "Apple", 2, "piece", 1)
 
-            val factory = DAOFactory()
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java) as ProductDAO
+            val jdbc = ConnectionFactory()
+            try {
+                val factory = DAOFactory()
+                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-            productDAO.add(product)
+                productDAO.add(product)
+            }catch (ex: Exception){
+                ex.printStackTrace()
+            }finally {
+                jdbc.closeConnection()
+            }
         }
     }
 
@@ -44,21 +52,39 @@ class ProductTest {
 
     @Test
     fun `validate insert product`() {
-        val factory = DAOFactory()
-        val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java) as ProductDAO
 
-        assertEquals(id, productDAO.get(id).id)
+        val jdbc = ConnectionFactory()
+        try {
+            val factory = DAOFactory()
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+            assertEquals(id, productDAO.get(id).id)
+        }catch (ex: java.lang.Exception){
+            ex.printStackTrace()
+            assertEquals(id, "")
+        }finally {
+            jdbc.closeConnection()
+        }
     }
 
     @Test
     fun `update product`() {
-        val factory = DAOFactory()
-        val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java) as ProductDAO
 
-        val product = Product(id, "Orange", 2, "piece", 1)
+        val jdbc = ConnectionFactory()
+        try {
+            val factory = DAOFactory()
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-        productDAO.edit(product)
+            val product = Product(id, "Orange", 2, "piece", 1)
 
-        assertEquals(product.name, productDAO.get(id).name)
+            productDAO.edit(product)
+
+            assertEquals(product.name, productDAO.get(id).name)
+        }catch (ex: java.lang.Exception){
+            ex.printStackTrace()
+            assertEquals("", "error")
+        }finally {
+            jdbc.closeConnection()
+        }
     }
 }
