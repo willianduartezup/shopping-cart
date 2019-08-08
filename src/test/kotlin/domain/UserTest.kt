@@ -1,7 +1,8 @@
 package test.kotlin.domain
 
-import org.hamcrest.MatcherAssert.assertThat
 import main.kotlin.domain.User
+import org.apache.log4j.Logger
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.Test
@@ -11,12 +12,15 @@ import javax.validation.Validation
 
 class UserTest() {
 
+    var LOG = Logger.getLogger(UserTest::class.java)
+
     private var validator = Validation.buildDefaultValidatorFactory().validator
 
     @Test
     fun userNameIsEmpty() {
+        LOG.info("userNameIsEmpty")
 
-        val user = User("123", "", "teste@teste.com", "123456")
+        val user = User(null, "", "teste@teste.com", "123456")
 
         val violations = validator.validate(user)
 
@@ -26,8 +30,9 @@ class UserTest() {
 
     @Test
     fun userEmailIsEmpty() {
+        LOG.info("userEmailIsEmpty")
 
-        val user = User("123", "teste", "", "123456")
+        val user = User(null, "teste", "", "123456")
 
         val violations = validator.validate(user)
 
@@ -37,19 +42,50 @@ class UserTest() {
     }
 
     @Test
-    fun userPasswordIsEmpty(){
+    fun userEmailNotValid() {
+        LOG.info("userEmailNotValid")
 
-        val user = User("123", "teste", "teste@test.com", "")
+        val user = User(null, "test name", "", "123456")
+
+        val violations = validator.validate(user)
+
+        assertThat(violations, hasSize(1))
+        assertThat(getNameFirstProperty(violations), `is`("email"))
+
+    }
+
+    @Test
+    fun userPasswordIsEmpty() {
+        LOG.info("userPasswordIsEmpty")
+
+        val user = User(null, "teste", "teste@test.com", "")
+
+        val violations = validator.validate(user)
+
+        if (violations.size < 1) {
+            assertThat(violations, hasSize(1))
+        } else if (violations.size > 1) {
+            assertThat(violations, hasSize(2))
+        }
+
+        assertThat(getNameFirstProperty(violations), `is`("password"))
+    }
+
+    @Test
+    fun userPasswordIsNotValid() {
+        LOG.info("userPasswordIsNotValid")
+
+        val user = User(null, "teste", "teste@test.com", "12")
 
         val violations = validator.validate(user)
 
         assertThat(violations, hasSize(1))
         assertThat(getNameFirstProperty(violations), `is`("password"))
-
     }
 
-
     private fun getNameFirstProperty(violations: Set<ConstraintViolation<User>>): String {
+        LOG.info("getNameFirstProperty")
+
         return violations.iterator().next().propertyPath.iterator().next().name
     }
 

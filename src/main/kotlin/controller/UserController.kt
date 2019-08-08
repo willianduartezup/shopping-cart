@@ -17,18 +17,6 @@ class UserController: HttpServlet() {
         resp.writer.write("Users!")
     }
 
-    override fun doPost(req: HttpServletRequest?, resp: HttpServletResponse?) {
 
-        var user = User("123",name = "",email = "teste@teste.com",password = "123456")
-
-        val violations = validator.validate(user)
-
-        for (violation in violations) {
-            var error = violation.message
-
-            println(error)
-        }
-
-    }
 
 }
