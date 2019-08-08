@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
-                     debug="false">
-    <appender name="shopping_cart_db" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.home}/logs/shopping_cart_db.log"/>
-        <param name="Append"            value="true" />
-        <param name="ImmediateFlush"    value="true" />
-        <param name="MaxFileSize"       value="20MB" />
-        <param name="MaxBackupIndex"    value="10" />
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
-        </layout>
-    </appender>
-
-    <logger name="br.com.zup.shopping-cart" additivity="false">
-        <level value="DEBUG" />
-        <appender-ref ref="shopping_cart_db"/>
-    </logger>
-
-    <root>
-        <level value="debug" />
-        <appender-ref ref="shopping_cart_db" />
-    </root>
-
-</log4j:configuration>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="shopping-cart" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
