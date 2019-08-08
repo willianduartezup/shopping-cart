@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-body
+<!--%@ include file="pages/test.html"%-->
+<%= request.getParameter("page") %>
 </body>
 </html>
