@@ -4,20 +4,17 @@ import java.lang.Exception
 import java.sql.Connection
 import java.sql.DriverManager
 
-class JDBCConection {
+class ConnectionFactory {
 
     private val url = "jdbc:postgresql://localhost:5432/shopping-cart-db"
     private val user = "postgres"
     private val password = "postgres"
     private lateinit var connection: Connection
 
-    fun getConnection(): Any {
-        try {
-            connection = DriverManager.getConnection(url, user, password)
-            return connection
-        }catch (e :Exception){
-            return e.printStackTrace()
-        }
+    @Throws(Exception::class)
+    fun getConnection(): Connection {
+        connection = DriverManager.getConnection(url, user, password)
+        return connection
     }
 
     fun closeConnection(){
