@@ -1,24 +1,24 @@
 package main.kotlin.domain
 
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
+
+import java.util.UUID
 import javax.validation.constraints.NotEmpty
 
 
+data class User(
 
-class User(
-    var id: String,
+
+    var id: UUID? = UUID.randomUUID(),
 
     @field:NotEmpty(message = "Name is blank!")
     var name: String,
 
-    @field:NotNull
-    var price: Int?,
+    @field:NotEmpty(message = "Email is blank!")
+    var email: String,
 
-    @field:NotBlank(message = "Unit is blank!")
-    var unit: String,
+    @field:NotEmpty(message = "Password is blank!")
+    var password: String
 
-    @field:NotNull
-    var quantity: Int
+
 ) {
 }

@@ -19,7 +19,7 @@ class UserController: HttpServlet() {
 
     override fun doPost(req: HttpServletRequest?, resp: HttpServletResponse?) {
 
-        var user = User("123","",0,"",0)
+        var user = User("123",name = "",email = "teste@teste.com",password = "123456")
 
         val violations = validator.validate(user)
 
