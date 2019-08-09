@@ -6,6 +6,7 @@
 </head>
 <body>
 <div>
+    <a href="index.jsp">Home</a>
     <a href="index.jsp?page=product/list">Product</a>
 </div>
 <div style="margin-top: 50px;">

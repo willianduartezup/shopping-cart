@@ -15,7 +15,7 @@
     <td style="text-align: center">1</td>
     <td style="text-align: center">
         <a href="index.jsp?page=product/form">update</a>
-        <a href="index.jsp?page=product/remove">remove</a>
+        <a href="index.jsp?page=product/list">remove</a>
     </td>
     </tbody>
 </table>
