@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<form method="post">
     <table>
         <tr>
             <td>name:</td>
             <td>
                 <label>
-                    <input type="text" name="name"/>
+                    <input type="text" name="name" id="name"/>
                 </label>
             </td>
         </tr>
@@ -12,7 +13,7 @@
             <td>price:</td>
             <td>
                 <label>
-                    <input type="text" name="price"/>
+                    <input type="text" name="price" id="price"/>
                 </label>
             </td>
         </tr>
@@ -20,7 +21,7 @@
             <td>unity:</td>
             <td>
                 <label>
-                    <input type="text" name="unity"/>
+                    <input type="text" name="unity" id="unity"/>
                 </label>
             </td>
         </tr>
@@ -28,7 +29,7 @@
             <td>quantity:</td>
             <td>
                 <label>
-                    <input type="text" name="quantity"/>
+                    <input type="text" name="quantity" id="quantity"/>
                 </label>
             </td>
         </tr>
@@ -38,3 +39,4 @@
             </td>
         </tr>
     </table>
+</form>

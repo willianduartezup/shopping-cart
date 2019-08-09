@@ -19,5 +19,7 @@
     %>
     <jsp:include page="<%= pagePath %>"></jsp:include>
 </div>
+
+<script type="text/javascript" src="js/infra/request.js"></script>
 </body>
 </html>
