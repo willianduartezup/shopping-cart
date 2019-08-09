@@ -1,2 +1,2 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-home
+<h1>SHOPPING CART</h1>
