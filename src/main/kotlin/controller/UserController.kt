@@ -1,4 +1,4 @@
-package main.kotlin.controller
+package controller
 
 import main.kotlin.domain.User
 import javax.servlet.annotation.WebServlet
@@ -18,5 +18,16 @@ class UserController: HttpServlet() {
     }
 
 
+        val user = User("123","",0,"",0)
+
+        val violations = validator.validate(user)
+
+        for (violation in violations) {
+            val error = violation.message
+
+            println(error)
+        }
+
+    }
 
 }
