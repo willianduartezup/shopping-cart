@@ -2,10 +2,16 @@
 <!doctype html>
 <html>
 <head>
-    <title>Title</title>
+    <title>Shopping Cart</title>
 </head>
 <body>
-<!--%@ include file="pages/test.html"%-->
-<%= request.getParameter("page") %>
+<%
+    String pagePath = "pages/home.jsp";
+    if (request.getParameter("page") != null) {
+        pagePath = "pages/" + request.getParameter("page") + ".jsp";
+    }
+%>
+
+<jsp:include page="<%= pagePath %>"></jsp:include>
 </body>
 </html>
