@@ -1,33 +1,81 @@
 package controller
 
-import main.kotlin.domain.User
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import domain.User
+import main.kotlin.infra.ReadPayload
+import repository.ConnectionFactory
+import repository.DAOFactory
+import repository.UserDAO
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import javax.validation.Validation
 
+@WebServlet(name = "Index", value = ["/user/*"])
+class UserController : HttpServlet() {
 
-@WebServlet(name = "Index", value = ["/user"])
-class UserController: HttpServlet() {
+    private lateinit var userDAO: UserDAO
+    private val factory = DAOFactory()
+    private val jdbc = ConnectionFactory()
+    private val mapper = jacksonObjectMapper()
+    private val readPayload = ReadPayload()
 
-    private var validator = Validation.buildDefaultValidatorFactory().validator
+    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
 
-    override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        resp.writer.write("Users!")
+        try {
+            val userDAO: UserDAO =
+                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+            val user: User = readPayload.mapper<User>(req.inputStream)
+            userDAO.add(user)
+            return resp.setStatus(201, "CREATED")
+        } catch (e: Exception) {
+            return resp.sendError(400, "ERROR")
+        }
     }
 
+    override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
 
-        val user = User("123","",0,"",0)
+        if (req.pathInfo != null) {
+            val param = req.pathInfo.replace("/", "")
+            try {
+                val userDAO: UserDAO =
+                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                val user: User = userDAO.get(param)
+                val jsonString = mapper.writeValueAsString(user)
+                resp.writer.write(jsonString)
+            } catch (e: Exception) {
+                resp.sendError(400, "User not found!")
+            }
+        } else resp.sendError(400, "Error, param not found!")
+    }
 
-        val violations = validator.validate(user)
+    override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
 
-        for (violation in violations) {
-            val error = violation.message
-
-            println(error)
+        try {
+            val jdbc = ConnectionFactory()
+            val userDAO: UserDAO =
+                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+            val readPayload = ReadPayload()
+            val user: User = readPayload.mapper<User>(req.inputStream)
+            userDAO.edit(user)
+            return resp.setStatus(200, "SUCCESS")
+        } catch (e: Exception) {
+            return resp.sendError(400, "ERROR")
         }
+    }
 
+    override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
+
+        if (req.pathInfo != null) {
+            val param = req.pathInfo.replace("/", "")
+            try {
+                val userDAO: UserDAO =
+                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                val user = userDAO.get(param)
+            } catch (e: Exception) {
+                return resp.sendError(400, "ERROR")
+            }
+        }
     }
 
 }

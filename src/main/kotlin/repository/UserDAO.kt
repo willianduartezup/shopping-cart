@@ -1,5 +1,5 @@
 package repository
 
-import main.kotlin.domain.User
+import domain.User
 
 interface UserDAO: CrudDAO<User, String> {}

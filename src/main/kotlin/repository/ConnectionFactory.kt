@@ -1,4 +1,4 @@
-package main.kotlin.repository
+package repository
 
 import java.lang.Exception
 import java.sql.Connection
@@ -13,6 +13,7 @@ class ConnectionFactory {
 
     @Throws(Exception::class)
     fun getConnection(): Connection {
+        Class.forName("org.postgresql.Driver")
         connection = DriverManager.getConnection(url, user, password)
         return connection
     }

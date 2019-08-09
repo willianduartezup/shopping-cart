@@ -1,12 +1,12 @@
 package domain
 
-import main.kotlin.repository.ConnectionFactory
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import repository.ConnectionFactory
 import repository.DAOFactory
 import repository.ProductDAO
 import java.util.UUID

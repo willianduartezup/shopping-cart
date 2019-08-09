@@ -1,4 +1,4 @@
-package main.kotlin.domain
+package domain
 
 
 import java.util.UUID

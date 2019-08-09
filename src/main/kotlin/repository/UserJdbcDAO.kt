@@ -1,6 +1,6 @@
 package repository
 
-import main.kotlin.domain.User
+import domain.User
 import java.sql.Connection
 
 class UserJdbcDAO(val connection: Connection) : UserDAO {
@@ -57,8 +57,9 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun remove(id: String) {
-        val psmt = connection.prepareStatement("DELETE FROM users WHERE id = ?")
-        psmt.setString(1, id)
+        val psmt = connection.prepareStatement("UPDATE users SET isDeleted = ? WHERE id = ?")
+        psmt.setString(1, "true")
+        psmt.setString(2, id)
 
         psmt.execute()
         psmt.close()

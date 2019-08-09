@@ -1,7 +1,6 @@
 package test.kotlin.domain
 
-import main.kotlin.domain.User
-import main.kotlin.repository.ConnectionFactory
+import domain.User
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -9,6 +8,7 @@ import org.hamcrest.Matchers.hasSize
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import repository.ConnectionFactory
 import repository.DAOFactory
 import repository.UserDAO
 import java.util.UUID
