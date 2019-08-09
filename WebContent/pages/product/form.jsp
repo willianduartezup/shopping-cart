@@ -1,28 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="index.jsp">
+<form action="product" method="post">
     <table>
         <tr>
             <td>name:</td>
             <td>
-                <input type="text" name="name"/>
+                <input type="text" name="name" id="name"/>
             </td>
         </tr>
         <tr>
             <td>price:</td>
             <td>
-                <input type="text" name="price"/>
+                <input type="text" name="price" id="price"/>
             </td>
         </tr>
         <tr>
             <td>unid:</td>
             <td>
-                <input type="text" name="unid"/>
+                <input type="text" name="unid" id="unid"/>
             </td>
         </tr>
         <tr>
             <td>quantity:</td>
             <td>
-                <input type="text" name="quantity"/>
+                <input type="text" name="quantity" id="quantity"/>
             </td>
         </tr>
         <tr>
