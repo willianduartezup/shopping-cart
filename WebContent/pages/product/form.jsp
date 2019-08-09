@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<script type="text/javascript" src="js/page/product/form.js"></script>
-<script>
-    onSubmit();
-</script>
 <form method="post" onsubmit="return onSubmit()">
     <table>
         <tr>
@@ -44,3 +40,4 @@
         </tr>
     </table>
 </form>
+<script type="text/javascript" src="js/page/product/form.js"></script>
