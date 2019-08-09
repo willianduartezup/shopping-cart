@@ -1,16 +1,23 @@
 package domain
 
-import infra.exception.ValidationException
 import main.kotlin.repository.ConnectionFactory
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.hasSize
+import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import repository.DAOFactory
 import repository.ProductDAO
-import java.util.*
+import java.util.UUID
+import javax.validation.ConstraintViolation
+import javax.validation.Validation
 import kotlin.test.assertEquals
 
 
 class ProductTest {
+
+    private var validator = Validation.buildDefaultValidatorFactory().validator
 
     companion object {
         val id = UUID.randomUUID().toString()
@@ -24,30 +31,36 @@ class ProductTest {
             val jdbc = ConnectionFactory()
             try {
                 val factory = DAOFactory()
-                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                val productDAO: ProductDAO =
+                    factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
                 productDAO.add(product)
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 ex.printStackTrace()
-            }finally {
+            } finally {
                 jdbc.closeConnection()
             }
         }
-    }
 
-    @Test
-    fun `product field validation`() {
-        val product = Product("", "", 0, "piece", 0)
-        var ok = 0
+        @AfterClass
+        @JvmStatic
+        fun deletProduct() {
 
-        try {
-            product.validateFields()
-        } catch (ex: ValidationException) {
-            if (ex.listErrors.containsKey("id") && ex.listErrors.containsKey("name") && ex.listErrors.containsKey("quantity")) {
-                ok = 1
+            val jdbc = ConnectionFactory()
+
+            try {
+                val factory = DAOFactory()
+                val productDAO: ProductDAO =
+                    factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+                productDAO.remove(id)
+
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            } finally {
+                jdbc.closeConnection()
             }
         }
-        assertEquals(1, ok)
     }
 
     @Test
@@ -56,13 +69,14 @@ class ProductTest {
         val jdbc = ConnectionFactory()
         try {
             val factory = DAOFactory()
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-            assertEquals(id, productDAO.get(id).id)
-        }catch (ex: java.lang.Exception){
+            assertEquals(id, productDAO.get(id).id.toString())
+        } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals(id, "")
-        }finally {
+        } finally {
             jdbc.closeConnection()
         }
     }
@@ -73,18 +87,45 @@ class ProductTest {
         val jdbc = ConnectionFactory()
         try {
             val factory = DAOFactory()
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
             val product = Product(id, "Orange", 2, "piece", 1)
 
             productDAO.edit(product)
 
             assertEquals(product.name, productDAO.get(id).name)
-        }catch (ex: java.lang.Exception){
+        } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals("", "error")
-        }finally {
+        } finally {
             jdbc.closeConnection()
         }
     }
+
+    @Test
+    fun productNameIsEmpty() {
+        val product = Product(id, "", 2, "piece", 1)
+
+        val violations = validator.validate(product)
+
+        assertThat(violations, hasSize(1))
+        assertThat(getNameFirstProperty(violations), `is`("name"))
+    }
+
+    @Test
+    fun productPriceIsPositivo() {
+
+        val product = Product(id, "Test", 0, "piece", 1)
+
+        val violations = validator.validate(product)
+
+        assertThat(violations, hasSize(1))
+        assertThat(getNameFirstProperty(violations), `is`("price"))
+    }
+
+    private fun getNameFirstProperty(violations: Set<ConstraintViolation<Product>>): String {
+        return violations.iterator().next().propertyPath.iterator().next().name
+    }
+
 }

@@ -10,4 +10,8 @@ interface CrudDAO<E, ID> {
 
     @Throws(Exception::class)
     fun edit(e: E): E
+
+    @Throws(Exception::class)
+    fun  remove(id: ID)
+
 }

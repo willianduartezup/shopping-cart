@@ -11,7 +11,7 @@ import javax.validation.constraints.Size
 data class User(
 
     @Id
-    var id: UUID? = UUID.randomUUID(),
+    var id: String? = UUID.randomUUID().toString(),
 
     @field:NotEmpty(message = "Name is blank!")
     var name: String,

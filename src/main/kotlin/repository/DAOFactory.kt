@@ -8,6 +8,8 @@ class DAOFactory {
 
         return if (c == ProductDAO::class.java) {
             ProductJdbcDAO(connection)
+        } else if (c == UserDAO::class.java) {
+            UserJdbcDAO(connection)
         } else {
             null
         }

@@ -1,13 +1,20 @@
 package test.kotlin.domain
 
 import main.kotlin.domain.User
+import main.kotlin.repository.ConnectionFactory
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.junit.Test
+import repository.DAOFactory
+import repository.UserDAO
+import java.util.UUID
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
+import kotlin.test.assertEquals
 
 
 class UserTest() {
@@ -15,6 +22,90 @@ class UserTest() {
     var LOG = Logger.getLogger(UserTest::class.java)
 
     private var validator = Validation.buildDefaultValidatorFactory().validator
+
+    companion object {
+        val id = UUID.randomUUID().toString()
+
+        @BeforeClass
+        @JvmStatic
+        fun insertUser() {
+            println("insert.user")
+            val user = User(id, "Tester", "teste@teste.com", "piece")
+
+            val jdbc = ConnectionFactory()
+            try {
+                val factory = DAOFactory()
+                val userDao: UserDAO =
+                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+
+                userDao.add(user)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            } finally {
+                jdbc.closeConnection()
+            }
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun deleteUser() {
+
+            val jdbc = ConnectionFactory()
+
+            try {
+                val factory = DAOFactory()
+                val userDao: UserDAO =
+                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+
+
+                userDao.remove(id)
+
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            } finally {
+                jdbc.closeConnection()
+            }
+        }
+    }
+
+    @Test
+    fun `validate insert user`() {
+        val jdbc = ConnectionFactory()
+        try {
+            val factory = DAOFactory()
+            val userDAO: UserDAO =
+                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+
+            assertEquals(id, userDAO.get(id).id)
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+            assertEquals(id, "")
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
+
+    @Test
+    fun `update user`() {
+
+        val jdbc = ConnectionFactory()
+        try {
+            val factory = DAOFactory()
+            val userDao: UserDAO =
+                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+
+            val user = User(id, "Test Modify", "teste@teste.com", "12345678")
+
+            userDao.edit(user)
+
+            assertEquals(user.name, userDao.get(id).name)
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+            assertEquals("", "error")
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
 
     @Test
     fun userNameIsEmpty() {

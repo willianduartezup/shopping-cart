@@ -3,7 +3,8 @@ package repository
 import domain.Product
 import java.sql.Connection
 
-class ProductJdbcDAO(val connection: Connection): ProductDAO {
+class ProductJdbcDAO(val connection: Connection) : ProductDAO {
+
     override fun get(id: String): Product {
         println("jdbc product get")
         val stm = connection.prepareStatement("SELECT * FROM product WHERE id = ?")
@@ -11,11 +12,17 @@ class ProductJdbcDAO(val connection: Connection): ProductDAO {
 
         val rs = stm.executeQuery()
 
-        if (!rs.next()){
+        if (!rs.next()) {
             throw Exception("Product not found")
         }
 
-        val product = Product(rs.getString("id"), rs.getString("name"),rs.getInt("price"),rs.getString("unit"),rs.getInt("quantity"))
+        val product = Product(
+            rs.getString("id"),
+            rs.getString("name"),
+            rs.getInt("price"),
+            rs.getString("unit"),
+            rs.getInt("quantity")
+        )
 
         stm.close()
 
@@ -37,7 +44,8 @@ class ProductJdbcDAO(val connection: Connection): ProductDAO {
     }
 
     override fun edit(e: Product): Product {
-        val psmt = connection.prepareStatement("UPDATE product SET name = ?, price = ?, unit = ?, quantity = ? WHERE id = ?")
+        val psmt =
+            connection.prepareStatement("UPDATE product SET name = ?, price = ?, unit = ?, quantity = ? WHERE id = ?")
         psmt.setString(1, e.name)
         psmt.setInt(2, e.price)
         psmt.setString(3, e.unity)
@@ -49,4 +57,14 @@ class ProductJdbcDAO(val connection: Connection): ProductDAO {
 
         return e
     }
+
+    override fun remove(id: String) {
+
+        val psmt = connection.prepareStatement("DELETE FROM product WHERE id = ?")
+        psmt.setString(1, id)
+
+        psmt.execute()
+        psmt.close()
+    }
+
 }

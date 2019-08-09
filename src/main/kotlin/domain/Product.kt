@@ -1,32 +1,27 @@
 package domain
 
-import infra.exception.ValidationException
+import java.util.UUID
+import javax.persistence.Id
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.Positive
+
 
 data class Product(
-    val id: String,
+
+    @Id
+    var id: String? = UUID.randomUUID().toString(),
+
+    @field:NotEmpty(message = "Name is Empty!")
     val name: String,
+
+    @field:Positive(message = "Price invalid!")
     val price: Int,
+
     val unity: String = "piece",
+
     val quantity: Int
+
 ) {
-    fun validateFields() {
-        val listErrors = mutableMapOf<String, String>()
-
-        if (id.trim() == "") {
-            listErrors["id"] = "id field is required"
-        }
-        if(name.trim() == ""){
-            listErrors["name"] = "name field is required"
-        }
-        if(quantity == 0){
-            listErrors["quantity"] = "quantity field cannot be zero"
-            println(listErrors.toList())
-        }
-
-        if (listErrors.isNotEmpty()){
-            throw ValidationException(listErrors)
-        }
-    }
 }
 
 
