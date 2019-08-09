@@ -4,7 +4,7 @@
     <thead>
     <th>name</th>
     <th>price</th>
-    <th>unid</th>
+    <th>unity</th>
     <th>quantity</th>
     <th>actions</th>
     </thead>
