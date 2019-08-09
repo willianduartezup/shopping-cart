@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<form method="post">
+<form method="post" onsubmit="return onSubmit()">
     <table>
         <tr>
             <td>name:</td>
@@ -40,3 +40,4 @@
         </tr>
     </table>
 </form>
+<script type="text/javascript" src="js/page/product/form.js"></script>

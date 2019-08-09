@@ -3,6 +3,9 @@
 <html>
 <head>
     <title>Shopping Cart</title>
+
+    <script type="text/javascript" src="js/infra/request.js"></script>
+    <script type="text/javascript" src="js/factory/productFactory.js"></script>
 </head>
 <body>
 <div>
@@ -19,7 +22,5 @@
     %>
     <jsp:include page="<%= pagePath %>"></jsp:include>
 </div>
-
-<script type="text/javascript" src="js/infra/request.js"></script>
 </body>
 </html>
