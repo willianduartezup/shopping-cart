@@ -8,6 +8,7 @@
 <div>
     <a href="index.jsp">Home</a>
     <a href="index.jsp?page=product/list">Product</a>
+    <a href="index.jsp?page=user/usersList">Users</a>
 </div>
 <div style="margin-top: 50px;">
     <%
@@ -16,7 +17,6 @@
             pagePath = "pages/" + request.getParameter("page") + ".jsp";
         }
     %>
-
     <jsp:include page="<%= pagePath %>"></jsp:include>
 </div>
 </body>
