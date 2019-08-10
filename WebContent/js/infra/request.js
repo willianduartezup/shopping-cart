@@ -1,7 +1,28 @@
 var request = {};
 
-request.getType = function(){
-    return new XMLHttpRequest();
+request.getType = function(callback, callbackError){
+    var type = new XMLHttpRequest();
+    type.onreadystatechange = function() {
+        if (this.readyState === 4){
+            var res = JSON.parse(this.responseText);
+
+            if (res.message){
+                alert(res.message);
+            }
+
+            if (request.getStatusSuccess().includes(this.status)) {
+                if (request.isFunction(callback)){
+                    callback(this.responseText);
+                }
+            }else{
+                if (request.isFunction(callbackError)) {
+                    callbackError(this.responseText);
+                }
+            }
+        }
+    };
+
+    return type;
 };
 
 request.getStatusSuccess = function(){
@@ -12,19 +33,10 @@ request.isFunction = function(fn){
     return fn && {}.toString.call(fn) === '[object Function]';
 }
 
-request.post = function(url, callback, callbackError){
-    var type = request.getType();
-    type.onreadystatechange = function() {
-        if (this.readyState === 4 && request.getStatusSuccess().includes(this.status)) {
-            if (request.isFunction(callback)){
-                callback(this.responseText);
-            }
-        }else{
-            if (request.isFunction(callbackError)) {
-                callbackError(this.responseText);
-            }
-        }
-    };
+request.post = function(url, body, callback, callbackError){
+    var type = request.getType(callback, callbackError);
+
     type.open("POST", url, true);
-    type.send();
+    type.setRequestHeader("Content-Type", "application/json");
+    type.send(JSON.stringify(body));
 };
