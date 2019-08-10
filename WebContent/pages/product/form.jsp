@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<form method="post" onsubmit="return onSubmit()">
+<form method="post" onsubmit="return onSubmit(this)">
     <table>
         <tr>
             <td>name:</td>
             <td>
                 <label>
-                    <input type="text" name="name" id="name"/>
+                    <input type="text" name="name" id="name" required/>
                 </label>
             </td>
         </tr>
@@ -13,7 +13,7 @@
             <td>price:</td>
             <td>
                 <label>
-                    <input type="text" name="price" id="price"/>
+                    <input type="number" name="price" id="price" required/>
                 </label>
             </td>
         </tr>
@@ -29,7 +29,7 @@
             <td>quantity:</td>
             <td>
                 <label>
-                    <input type="text" name="quantity" id="quantity"/>
+                    <input type="number" name="quantity" id="quantity" required/>
                 </label>
             </td>
         </tr>
