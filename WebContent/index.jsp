@@ -6,6 +6,7 @@
 
     <script type="text/javascript" src="js/infra/request.js"></script>
     <script type="text/javascript" src="js/factory/productFactory.js"></script>
+    <script type="text/javascript" src="js/factory/userFactory.js"></script>
 </head>
 <body>
 <div>

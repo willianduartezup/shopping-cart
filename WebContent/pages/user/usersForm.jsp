@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<form method="post" onsubmit="return onSubmit(this)">
 <table>
     <tr>
         <td>name:</td>
         <td>
             <label>
-                <input type="text" name="name"/>
+                <input type="text" name="name" id="nameBox" required/>
             </label>
         </td>
     </tr>
@@ -12,7 +13,7 @@
         <td>email:</td>
         <td>
             <label>
-                <input type="text" name="price"/>
+                <input type="text" name="email" id="emailBox" required/>
             </label>
         </td>
     </tr>
@@ -22,3 +23,5 @@
         </td>
     </tr>
 </table>
+</form>
+<script type="text/javascript" src="js/page/user/usersForm.js"></script>
