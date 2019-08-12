@@ -80,3 +80,11 @@ request.post = function(url, body, callback, callbackError){
     type.setRequestHeader("Content-Type", "application/json");
     type.send(JSON.stringify(body));
 };
+
+request.put = function(url, body, callback, callbackError){
+    const type = request.getType(callback, callbackError);
+
+    type.open("PUT", url, true);
+    type.setRequestHeader("Content-Type", "application/json");
+    type.send(JSON.stringify(body));
+};
