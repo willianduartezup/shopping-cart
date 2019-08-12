@@ -3,11 +3,12 @@ package br.com.zup.shoppingcart.repository
 import br.com.zup.shoppingcart.domain.User
 import java.sql.Connection
 
+
 class UserJdbcDAO(val connection: Connection) : UserDAO {
     override fun get(id: String): User {
 
         println("jdbc user get")
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted = false")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ?")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
@@ -66,6 +67,4 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.execute()
         psmt.close()
     }
-
-
 }

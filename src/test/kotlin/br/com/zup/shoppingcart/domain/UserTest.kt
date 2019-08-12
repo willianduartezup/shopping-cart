@@ -1,6 +1,8 @@
 package br.com.zup.shoppingcart.domain
 
-import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.DAOFactory
+import br.com.zup.shoppingcart.repository.UserDAO
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -8,9 +10,6 @@ import org.hamcrest.Matchers.hasSize
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
-import br.com.zup.shoppingcart.repository.ConnectionFactory
-import br.com.zup.shoppingcart.repository.DAOFactory
-import br.com.zup.shoppingcart.repository.UserDAO
 import java.util.UUID
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
