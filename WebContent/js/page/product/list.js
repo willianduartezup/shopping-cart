@@ -36,8 +36,8 @@ function loadProducts(){
 
                 var actions  = newRow.insertCell(4);
                 actions.style.textAlign = "center";
-                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ product.id +"\">update</a>\n" +
-                    "<a href=\"index.jsp?page=product/list\">remove</a>";
+                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ product.id +"\">update</a>\n"/* +
+                    "<a href=\"index.jsp?page=product/list\">remove</a>"*/;
             });
         }
     });

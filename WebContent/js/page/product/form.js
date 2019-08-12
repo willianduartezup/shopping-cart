@@ -1,5 +1,5 @@
 function getProduct(){
-    var id = url.findGetParameter('id');
+    const id = url.findGetParameter('id');
 
     if (id){
         productFactory.get(id, function (res) {
@@ -15,13 +15,20 @@ function getProduct(){
 
 function onSubmit(form) {
 
-    var product = {};
+    const id = url.findGetParameter('id');
+
+    let product = {};
     product.name = form.name.value;
     product.price = form.price.value;
     product.unity = form.unity.value;
     product.quantity = form.quantity.value;
 
-    productFactory.add(product);
+    if (id){
+        productFactory.update(product);
+    }else{
+        productFactory.add(product);
+    }
+
     return false;
 }
 
