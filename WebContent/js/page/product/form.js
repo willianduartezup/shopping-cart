@@ -3,7 +3,7 @@ function getProduct(){
 
     if (id){
         productFactory.get(id, function (res) {
-            var product = JSON.parse(res);
+            const product = JSON.parse(res);
 
             document.getElementById("name").value = product.name;
             document.getElementById("price").value = product.price;
