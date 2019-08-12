@@ -1,4 +1,4 @@
-package repository
+package br.com.zup.shoppingcart.repository
 
 import java.lang.Exception
 import java.sql.Connection

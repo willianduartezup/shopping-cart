@@ -1,4 +1,4 @@
-package infra.exception
+package br.com.zup.shoppingcart.infra.exception
 
 import java.lang.Exception
 

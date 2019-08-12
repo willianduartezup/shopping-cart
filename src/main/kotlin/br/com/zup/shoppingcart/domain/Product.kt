@@ -1,4 +1,4 @@
-package domain
+package br.com.zup.shoppingcart.domain
 
 import java.util.UUID
 import javax.persistence.Id

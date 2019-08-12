@@ -1,7 +1,7 @@
-package controller
+package br.com.zup.shoppingcart.controller
 
-import application.UserApplication
-import application.UserService
+import br.com.zup.shoppingcart.application.UserApplication
+import br.com.zup.shoppingcart.application.UserService
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest

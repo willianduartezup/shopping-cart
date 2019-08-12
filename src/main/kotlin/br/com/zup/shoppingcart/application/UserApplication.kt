@@ -1,4 +1,4 @@
-package application
+package br.com.zup.shoppingcart.application
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse

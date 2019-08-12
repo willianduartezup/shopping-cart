@@ -6,7 +6,7 @@
     <servlet>
         <description></description>
         <servlet-name>UserController</servlet-name>
-        <servlet-class>controller.UserController</servlet-class>
+        <servlet-class>br.com.zup.shoppingcart.controller.UserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>

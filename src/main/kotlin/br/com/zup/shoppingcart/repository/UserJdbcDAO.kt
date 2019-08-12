@@ -1,6 +1,6 @@
-package repository
+package br.com.zup.shoppingcart.repository
 
-import domain.User
+import br.com.zup.shoppingcart.domain.User
 import java.sql.Connection
 
 class UserJdbcDAO(val connection: Connection) : UserDAO {

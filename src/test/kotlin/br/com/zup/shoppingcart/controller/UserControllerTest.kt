@@ -1,12 +1,11 @@
-package controller
+package br.com.zup.shoppingcart.controller
 
-import ServletTestConfig.Companion.LOG
-import application.UserService
+import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
+import br.com.zup.shoppingcart.application.UserService
 import com.meterware.httpunit.PostMethodWebRequest
 import com.meterware.servletunit.ServletRunner
 import junit.framework.Assert.assertTrue
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.fail
 import org.junit.Before
 import org.junit.Test
