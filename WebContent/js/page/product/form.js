@@ -1,7 +1,7 @@
 function onSubmit(form) {
 
     try {
-        var product = {};
+        let product = {};
         product.name = form.name.value;
         product.price = form.price.value;
         product.unity = form.unity.value;

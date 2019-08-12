@@ -1,26 +1,28 @@
-var request = {};
+const request = {};
 
 request.getType = function(callback, callbackError){
-    var type = new XMLHttpRequest();
+    let type = new XMLHttpRequest();
     type.onreadystatechange = function() {
+        let res;
         if (this.readyState === 4){
             try{
-                var res = JSON.parse(this.responseText);
+                res = JSON.parse(this.responseText);
             }catch (e) {
-                var res = {}
+                res = {
+                    fields: undefined
+                };
             }
 
             if (request.getStatusSuccess().includes(this.status)) {
                 if (res.message){
                     alert(res.message);
                 }
-
                 if (request.isFunction(callback)){
                     callback(this.responseText);
                 }
             }else{
                 if (this.status === 400){
-                    var message = res.message +': ';
+                    let message = res.message + ': ';
 
                     res.fields.map(function (obj) {
                         message += '- '+ obj.field +': '+ obj.message;
@@ -59,11 +61,12 @@ request.formatParams = function(queryParam){
 };
 
 request.get = function(url, queryParam, callback, callbackError){
-    var type = request.getType(callback, callbackError);
+    let urlEncode;
+    const type = request.getType(callback, callbackError);
     if(queryParam){
-        var urlEncode = url + request.formatParams(queryParam);
+        urlEncode = url + request.formatParams(queryParam);
     }else{
-        var urlEncode = url;
+        urlEncode = url;
     }
 
     type.open("GET", urlEncode, true);
@@ -71,7 +74,7 @@ request.get = function(url, queryParam, callback, callbackError){
 };
 
 request.post = function(url, body, callback, callbackError){
-    var type = request.getType(callback, callbackError);
+    const type = request.getType(callback, callbackError);
 
     type.open("POST", url, true);
     type.setRequestHeader("Content-Type", "application/json");
