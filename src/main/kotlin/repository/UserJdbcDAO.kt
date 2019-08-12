@@ -1,5 +1,6 @@
 package repository
 
+import domain.Product
 import main.kotlin.domain.User
 import java.sql.Connection
 
@@ -63,6 +64,4 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.execute()
         psmt.close()
     }
-
-
 }

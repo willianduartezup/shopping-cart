@@ -1,6 +1,6 @@
 package domain
 
-import main.kotlin.repository.ConnectionFactory
+import repository.ConnectionFactory
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize

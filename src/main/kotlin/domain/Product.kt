@@ -12,14 +12,14 @@ data class Product(
     var id: String? = UUID.randomUUID().toString(),
 
     @field:NotEmpty(message = "Name is Empty!")
-    val name: String,
+    var name: String,
 
     @field:Positive(message = "Price invalid!")
-    val price: Int,
+    var price: Int,
 
-    val unity: String = "piece",
+    var unit: String = "piece",
 
-    val quantity: Int
+    var quantity: Int
 
 ) {
 }

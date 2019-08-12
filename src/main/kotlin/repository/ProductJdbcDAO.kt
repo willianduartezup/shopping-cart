@@ -5,6 +5,7 @@ import java.sql.Connection
 
 class ProductJdbcDAO(val connection: Connection) : ProductDAO {
 
+
     override fun get(id: String): Product {
         println("jdbc product get")
         val stm = connection.prepareStatement("SELECT * FROM product WHERE id = ?")
@@ -34,7 +35,7 @@ class ProductJdbcDAO(val connection: Connection) : ProductDAO {
         psmt.setString(1, e.id)
         psmt.setString(2, e.name)
         psmt.setInt(3, e.price)
-        psmt.setString(4, e.unity)
+        psmt.setString(4, e.unit)
         psmt.setInt(5, e.quantity)
 
         psmt.execute()
@@ -48,7 +49,7 @@ class ProductJdbcDAO(val connection: Connection) : ProductDAO {
             connection.prepareStatement("UPDATE product SET name = ?, price = ?, unit = ?, quantity = ? WHERE id = ?")
         psmt.setString(1, e.name)
         psmt.setInt(2, e.price)
-        psmt.setString(3, e.unity)
+        psmt.setString(3, e.unit)
         psmt.setInt(4, e.quantity)
         psmt.setString(5, e.id)
 
@@ -67,4 +68,31 @@ class ProductJdbcDAO(val connection: Connection) : ProductDAO {
         psmt.close()
     }
 
+
+    override fun listProduct(): ArrayList<Product> {
+        val listProduct = ArrayList<Product>()
+        try {
+            val stm = connection.createStatement()
+            val rs = stm.executeQuery("Select * from product")
+
+            while (rs.next()) {
+                val product = Product(
+                    rs.getString("id"),
+                    rs.getString("name"),
+                    rs.getInt("price"),
+                    rs.getString("unit"),
+                    rs.getInt("quantity"))
+                listProduct.add(product)
+            }
+            stm.close()
+            connection.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return listProduct
+
+    }
+
 }
+

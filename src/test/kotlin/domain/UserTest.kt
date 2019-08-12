@@ -1,7 +1,7 @@
 package test.kotlin.domain
 
 import main.kotlin.domain.User
-import main.kotlin.repository.ConnectionFactory
+import repository.ConnectionFactory
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
