@@ -67,4 +67,13 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.execute()
         psmt.close()
     }
+    override fun removeUserFromTable(id: String) {
+
+        val psmt = connection.prepareStatement("DELETE FROM users WHERE id = ?")
+        psmt.setString(1, id)
+
+        psmt.execute()
+        psmt.close()
+    }
+
 }

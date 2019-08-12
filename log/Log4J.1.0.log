@@ -48,3 +48,31 @@ INFO - 2019-08-12 - 09:35:21 - Log4J - userPasswordIsEmpty
 INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
 INFO - 2019-08-12 - 09:35:21 - Log4J - userPasswordIsNotValid 
 INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:04:02 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:04:02 - Log4J - Update User 
+INFO - 2019-08-12 - 10:04:03 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:04:03 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Update User 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Update User 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:13:33 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:16:01 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:16:01 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:16:02 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:16:02 - Log4J - Delete Product Test 
