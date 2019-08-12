@@ -1,4 +1,4 @@
-package main.kotlin.domain
+package domain
 
 
 import java.util.UUID
@@ -22,8 +22,8 @@ data class User(
 
     @field:Size(min = 6, message = "Password is not valid!")
     @field:NotEmpty(message = "Password is blank!")
-    var password: String
+    var password: String,
 
-
-) {
+    var deleted: Boolean? = false
+    ) {
 }

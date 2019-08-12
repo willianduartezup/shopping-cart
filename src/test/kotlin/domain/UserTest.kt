@@ -1,7 +1,10 @@
-package test.kotlin.domain
+package domain
 
+<<<<<<< HEAD
 import main.kotlin.domain.User
 import repository.ConnectionFactory
+=======
+>>>>>>> 1510ab67b3d7593e393a3fe486a52beab5020890
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -9,6 +12,7 @@ import org.hamcrest.Matchers.hasSize
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import repository.ConnectionFactory
 import repository.DAOFactory
 import repository.UserDAO
 import java.util.UUID
@@ -30,7 +34,7 @@ class UserTest() {
         @JvmStatic
         fun insertUser() {
             println("insert.user")
-            val user = User(id, "Tester", "teste@teste.com", "piece")
+            val user = User(id, "Tester", "teste@teste.com", "piece!")
 
             val jdbc = ConnectionFactory()
             try {
@@ -102,6 +106,7 @@ class UserTest() {
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals("", "error")
+
         } finally {
             jdbc.closeConnection()
         }

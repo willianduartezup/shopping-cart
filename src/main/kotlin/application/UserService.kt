@@ -1,48 +1,30 @@
-package controller
+package application
 
-import application.UserApplication
-import application.UserService
-import javax.servlet.annotation.WebServlet
-import javax.servlet.http.HttpServlet
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import domain.User
+import main.kotlin.infra.ReadPayload
+import repository.ConnectionFactory
+import repository.DAOFactory
+import repository.UserDAO
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "Index", value = ["/user/*"])
-class UserController : HttpServlet() {
-
-    private val service = UserService()
-
-    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.service.add(req, resp)
-    }
-
-    override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.service.getUserById(req, resp)
-    }
-
-    override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.service.edit(req, resp)
-    }
-
-    override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.service.remove(req, resp)
-    }
-
-    /*private lateinit var userDAO: UserDAO
+class UserService {
+    private lateinit var userDAO: UserDAO
     private val factory = DAOFactory()
     private val jdbc = ConnectionFactory()
     private val mapper = jacksonObjectMapper()
     private val readPayload = ReadPayload()
 
-    fun add(req: HttpServletRequest, resp: HttpServletResponse){
+    fun add(request: HttpServletRequest, response: HttpServletResponse){
         try {
             val userDAO: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-            val user: User = readPayload.mapper<User>(req.inputStream)
+            val user: User = readPayload.mapper<User>(request.inputStream)
             userDAO.add(user)
-            return resp.setStatus(201, "CREATED")
+            return response.setStatus(201, "CREATED")
         } catch (e: Exception) {
-            return resp.sendError(400, "ERROR")
+            return response.sendError(400, "ERROR")
         }
     }
 
@@ -75,6 +57,7 @@ class UserController : HttpServlet() {
             return resp.sendError(400, "ERROR")
         }
     }
+
     fun remove(req: HttpServletRequest, resp: HttpServletResponse) {
         if (req.pathInfo != null) {
             val param = req.pathInfo.replace("/", "")
@@ -87,5 +70,6 @@ class UserController : HttpServlet() {
                 return resp.sendError(400, "ERROR")
             }
         }
-    }*/
+    }
+
 }

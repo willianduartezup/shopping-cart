@@ -1,14 +1,14 @@
 package repository
 
-import domain.Product
-import main.kotlin.domain.User
+
+import domain.User
 import java.sql.Connection
 
 class UserJdbcDAO(val connection: Connection) : UserDAO {
     override fun get(id: String): User {
 
         println("jdbc user get")
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id = ?")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted = false")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
@@ -21,7 +21,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             rs.getString("id"),
             rs.getString("name"),
             rs.getString("email"),
-            "PRIVATE"
+            "PRIVATE",
+            rs.getBoolean("deleted")
         )
 
         stm.close()
@@ -31,11 +32,12 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun add(e: User): User {
-        val psmt = connection.prepareStatement("INSERT INTO users(id, name, email, password) VALUES(?,?,?,?)")
+        val psmt = connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted) VALUES(?,?,?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.name)
         psmt.setString(3, e.email)
         psmt.setString(4, e.password)
+        psmt.setBoolean(5,false)
 
         psmt.execute()
         psmt.close()
@@ -45,7 +47,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun edit(e: User): User {
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ? WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
@@ -58,8 +60,9 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun remove(id: String) {
-        val psmt = connection.prepareStatement("DELETE FROM users WHERE id = ?")
-        psmt.setString(1, id)
+        val psmt = connection.prepareStatement("UPDATE users SET deleted = ? WHERE id like ?")
+        psmt.setBoolean(1, true )
+        psmt.setString(2, id)
 
         psmt.execute()
         psmt.close()

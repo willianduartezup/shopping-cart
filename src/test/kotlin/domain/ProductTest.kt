@@ -1,12 +1,16 @@
 package domain
 
+<<<<<<< HEAD
 import repository.ConnectionFactory
+=======
+>>>>>>> 1510ab67b3d7593e393a3fe486a52beab5020890
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
+import repository.ConnectionFactory
 import repository.DAOFactory
 import repository.ProductDAO
 import java.util.UUID
