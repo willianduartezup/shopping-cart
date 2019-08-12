@@ -14,6 +14,7 @@
     <a href="index.jsp">Home</a>
     <a href="index.jsp?page=product/list">Product</a>
     <a href="index.jsp?page=user/usersList">Users</a>
+    <a href="index.jsp?page=cart/manager">Cart</a>
 </div>
 <div style="margin-top: 50px;">
     <%
