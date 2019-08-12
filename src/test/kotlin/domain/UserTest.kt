@@ -1,6 +1,5 @@
-package test.kotlin.domain
+package domain
 
-import domain.User
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -30,7 +29,7 @@ class UserTest() {
         @JvmStatic
         fun insertUser() {
             println("insert.user")
-            val user = User(id, "Tester", "teste@teste.com", "piece")
+            val user = User(id, "Tester", "teste@teste.com", "piece!")
 
             val jdbc = ConnectionFactory()
             try {
@@ -102,6 +101,7 @@ class UserTest() {
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals("", "error")
+
         } finally {
             jdbc.closeConnection()
         }

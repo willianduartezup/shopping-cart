@@ -1,0 +1,4 @@
+"02:25:03.714 [main] controller.UserControllerTest.setup(UserControllerTest.kt:36)evel controller.UserControllerTest.setup(UserControllerTest.kt:36)ogger{36} - UserControllerTest.setupsg {}
+"/>"02:25:03.716 [main] controller.UserControllerTest.test(UserControllerTest.kt:94)evel controller.UserControllerTest.test(UserControllerTest.kt:94)ogger{36} -  test sg {}
+"/>INFO - 2019-08-12 - 02:25:59 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 02:25:59 - Log4J -  test  
