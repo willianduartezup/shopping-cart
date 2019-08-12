@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<form method="post" onsubmit="return onSubmit(this)">
+<form method="post" onsubmit="return onSubmit(this, <%= request.getParameter("id") %>)">
     <table>
         <tr>
             <td>name:</td>
