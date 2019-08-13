@@ -24,7 +24,7 @@ class CartController: HttpServlet() {
     }
 
     override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.romeve(req,resp)
+        this.cartService.remove(req,resp)
     }
 
 }

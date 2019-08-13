@@ -72,13 +72,16 @@ class CartService {
                 editCart(idCart, idItem, totalPrice)
             }
 
+            resp.setStatus(201, "CREATED")
+
+
         } catch (e: Exception) {
             resp.sendError(400, e.message)
         }
 
     }
 
-    fun romeve(req: HttpServletRequest, resp: HttpServletResponse){
+    fun remove(req: HttpServletRequest, resp: HttpServletResponse){
 
         try {
             val idItemCart = req.pathInfo.replace("/", "")
@@ -92,7 +95,56 @@ class CartService {
         } catch (e: Exception){
             resp.sendError(400, e.message)
         }
+    }
 
+    fun edit(req: HttpServletRequest,resp: HttpServletResponse){
+
+        try {
+            val itemCart = reader.mapper<ItemCart>(req.inputStream)
+
+            val operator = getOperatorStock(itemCart.id.toString(), itemCart.quantity)
+
+            if (operator != "") {
+                val product = productDAO.get(itemCart.product_id)
+
+                updateQuantityProduct(product.id.toString(), itemCart.quantity, operator)
+            }
+
+            itemCartDao.edit(itemCart)
+
+        }catch (e: Exception){
+            resp.sendError(400, e.message)
+        }
+    }
+
+    fun get(req: HttpServletRequest, resp: HttpServletResponse){
+
+        val idUser = req.pathInfo.replace("/","")
+
+        val idCart = userDAO.get(idUser).cart_id.toString()
+
+        val listItems = itemCartDao.listItemCart(idCart)
+
+        val jsonString = mapper.writeValueAsString(listItems)
+
+        resp.writer.write(jsonString)
+
+
+
+    }
+
+
+    private fun getOperatorStock(idItemCart: String, quantity: Int): String{
+
+        val quantityBefore = itemCartDao.get(idItemCart).quantity
+
+        return if (quantityBefore > quantity){
+            "+"
+        }else if(quantityBefore < quantity){
+            "-"
+        }else{
+            ""
+        }
 
     }
 
