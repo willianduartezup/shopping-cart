@@ -27,18 +27,3 @@ class UserController : HttpServlet() {
         this.service.remove(req, resp)
     }
 }
-
-/*
-
-    override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.edit(req, resp)
-    }
-
-    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.add(req, resp)
-    }
-
-    override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.remove(req, resp)
-    }
-*/

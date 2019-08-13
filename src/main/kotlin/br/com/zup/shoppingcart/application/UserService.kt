@@ -2,7 +2,7 @@ package br.com.zup.shoppingcart.application
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import br.com.zup.shoppingcart.domain.User
-import main.kotlin.infra.ReadPayload
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
@@ -20,7 +20,7 @@ class UserService {
 
     fun add(request: HttpServletRequest, response: HttpServletResponse){
         try {
-            val user: User = readPayload.mapper<User>(request.inputStream)
+            val user: User = readPayload.mapper(request.inputStream)
 
             userDAO.add(user)
 

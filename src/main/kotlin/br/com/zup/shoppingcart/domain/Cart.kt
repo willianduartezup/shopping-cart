@@ -25,5 +25,4 @@ data class Cart(
 
     var status: Status? = Status.ACTIVE
 
-    ) {
-}
+    )
