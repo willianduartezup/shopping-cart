@@ -49,14 +49,13 @@ class CartService {
             if (userCart.cart_id != "") {
 
                 idCart = userCart.cart_id.toString()
-
             }
 
             itemCartDao.add(itemCart)
 
             updateQuantityProduct(itemCart.product_id,itemCart.quantity,"-")
 
-            var idItem = itemCart.id.toString()
+            val idItem = itemCart.id.toString()
 
             var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
 
@@ -78,7 +77,7 @@ class CartService {
 
     }
 
-    fun romeve(req: HttpServletRequest, resp: HttpServletResponse){
+    fun remove(req: HttpServletRequest, resp: HttpServletResponse){
 
         try {
             val idItemCart = req.pathInfo.replace("/", "")
@@ -92,8 +91,6 @@ class CartService {
         } catch (e: Exception){
             resp.sendError(400, e.message)
         }
-
-
     }
 
     private fun updateQuantityProduct(idProduct: String, quantity: Int, operator: String){
@@ -111,7 +108,6 @@ class CartService {
         val productUpdate = Product(idProduct, product.name,product.price,product.unit,newQuantity)
 
         productDAO.edit(productUpdate)
-
     }
 
     private fun validateQuantity(quantity: Int){
@@ -122,7 +118,7 @@ class CartService {
 
     private fun validateInventoryProduct(idProduct: String, quantity: Int) {
 
-        var quantityProduct = productDAO.get(idProduct).quantity
+        val quantityProduct = productDAO.get(idProduct).quantity
 
         if (quantityProduct - quantity <= 0) {
             throw Exception("Product has no quantity in stock")
@@ -138,27 +134,25 @@ class CartService {
 
         listItem.add(idItem.toString())
 
-        var cart = Cart(null, listItem, userId, totalPrice)
+        val cart = Cart(null, listItem, userId, totalPrice)
 
         cartDao.add(cart)
 
-
-        var userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
+        val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
         userDAO.edit(userUpdate)
     }
 
     private fun editCart(idCart: String, idItem: String, totalPrice: Int) {
-        var cart = cartDao.get(idCart)
+        val cart = cartDao.get(idCart)
 
-        val items = cart.itens
+        val items = cart.items
 
         items.add(idItem)
 
-        var cartUpdate = Cart(idCart, items, cart.user_id, totalPrice)
+        val cartUpdate = Cart(idCart, items, cart.user_id, totalPrice)
 
         cartDao.edit(cartUpdate)
-
     }
 
     private fun recalculateTotalPrice(idCart: String): Int {
@@ -168,17 +162,12 @@ class CartService {
 
         for (itemCart in listItemCart) {
 
-            var unit_price = itemCart.price_unit_product
-            var quantity = itemCart.quantity
-            var itemPrice = (unit_price * quantity)
+            val unitPrice = itemCart.price_unit_product
+            val quantity = itemCart.quantity
+            val itemPrice = (unitPrice * quantity)
 
             totalPrice += itemPrice
-
         }
-
         return totalPrice
-
     }
-
-
 }

@@ -1,11 +1,9 @@
 package br.com.zup.shoppingcart.domain
 
-import br.com.zup.shoppingcart.ServletTestConfig
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers
 import org.junit.Test
-import java.util.Date
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
 
@@ -18,9 +16,11 @@ class CartTest {
 
         LOG.info("cart user id not empty test")
 
-        var itens = listOf("abca123")
+        val items = ArrayList<String>()
+        items.add("id1")
+        items.add("id2")
 
-        val cart = Cart(null,itens,"",10,null,Status.CANCELLED)
+        val cart = Cart(null,items,"",10,null,Status.CANCELLED)
 
         val violations = validator.validate(cart)
 
@@ -33,11 +33,11 @@ class CartTest {
 
         LOG.info("cart total price is negative")
 
-        var itens = listOf("abca123")
+        val items = ArrayList<String>()
+        items.add("id1")
+        items.add("id2")
 
-        var date = Date()
-
-        val cart = Cart(null,itens,"abca123",-1,null,Status.CANCELLED)
+        val cart = Cart(null,items,"abc123",-1,null,Status.CANCELLED)
 
         val violations = validator.validate(cart)
 
