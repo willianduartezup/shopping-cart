@@ -88,3 +88,16 @@ request.put = function(url, body, callback, callbackError){
     type.setRequestHeader("Content-Type", "application/json");
     type.send(JSON.stringify(body));
 };
+
+request.delete = function(url, queryParam, callback, callbackError){
+    let urlEncode;
+    const type = request.getType(callback, callbackError);
+    if(queryParam){
+        urlEncode = url + request.formatParams(queryParam);
+    }else{
+        urlEncode = url;
+    }
+
+    type.open("DELETE", urlEncode, true);
+    type.send();
+};
