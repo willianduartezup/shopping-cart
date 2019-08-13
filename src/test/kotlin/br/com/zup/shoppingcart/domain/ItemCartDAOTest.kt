@@ -12,25 +12,25 @@ class ItemCartDAOTest {
     private var validator = Validation.buildDefaultValidatorFactory().validator
 
     @Test
-    fun `itens cart product id not empty`() {
+    fun `items cart product id not empty`() {
 
-        LOG.info("itens cart product id not empty test")
+        LOG.info("items cart product id not empty test")
 
-        val itensCart = ItemCart(null, "", 10, 5)
+        val itemsCart = ItemCart(null, "", 10, 5)
 
-        val violations = validator.validate(itensCart)
+        val violations = validator.validate(itemsCart)
 
         MatcherAssert.assertThat(violations, Matchers.hasSize(1))
         MatcherAssert.assertThat(getNameFirstProperty(violations), Matchers.`is`("product_id"))
     }
 
     @Test
-    fun `itens cart price negative`() {
-        LOG.info("itens cart price negative")
+    fun `items cart price negative`() {
+        LOG.info("items cart price negative")
 
-        val itensCart = ItemCart(null, "123", -1, 5)
+        val itemsCart = ItemCart(null, "123", -1, 5)
 
-        val violations = validator.validate(itensCart)
+        val violations = validator.validate(itemsCart)
 
         MatcherAssert.assertThat(violations, Matchers.hasSize(1))
         MatcherAssert.assertThat(getNameFirstProperty(violations), Matchers.`is`("price_unit_product"))
@@ -38,12 +38,12 @@ class ItemCartDAOTest {
     }
 
     @Test
-    fun `itens cart quantity negative`() {
-        LOG.info("itens cart quantity negative")
+    fun `items cart quantity negative`() {
+        LOG.info("items cart quantity negative")
 
-        val itensCart = ItemCart(null, "123", 10, -1)
+        val itemsCart = ItemCart(null, "123", 10, -1)
 
-        val violations = validator.validate(itensCart)
+        val violations = validator.validate(itemsCart)
 
         MatcherAssert.assertThat(violations, Matchers.hasSize(1))
         MatcherAssert.assertThat(getNameFirstProperty(violations), Matchers.`is`("quantity"))

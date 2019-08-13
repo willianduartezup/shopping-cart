@@ -5,7 +5,7 @@ import br.com.zup.shoppingcart.domain.Status
 import java.sql.Connection
 import java.sql.Date
 
-class CartJdbcDAO(val connection: Connection) : CartDAO {
+class CartJdbcDAO(private val connection: Connection) : CartDAO {
     override fun get(id: String): Cart {
 
         val stm = connection.prepareStatement("SELECT * FROM cart WHERE id like ? AND status like Status.ACTIVE")
@@ -19,7 +19,7 @@ class CartJdbcDAO(val connection: Connection) : CartDAO {
 
         val cart = Cart(
             rs.getString("id"),
-            rs.getObject("itens") as List<String>,
+            rs.getArray("items") as ArrayList<String>,
             rs.getString("user_id"),
             rs.getInt("total_price"),
             rs.getDate("update_at"),
@@ -49,7 +49,7 @@ class CartJdbcDAO(val connection: Connection) : CartDAO {
     override fun add(e: Cart): Cart {
         val psmt = connection.prepareStatement("INSERT INTO cart(id, itens, user_id:, total_price, update_at, status) VALUES(?,?,?,?,?,?)")
         psmt.setString(1, e.id)
-        psmt.setObject(2, e.itens)
+        psmt.setObject(2, e.items)
         psmt.setString(3, e.user_id)
         psmt.setInt(4, e.total_price)
         psmt.setDate(5, e.update_at as Date?)
@@ -65,7 +65,7 @@ class CartJdbcDAO(val connection: Connection) : CartDAO {
         val psmt =
             connection.prepareStatement("UPDATE cart SET itens = ?, user_id = ?, total_price = ?, update_at = ?, status = ? WHERE id = ?")
         psmt.setString(1, e.id)
-        psmt.setObject(2, e.itens)
+        psmt.setObject(2, e.items)
         psmt.setString(3, e.user_id)
         psmt.setInt(4, e.total_price)
         psmt.setDate(5, e.update_at as Date?)

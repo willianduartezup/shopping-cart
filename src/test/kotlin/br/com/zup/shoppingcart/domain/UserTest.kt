@@ -1,22 +1,15 @@
 package br.com.zup.shoppingcart.domain
 
-import br.com.zup.shoppingcart.repository.ConnectionFactory
-import br.com.zup.shoppingcart.repository.DAOFactory
-import br.com.zup.shoppingcart.repository.UserDAO
 import org.apache.log4j.Logger
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.hasSize
-import org.junit.AfterClass
-import org.junit.BeforeClass
 import org.junit.Test
-import java.util.UUID
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
-import kotlin.test.assertEquals
 
 
-class UserTest() {
+class UserTest {
 
     var LOG = Logger.getLogger(UserTest::class.java)
 
@@ -38,7 +31,7 @@ class UserTest() {
     fun userEmailIsEmpty() {
         LOG.info("userEmailIsEmpty")
 
-        val user = User(null, "teste", "", "123456")
+        val user = User(null, "test", "", "123456")
 
         val violations = validator.validate(user)
 
@@ -64,7 +57,7 @@ class UserTest() {
     fun userPasswordIsEmpty() {
         LOG.info("userPasswordIsEmpty")
 
-        val user = User(null, "teste", "teste@test.com", "")
+        val user = User(null, "test", "teste@test.com", "")
 
         val violations = validator.validate(user)
 
@@ -81,7 +74,7 @@ class UserTest() {
     fun userPasswordIsNotValid() {
         LOG.info("userPasswordIsNotValid")
 
-        val user = User(null, "teste", "teste@test.com", "12")
+        val user = User(null, "test", "teste@test.com", "12")
 
         val violations = validator.validate(user)
 
