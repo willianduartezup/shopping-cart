@@ -15,11 +15,11 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
 
         val listItemCart = ArrayList<ItemCart>()
 
-        val listIdItem = cartDao.get(idCart).itens
+        val listIdItem = cartDao.get(idCart).items
 
         for (idItem in listIdItem) {
 
-            var itemCart = get(idItem)
+            val itemCart = get(idItem)
 
             listItemCart.add(itemCart)
         }

@@ -1,12 +1,10 @@
 package br.com.zup.shoppingcart.domain
 
-
 import java.util.UUID
 import javax.persistence.Id
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
-
 
 data class User(
 
@@ -27,6 +25,4 @@ data class User(
     var deleted: Boolean? = false,
 
     var cart_id: String? = ""
-
-    ) {
-}
+    )
