@@ -35,41 +35,55 @@ function getItens(){
 
     const tableRef = document.getElementById('listItens').getElementsByTagName('tbody')[0];
 
-    const newRowNotFound   = tableRef.insertRow();
-
-    const cell = newRowNotFound.insertCell(0);
-
-    cell.style.textAlign = "center";
-    cell.colSpan = 4;
-    cell.innerHTML = "No products found";
-
     cartFactory.get(user_id, function(res){
         const list = JSON.parse(res);
 
         if (list.length > 0){
-            tableRef.deleteRow(0);
+            tableRef.innerHTML = '';
 
             list.map(function (item) {
-                const newRow   = tableRef.insertRow();
+                productFactory.get(item.product_id,function (res) {
+                    const product = JSON.parse(res);
 
-                const name  = newRow.insertCell(0);
-                name.style.textAlign = "center";
-                name.innerHTML = item.name;
+                    const newRow   = tableRef.insertRow();
 
-                const quantity  = newRow.insertCell(1);
-                quantity.style.textAlign = "center";
-                quantity.innerHTML = "<label><input type='number' value='"+ item.quantity +"'/></label>";
+                    const name  = newRow.insertCell(0);
+                    name.style.textAlign = "center";
+                    name.innerHTML = product.name;
 
-                const price  = newRow.insertCell(2);
-                price.style.textAlign = "center";
-                price.innerHTML = "R$ "+ item.price;
+                    const quantity  = newRow.insertCell(1);
+                    quantity.style.textAlign = "center";
+                    quantity.innerHTML = "<label><input type='number' value='"+ item.quantity +"'/></label>";
 
-                const actions  = newRow.insertCell(3);
-                actions.style.textAlign = "center";
-                actions.innerHTML = "<button>X</button>";
+                    const price  = newRow.insertCell(2);
+                    price.style.textAlign = "center";
+                    price.innerHTML = "R$ "+ item.price;
+
+                    const actions  = newRow.insertCell(3);
+                    actions.style.textAlign = "center";
+                    actions.innerHTML = "<button>X</button>";
+                });
             });
         }
     });
+}
+
+function onSubmit(form){
+    const item = {};
+
+    item.product_id = form.product_id.value;
+    item.quantity = form.quantity.value;
+    productFactory.get(item.product_id, function (res) {
+       const product = JSON.parse(res);
+
+        item.price = product.price;
+
+        cartFactory.add(item, function () {
+            getItens();
+        });
+    });
+
+    return false;
 }
 
 getUser();

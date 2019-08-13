@@ -1,27 +1,29 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <div>
-    <table>
-        <tr>
-            <td id="userName"></td>
-            <td>
-                <label>
-                    <select id="listProduct">
-                        <option value="">Product</option>
-                    </select>
-                </label>
-            </td>
-            <td>
-                <label>
-                    <input type="number" id="quantity" placeholder="quantity"/>
-                </label>
-            </td>
-            <td>
-                <label>
-                    <button id="addItem">+</button>
-                </label>
-            </td>
-        </tr>
-    </table>
+    <form onsubmit="return onSubmit(this)">
+        <table>
+            <tr>
+                <td id="userName"></td>
+                <td>
+                    <label>
+                        <select name="product_id" id="listProduct">
+                            <option value="">Product</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input name="quantity" type="number" id="quantity" placeholder="quantity"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <button type="submit" id="addItem">+</button>
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 <br/>
 <div>
@@ -35,6 +37,9 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td style="text-align: center;" colspan="4">No products found</td>
+        </tr>
         <!--tr>
             <td style="text-align: center;">Apple</td>
             <td style="text-align: center;">
