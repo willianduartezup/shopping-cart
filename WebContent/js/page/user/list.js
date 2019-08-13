@@ -1,6 +1,8 @@
 function loadUsers(){
     const tableRef = document.getElementById('listUser').getElementsByTagName('tbody')[0];
 
+    tableRef.innerHTML = "";
+
     const newRowNotFound = tableRef.insertRow();
 
     let cell = newRowNotFound.insertCell(0);
@@ -13,7 +15,7 @@ function loadUsers(){
         const list = JSON.parse(res);
 
         if (list.length > 0){
-            tableRef.deleteRow(0);
+            tableRef.innerHTML = "";
 
             list.map(function (user) {
                 const newRow   = tableRef.insertRow();

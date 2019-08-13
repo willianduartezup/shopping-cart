@@ -6,13 +6,6 @@
     <th>email</th>
     <th>actions</th>
     </thead>
-    <tbody>
-    <td style="text-align: center">Maria de Nazaré</td>
-    <td style="text-align: center">mariaNazare@Gmail.com</td>
-    <td style="text-align: center">
-        <a href="index.jsp?page=user/usersForm">update</a>
-        <a href="index.jsp?page=user/usersList">remove</a>
-    </td>
-    </tbody>
+    <tbody></tbody>
 </table>
 <script type="text/javascript" src="js/page/user/list.js"></script>
