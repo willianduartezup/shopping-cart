@@ -7,7 +7,6 @@ import java.sql.Connection
 class UserJdbcDAO(val connection: Connection) : UserDAO {
     override fun get(id: String): User {
 
-        println("jdbc user get")
         val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ?")
         stm.setString(1, id)
 
@@ -22,7 +21,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             rs.getString("name"),
             rs.getString("email"),
             "PRIVATE",
-            rs.getBoolean("deleted")
+            rs.getBoolean("deleted"),
+            rs.getString("cart_id")
         )
 
         stm.close()
@@ -32,12 +32,13 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun add(e: User): User {
-        val psmt = connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted) VALUES(?,?,?,?,?)")
+        val psmt = connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted, cart_id) VALUES(?,?,?,?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.name)
         psmt.setString(3, e.email)
         psmt.setString(4, e.password)
         psmt.setBoolean(5,false)
+        psmt.setString(6,e.cart_id)
 
         psmt.execute()
         psmt.close()
@@ -47,11 +48,12 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun edit(e: User): User {
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ? WHERE id like ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, cart_id = ? WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
-        psmt.setString(4, e.id)
+        psmt.setString(4, e.cart_id)
+        psmt.setString(5, e.id)
 
         psmt.execute()
         psmt.close()

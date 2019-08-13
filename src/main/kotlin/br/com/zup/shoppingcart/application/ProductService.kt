@@ -21,7 +21,6 @@ class ProductService {
 
     fun add(request: HttpServletRequest, response: HttpServletResponse) {
         try {
-            val reader = ReadPayload()
             val product = reader.mapper<Product>(request.inputStream)
 
             productDAO.add(product)

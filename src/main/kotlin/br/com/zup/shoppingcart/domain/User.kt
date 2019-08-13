@@ -24,6 +24,9 @@ data class User(
     @field:NotEmpty(message = "Password is blank!")
     var password: String,
 
-    var deleted: Boolean? = false
+    var deleted: Boolean? = false,
+
+    var cart_id: String? = ""
+
     ) {
 }

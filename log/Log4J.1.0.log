@@ -76,3 +76,33 @@ INFO - 2019-08-12 - 10:16:01 - Log4J - Insert Product Test
 INFO - 2019-08-12 - 10:16:01 - Log4J - Update Product Test 
 INFO - 2019-08-12 - 10:16:02 - Log4J - Validate Insert Product Test 
 INFO - 2019-08-12 - 10:16:02 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 14:07:18 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:08:43 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:08:59 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:09:19 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:48:41 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:58:07 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:24:00 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:26:52 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:27:16 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:27:49 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:28:25 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:29:02 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:29:45 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:32:08 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:32:38 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:38:59 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:38:59 - Log4J - cart user id not empty test 
+INFO - 2019-08-12 - 15:38:59 - Log4J - cart total price is negative 
+INFO - 2019-08-12 - 15:47:25 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:47:25 - Log4J - itens cart product id not empty test 
+INFO - 2019-08-12 - 15:49:36 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:49:36 - Log4J - itens cart price negative 
+INFO - 2019-08-12 - 15:54:44 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:54:44 - Log4J - itens cart price negative 
+INFO - 2019-08-12 - 15:56:04 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:56:05 - Log4J - itens cart quantity negative 
+INFO - 2019-08-12 - 15:56:22 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart quantity negative 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart product id not empty test 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart price negative 
