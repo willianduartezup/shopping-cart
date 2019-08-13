@@ -1,5 +1,5 @@
 function loadProducts(){
-    var tableRef = document.getElementById('listProducts').getElementsByTagName('tbody')[0];
+    const tableRef = document.getElementById('listProducts').getElementsByTagName('tbody')[0];
 
     tableRef.innerHTML = "";
 

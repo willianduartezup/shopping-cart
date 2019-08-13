@@ -30,8 +30,8 @@ function loadUsers(){
 
                 let actions  = newRow.insertCell(2);
                 actions.style.textAlign = "center";
-                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ user.id +"\">update</a>\n"/* +
-                    "<a href=\"index.jsp?page=product/list\">remove</a>"*/;
+                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ user.id +"\">update</a>\n" +
+                    "<a href=\"index.jsp?page=cart/manager&user_id="+ user.id +"\">cart</a>";
             });
         }
     });
