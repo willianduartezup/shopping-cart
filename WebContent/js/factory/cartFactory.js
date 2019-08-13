@@ -8,6 +8,10 @@ cartFactory.add = function (item, callback) {
     request.post('cart', item, callback);
 };
 
+cartFactory.update = function (item, callback) {
+    request.put('cart', item, callback);
+};
+
 cartFactory.removeItem = function(id, callback){
     request.delete('cart/'+ id, null, callback)
 };

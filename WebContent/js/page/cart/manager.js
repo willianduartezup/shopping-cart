@@ -62,7 +62,7 @@ function getItens(){
 
                     const quantity  = newRow.insertCell(1);
                     quantity.style.textAlign = "center";
-                    quantity.innerHTML = "<label><input type='number' value='"+ item.quantity +"'/></label>";
+                    quantity.innerHTML = "<label><input class='quantity_item' onchange='onUpdate(\""+ item.id +"\",\""+ item.product_id +"\", this.value)' type='number' min=\"1\" required value='"+ item.quantity +"'/></label>";
 
                     const price  = newRow.insertCell(2);
                     price.style.textAlign = "center";
@@ -101,6 +101,22 @@ function onRemove(id){
             getItens();
         });
     }
+}
+
+function onUpdate(id, product_id, quantity){
+    productFactory.get(product_id, function (res) {
+        const product = JSON.parse(res);
+
+        const item = {};
+        item.id = id;
+        item.product_id = product_id;
+        item.quantity = quantity;
+        item.price = product.price;
+
+        cartFactory.update(item, function () {
+            getItens();
+        });
+    });
 }
 
 getUser();

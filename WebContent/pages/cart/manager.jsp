@@ -6,14 +6,14 @@
                 <td id="userName"></td>
                 <td>
                     <label>
-                        <select name="product_id" id="listProduct">
+                        <select name="product_id" id="listProduct" required>
                             <option value="">Product</option>
                         </select>
                     </label>
                 </td>
                 <td>
                     <label>
-                        <input name="quantity" type="number" id="quantity" placeholder="quantity"/>
+                        <input name="quantity" type="number" id="quantity" placeholder="quantity" min="1" required/>
                     </label>
                 </td>
                 <td>
@@ -36,11 +36,7 @@
             <th>action</th>
         </tr>
         </thead>
-        <tbody>
-        <!--tr>
-            <td style="text-align: center;" colspan="4">No products found</td>
-        </tr-->
-        </tbody>
+        <tbody></tbody>
     </table>
 </div>
 <script type="text/javascript" src="js/page/cart/manager.js"></script>
