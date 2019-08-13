@@ -18,15 +18,15 @@ function loadUsers(){
             list.map(function (user) {
                 const newRow   = tableRef.insertRow();
 
-                const name  = newRow.insertCell(0);
+                let name  = newRow.insertCell(0);
                 name.style.textAlign = "center";
                 name.innerHTML = user.name;
 
-                const quantity  = newRow.insertCell(1);
-                quantity.style.textAlign = "center";
-                quantity.innerHTML = user.email;
+                let email  = newRow.insertCell(1);
+                email.style.textAlign = "center";
+                email.innerHTML = user.email;
 
-                const actions  = newRow.insertCell(2);
+                let actions  = newRow.insertCell(2);
                 actions.style.textAlign = "center";
                 actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ user.id +"\">update</a>\n"/* +
                     "<a href=\"index.jsp?page=product/list\">remove</a>"*/;

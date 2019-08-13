@@ -3,10 +3,9 @@ function getUser() {
 
     if (id) {
         userFactory.get(id, function (res) {
-            const product = JSON.parse(res);
-            document.getElementById("name").value = product.name;
-            document.getElementById("price").value = product.price;
-
+            const user = JSON.parse(res);
+            document.getElementById("nameBox").value = user.name;
+            document.getElementById("emailBox").value = user.email;
         });
     }
 }
@@ -17,7 +16,6 @@ function onSubmit(usersForm) {
     let user = {};
     user.name = usersForm.name.value;
     user.email = usersForm.email.value;
-    userFactory.add(user);
 
     if (id){
         userFactory.update(user);
@@ -25,7 +23,6 @@ function onSubmit(usersForm) {
         userFactory.add(user);
     }
     return false;
-
 }
 
 getUser();
