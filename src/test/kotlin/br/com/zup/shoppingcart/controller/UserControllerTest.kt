@@ -1,9 +1,12 @@
 package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
+import br.com.zup.shoppingcart.ServletTestConfig.Companion.id
 import br.com.zup.shoppingcart.application.UserService
 import com.meterware.httpunit.PostMethodWebRequest
+import com.meterware.servletunit.InvocationContext
 import com.meterware.servletunit.ServletRunner
+import junit.framework.Assert.assertNull
 import junit.framework.Assert.assertTrue
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.fail
@@ -26,13 +29,56 @@ import javax.servlet.http.HttpServletResponse
 
 @RunWith(JUnit4::class)
 class UserControllerTest {
+    lateinit var request: HttpServletRequest
+    lateinit var response: HttpServletResponse
 
     @Mock
     private val service = UserService()
 
+    @Mock
+    private val controller = UserController()
+
+
     @Before
     fun setup() {
         LOG.info("UserControllerTest.setup")
+        request = mock(HttpServletRequest::class.java)
+        response = mock(HttpServletResponse::class.java)
+    }
+
+    @Test
+    fun `should add user`() {
+        LOG.info("should add user")
+        val sr = ServletRunner()
+        sr.registerServlet("UserController", UserController::class.java.name)
+        val sc = sr.newClient()
+        val request = PostMethodWebRequest("http://localhost:8080/shopping_cart_war")
+
+        try {
+            val ic: InvocationContext = sc.newInvocation(request)
+            val ppickServlet: PlayerPickServlet = ic.getServlet() as PlayerPickServlet
+
+            assertNull(
+                "A session already exists",
+                ic.getRequest().getSession(false)
+            );
+            HttpServletRequest ppickServletRequest = ic . getRequest ();
+
+            // Call the servlets getOpenPool() method
+            FootballPool openPool =
+            ppickServlet.getOpenPool(ppickServletRequest);
+
+            // Check the return football pool to make sure it is correct
+            assertEquals("Kansas City", openPool.getAwayTeam(0));
+            assertEquals("Green Bay", openPool.getHomeTeam(0));
+            assertEquals("Houston", openPool.getAwayTeam(1));
+            assertEquals("Tennessee", openPool.getHomeTeam(1));
+        } catch (Exception e) {
+            fail(
+                "Error testing DisplayPlayerPickServlet Exception
+                        is " + e);
+            e.printStackTrace();
+        }
 
     }
 
@@ -44,8 +90,23 @@ class UserControllerTest {
         val input = FileInputStream("./src/test/resources/userTest.json")
         val inputStream = ByteArrayInputStream(input.readBytes())
 
+        service.add(request, response)
+        assertEquals(response.status, 201)
+
+        `when`(request.getParameter(id)).thenReturn(s)
+
+        val sw = StringWriter(input.read())
+        val pw = PrintWriter(sw)
+
+        `when`(response.writer).thenReturn(pw)
+
+        val servlet = UserController()
+        //servlet.doGet(request, response)
+        val result = sw.buffer.toString().trim { it <= ' ' }
+        assertEquals(result, StringBuffer(input.readBytes().toString()))
+
         var runner = ServletRunner()
-        runner.registerServlet("UserController", UserController::class.java.getName())
+        runner.registerServlet("UserController", UserController::class.java.name)
         val client = runner.newClient()
         val request = PostMethodWebRequest("http://localhost:8080/shopping_cart_war/user")
         try {

@@ -118,7 +118,12 @@
             <version>1.7</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/cactus/cactus-maven -->
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.47</version>
+            <scope>test</scope>
+        </dependency>
         <!--
         <dependency>
             <groupId>cactus</groupId>
@@ -141,6 +146,7 @@
                 </excludes>
             </resource>
         </resources>
+
 
         <plugins>
             <plugin>

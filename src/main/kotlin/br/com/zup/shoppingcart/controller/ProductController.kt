@@ -3,10 +3,9 @@ package br.com.zup.shoppingcart.controller
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
+import br.com.zup.shoppingcart.repository.ProductDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import main.kotlin.infra.ReadPayload
-
-import repository.ProductDAO
 import java.io.IOException
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
