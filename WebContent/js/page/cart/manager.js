@@ -34,6 +34,15 @@ function getItens(){
     const user_id = url.findGetParameter("user_id");
 
     const tableRef = document.getElementById('listItens').getElementsByTagName('tbody')[0];
+    tableRef.innerHTML = '';
+
+    const newRowNotFound   = tableRef.insertRow();
+
+    const cell = newRowNotFound.insertCell(0);
+
+    cell.style.textAlign = "center";
+    cell.colSpan = 4;
+    cell.innerHTML = "No products found";
 
     cartFactory.get(user_id, function(res){
         const list = JSON.parse(res);
@@ -61,7 +70,7 @@ function getItens(){
 
                     const actions  = newRow.insertCell(3);
                     actions.style.textAlign = "center";
-                    actions.innerHTML = "<button>X</button>";
+                    actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
                 });
             });
         }
@@ -84,6 +93,14 @@ function onSubmit(form){
     });
 
     return false;
+}
+
+function onRemove(id){
+    if (confirm("confirm remove this item?")){
+        cartFactory.removeItem(id, function () {
+            getItens();
+        });
+    }
 }
 
 getUser();

@@ -37,20 +37,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td style="text-align: center;" colspan="4">No products found</td>
-        </tr>
         <!--tr>
-            <td style="text-align: center;">Apple</td>
-            <td style="text-align: center;">
-                <label>
-                    <input value="1" \>
-                </label>
-            </td>
-            <td style="text-align: center;">R$ 1</td>
-            <td style="text-align: center;">
-                <button>X</button>
-            </td>
+            <td style="text-align: center;" colspan="4">No products found</td>
         </tr-->
         </tbody>
     </table>
