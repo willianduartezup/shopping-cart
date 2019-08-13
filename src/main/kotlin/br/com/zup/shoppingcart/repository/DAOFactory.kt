@@ -10,7 +10,11 @@ class DAOFactory {
             ProductJdbcDAO(connection)
         } else if (c == UserDAO::class.java) {
             UserJdbcDAO(connection)
-        } else {
+        } else if(c == CartDAO::class.java) {
+            CartJdbcDAO(connection)
+        }else if(c == ItemsCartDAO::class.java) {
+            ItemsCartJdbcDAO(connection)
+        }else {
             null
         }
     }

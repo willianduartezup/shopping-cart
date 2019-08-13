@@ -5,7 +5,7 @@ import br.com.zup.shoppingcart.domain.Status
 import java.sql.Connection
 import java.sql.Date
 
-class CartJdbcDAO(private val connection: Connection) : CartDAO {
+class CartJdbcDAO(val connection: Connection) : CartDAO {
     override fun get(id: String): Cart {
 
         val stm = connection.prepareStatement("SELECT * FROM cart WHERE id like ? AND status like Status.ACTIVE")
