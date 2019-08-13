@@ -1,0 +1,115 @@
+"02:25:03.714 [main] controller.UserControllerTest.setup(UserControllerTest.kt:36)evel controller.UserControllerTest.setup(UserControllerTest.kt:36)ogger{36} - UserControllerTest.setupsg {}
+"/>"02:25:03.716 [main] controller.UserControllerTest.test(UserControllerTest.kt:94)evel controller.UserControllerTest.test(UserControllerTest.kt:94)ogger{36} -  test sg {}
+"/>INFO - 2019-08-12 - 02:25:59 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 02:25:59 - Log4J -  test  
+INFO - 2019-08-12 - 09:33:14 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:33:14 - Log4J -  shouldAddedUser  
+INFO - 2019-08-12 - 09:33:14 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:33:14 - Log4J -  test  
+INFO - 2019-08-12 - 09:33:14 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:33:14 - Log4J - testServletGetUser() 
+INFO - 2019-08-12 - 09:34:16 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:16 - Log4J -  shouldAddedUser  
+INFO - 2019-08-12 - 09:34:16 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:16 - Log4J -  test  
+INFO - 2019-08-12 - 09:34:16 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:16 - Log4J - testServletGetUser() 
+INFO - 2019-08-12 - 09:34:27 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:27 - Log4J -  shouldAddedUser  
+INFO - 2019-08-12 - 09:34:27 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:27 - Log4J -  test  
+INFO - 2019-08-12 - 09:34:28 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:34:28 - Log4J - testServletGetUser() 
+INFO - 2019-08-12 - 09:34:28 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 09:34:28 - Log4J - userNameIsEmpty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - userEmailNotValid 
+INFO - 2019-08-12 - 09:34:28 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:34:28 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-12 - 09:34:28 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:35:19 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:35:19 - Log4J -  shouldAddedUser  
+INFO - 2019-08-12 - 09:35:20 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:35:20 - Log4J -  test  
+INFO - 2019-08-12 - 09:35:20 - Log4J - UserControllerTest.setup 
+INFO - 2019-08-12 - 09:35:20 - Log4J - testServletGetUser() 
+INFO - 2019-08-12 - 09:35:20 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 09:35:21 - Log4J - userNameIsEmpty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - userEmailNotValid 
+INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:35:21 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-12 - 09:35:21 - Log4J - getNameFirstProperty 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 09:52:38 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:04:02 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:04:02 - Log4J - Update User 
+INFO - 2019-08-12 - 10:04:03 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:04:03 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Update User 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:05:04 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Insert User Test 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Update User 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Validate Insert User 
+INFO - 2019-08-12 - 10:08:00 - Log4J - Delete User Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:12:54 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:13:33 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:13:55 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 10:16:01 - Log4J - Insert Product Test 
+INFO - 2019-08-12 - 10:16:01 - Log4J - Update Product Test 
+INFO - 2019-08-12 - 10:16:02 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-12 - 10:16:02 - Log4J - Delete Product Test 
+INFO - 2019-08-12 - 14:07:18 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:08:43 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:08:59 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:09:19 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:48:41 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 14:58:07 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:24:00 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:26:52 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:27:16 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:27:49 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:28:25 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:29:02 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:29:45 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:32:08 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:32:38 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:38:59 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:38:59 - Log4J - cart user id not empty test 
+INFO - 2019-08-12 - 15:38:59 - Log4J - cart total price is negative 
+INFO - 2019-08-12 - 15:47:25 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:47:25 - Log4J - itens cart product id not empty test 
+INFO - 2019-08-12 - 15:49:36 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:49:36 - Log4J - itens cart price negative 
+INFO - 2019-08-12 - 15:54:44 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:54:44 - Log4J - itens cart price negative 
+INFO - 2019-08-12 - 15:56:04 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:56:05 - Log4J - itens cart quantity negative 
+INFO - 2019-08-12 - 15:56:22 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart quantity negative 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart product id not empty test 
+INFO - 2019-08-12 - 15:56:23 - Log4J - itens cart price negative 
+INFO - 2019-08-13 - 14:37:50 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-13 - 14:37:51 - Log4J - cart user id not empty test 
+INFO - 2019-08-13 - 14:38:02 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-13 - 14:38:02 - Log4J - cart total price is negative 
+INFO - 2019-08-13 - 14:38:10 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-13 - 14:38:10 - Log4J - cart user id not empty test 
+INFO - 2019-08-13 - 14:38:10 - Log4J - cart total price is negative 
