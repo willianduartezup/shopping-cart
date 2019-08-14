@@ -25,6 +25,7 @@ function onSubmit(form) {
         product.quantity = form.quantity.value;
 
         if (id){
+            product.id = id;
             productFactory.update(product);
         }else{
             productFactory.add(product);
