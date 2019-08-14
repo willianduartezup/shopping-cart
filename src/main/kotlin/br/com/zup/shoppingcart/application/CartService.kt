@@ -43,12 +43,11 @@ class CartService {
             val userCart = userDAO.get(userId)
 
             validateQuantity(itemCart.quantity)
+            validateInventoryProduct(itemCart.product_id, itemCart.quantity)
 
             if (userCart.cart_id != "") {
 
                 idCart = userCart.cart_id.toString()
-
-                validateInventoryProduct(idCart, itemCart.quantity)
             }
 
             itemCartDao.add(itemCart)
@@ -130,7 +129,7 @@ class CartService {
 
             resp.writer.write(jsonString)
         } else {
-            resp.sendError(400, "User not found!")
+            resp.sendError(400, "Cart not found!")
         }
     }
 
@@ -174,7 +173,7 @@ class CartService {
 
         val quantityProduct = productDAO.get(idProduct).quantity
 
-        if (quantityProduct - quantity <= 0) {
+        if (quantityProduct - quantity < 0) {
             throw Exception("Product has no quantity in stock")
         }
     }
@@ -188,7 +187,7 @@ class CartService {
 
         listItem.add(idItem)
 
-        val cart = Cart(null, listItem, userId, totalPrice)
+        val cart = Cart(items =  listItem, user_id =  userId, total_price = totalPrice)
 
         cartDao.add(cart)
 

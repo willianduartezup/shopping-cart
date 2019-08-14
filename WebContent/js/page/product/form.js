@@ -7,7 +7,7 @@ function getProduct(){
 
             document.getElementById("name").value = product.name;
             document.getElementById("price").value = product.price;
-            document.getElementById("unit").value = product.unity;
+            document.getElementById("unit").value = product.unit;
             document.getElementById("quantity").value = product.quantity;
         });
     }

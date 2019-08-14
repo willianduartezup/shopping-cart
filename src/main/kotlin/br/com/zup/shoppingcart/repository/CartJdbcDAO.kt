@@ -50,14 +50,17 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
 
     override fun add(e: Cart): Cart {
-        val psmt = connection.prepareStatement("INSERT INTO cart(id, items, user_id:, total_price, update_at, status) VALUES(?,?,?,?,?,?)")
+
+        val psmt = connection.prepareStatement("INSERT INTO cart(id, items, user_id, total_price, update_at, status) VALUES(?,?,?,?,?,?)")
+
+        println(e.id)
 
         psmt.setString(1, e.id)
         psmt.setObject(2, connection.createArrayOf("text", e.items.toArray()))
         psmt.setString(3, e.user_id)
-        psmt.setInt(4, e.total_price)
+        psmt.setString(4, e.total_price.toString())
         psmt.setDate(5, e.update_at as Date)
-        psmt.setString(6, "ACTIVE")
+        psmt.setString(6, e.status.toString())
 
         psmt.execute()
         psmt.close()
