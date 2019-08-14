@@ -15,21 +15,26 @@ function getProduct(){
 
 function onSubmit(form) {
 
-    const id = url.findGetParameter('id');
+    try {
+        const id = url.findGetParameter('id');
 
-    let product = {};
-    product.name = form.name.value;
-    product.price = form.price.value;
-    product.unit = form.unit.value;
-    product.quantity = form.quantity.value;
+        let product = {};
+        product.name = form.name.value;
+        product.price = form.price.value;
+        product.unit = form.unit.value;
+        product.quantity = form.quantity.value;
 
-    if (id){
-        productFactory.update(product);
-    }else{
-        productFactory.add(product);
+        if (id){
+            productFactory.update(product);
+        }else{
+            productFactory.add(product);
+        }
+
+        return false;
+    }catch (e) {
+        console.log(e);
+        return false;
     }
-
-    return false;
 }
 
 getProduct();
