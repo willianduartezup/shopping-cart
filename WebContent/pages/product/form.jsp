@@ -18,10 +18,10 @@
             </td>
         </tr>
         <tr>
-            <td>unity:</td>
+            <td>unit:</td>
             <td>
                 <label>
-                    <input type="text" name="unity" id="unity"/>
+                    <input type="text" name="unit" id="unit"/>
                 </label>
             </td>
         </tr>

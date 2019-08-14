@@ -4,8 +4,6 @@ import br.com.zup.shoppingcart.domain.Cart
 import br.com.zup.shoppingcart.domain.Status
 import java.sql.Connection
 import java.sql.Date
-import sun.reflect.annotation.AnnotationParser.toArray
-import java.sql.Array
 
 
 class CartJdbcDAO(private val connection: Connection) : CartDAO {
@@ -21,12 +19,12 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
         }
 
         val cart = Cart(
-            rs.getString("id"),
-            rs.getObject("items") as ArrayList<String>,
-            rs.getString("user_id"),
-            rs.getInt("total_price"),
-            rs.getDate("update_at"),
-            rs.getObject("status") as Status
+                rs.getString("id"),
+                rs.getObject("items") as ArrayList<String>,
+                rs.getString("user_id"),
+                rs.getInt("total_price"),
+                rs.getDate("update_at"),
+                rs.getObject("status") as Status
         )
 
         stm.close()
@@ -34,7 +32,7 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
         return cart
     }
 
-    override fun getCartActive(): Cart{
+    override fun getCartActive(): Cart {
 
         val stm = connection.prepareStatement("SELECT * FROM cart WHERE status like Status.ACTIVE")
 
@@ -70,13 +68,13 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
     override fun edit(e: Cart): Cart {
         val psmt =
-            connection.prepareStatement("UPDATE cart SET itens = ?, user_id = ?, total_price = ?, update_at = ?, status = ? WHERE id = ?")
+                connection.prepareStatement("UPDATE cart SET itens = ?, user_id = ?, total_price = ?, update_at = ?, status = ? WHERE id = ?")
 
         val array = arrayOfNulls<String>(e.items.size)
 
 
         psmt.setString(1, e.id)
-       // psmt.set
+        // psmt.set
         psmt.setString(3, e.user_id)
         psmt.setInt(4, e.total_price)
         psmt.setDate(5, e.update_at as Date?)
@@ -90,7 +88,7 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
     override fun remove(id: String) {
         val psmt = connection.prepareStatement("UPDATE cart SET status = ? WHERE id like ?")
-        psmt.setObject(1, Status.CANCELLED )
+        psmt.setObject(1, Status.CANCELLED)
         psmt.setString(2, id)
 
         psmt.execute()
