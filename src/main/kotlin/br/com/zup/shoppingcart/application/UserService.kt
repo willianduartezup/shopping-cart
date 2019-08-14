@@ -27,7 +27,7 @@ class UserService {
             response.setStatus(201, "CREATED")
 
         } catch (e: Exception) {
-            response.sendError(400, "ERROR")
+            response.sendError(400, e.message)
         }
     }
 
