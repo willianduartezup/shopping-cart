@@ -1,10 +1,38 @@
 package br.com.zup.shoppingcart.repository
 
+import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
 import java.sql.Connection
 
 
 class UserJdbcDAO(val connection: Connection) : UserDAO {
+    override fun listUsers(): ArrayList<User> {
+        val listUser = ArrayList<User>()
+        try {
+            val stm = connection.createStatement()
+            val rs = stm.executeQuery("Select * from users")
+
+            while (rs.next()) {
+                val user = User(
+                    rs.getString("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getBoolean("deleted"),
+                    rs.getString("cart_id"))
+
+                listUser.add(user)
+            }
+            stm.close()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return listUser
+
+    }
+
     override fun get(id: String): User {
 
         val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ?")

@@ -16,7 +16,11 @@ class UserController : HttpServlet() {
     }
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.service.getUserById(req, resp)
+        if (req.pathInfo != null) {
+            this.service.getUserById(req, resp)
+        } else {
+            this.service.getListUser(req, resp)
+        }
     }
 
     override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {

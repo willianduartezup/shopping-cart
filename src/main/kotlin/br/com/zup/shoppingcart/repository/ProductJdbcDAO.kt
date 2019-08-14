@@ -85,7 +85,7 @@ class ProductJdbcDAO(val connection: Connection) : ProductDAO {
                 listProduct.add(product)
             }
             stm.close()
-            connection.close()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
