@@ -30,7 +30,7 @@ function loadProducts(){
 
                 const unity  = newRow.insertCell(2);
                 unity.style.textAlign = "center";
-                unity.innerHTML = product.unity;
+                unity.innerHTML = product.unit;
 
                 const quantity  = newRow.insertCell(3);
                 quantity.style.textAlign = "center";
