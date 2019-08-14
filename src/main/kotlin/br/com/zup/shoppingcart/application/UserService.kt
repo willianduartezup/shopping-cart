@@ -24,10 +24,10 @@ class UserService {
 
             userDAO.add(user)
 
-            response.setStatus(201, "CREATED")
-
         } catch (e: Exception) {
             response.sendError(400, "ERROR")
+        } finally {
+            response.setStatus(201, "CREATED")
         }
     }
 
@@ -35,12 +35,9 @@ class UserService {
         if (req.pathInfo != null) {
             val param = req.pathInfo.replace("/", "")
             try {
-
                 val user = userDAO.get(param)
                 val jsonString = mapper.writeValueAsString(user)
-
                 resp.writer.write(jsonString)
-
             } catch (e: Exception) {
                 resp.sendError(400, "User not found!")
             }
@@ -49,13 +46,12 @@ class UserService {
 
     fun edit(req: HttpServletRequest, resp: HttpServletResponse) {
         try {
-
             val user = readPayload.mapper<User>(req.inputStream)
             userDAO.edit(user)
-
-            resp.setStatus(200, "SUCCESS")
         } catch (e: Exception) {
             resp.sendError(400, "ERROR")
+        } finally {
+            resp.setStatus(200, "SUCCESS")
         }
     }
 
@@ -63,13 +59,11 @@ class UserService {
         if (req.pathInfo != null) {
             val param = req.pathInfo.replace("/", "")
             try {
-
                 userDAO.remove(param)
-
-                resp.setStatus(204, "SUCCESS")
-
             } catch (e: Exception) {
                 resp.sendError(400, "ERROR")
+            }finally {
+                resp.setStatus(204, "SUCCESS")
             }
         }
     }

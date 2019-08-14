@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "Index", value = ["/user/*"])
+@WebServlet(name = "UserController", value = ["/user/*"])
 class UserController : HttpServlet() {
 
     private val service = UserService()
@@ -27,18 +27,3 @@ class UserController : HttpServlet() {
         this.service.remove(req, resp)
     }
 }
-
-/*
-
-    override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.edit(req, resp)
-    }
-
-    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.add(req, resp)
-    }
-
-    override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
-        this.cartService.remove(req, resp)
-    }
-*/

@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 @WebServlet(name = "Index", value = ["/index"])
 class IndexController: HttpServlet() {
 
-
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
 
         resp.writer.write("Hello!! Servlet application is run!")

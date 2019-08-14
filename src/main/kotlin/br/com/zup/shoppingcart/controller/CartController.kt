@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "Cart", value = ["/cart/*"])
+@WebServlet(name = "CartController", value = ["/cart/*"])
 class CartController : HttpServlet() {
 
     private val service = CartService()
