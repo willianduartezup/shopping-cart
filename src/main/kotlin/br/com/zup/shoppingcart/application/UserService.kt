@@ -27,7 +27,7 @@ class UserService {
             response.setStatus(201, "CREATED")
 
         } catch (e: Exception) {
-            response.sendError(400, "ERROR")
+            response.sendError(400, e.message)
         }
     }
 
@@ -41,10 +41,24 @@ class UserService {
 
                 resp.writer.write(jsonString)
 
+                resp.setStatus(200, "Ok!")
+
             } catch (e: Exception) {
                 resp.sendError(400, "User not found!")
             }
         } else resp.sendError(400, "Error, param not found!")
+    }
+
+    fun getListUser(req: HttpServletRequest, resp: HttpServletResponse){
+
+        val listUsers = userDAO.listUsers()
+
+        val jsonString = mapper.writeValueAsString(listUsers)
+
+        resp.writer.write(jsonString)
+
+        resp.setStatus(200, "Ok!")
+
     }
 
     fun edit(req: HttpServletRequest, resp: HttpServletResponse) {

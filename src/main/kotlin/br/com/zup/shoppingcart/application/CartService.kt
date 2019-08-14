@@ -40,14 +40,15 @@ class CartService {
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             var idCart = ""
 
-            validateQuantity(itemCart.quantity)
-            validateInventoryProduct(itemCart.product_id, itemCart.quantity)
-
             val userCart = userDAO.get(userId)
+
+            validateQuantity(itemCart.quantity)
 
             if (userCart.cart_id != "") {
 
                 idCart = userCart.cart_id.toString()
+
+                validateInventoryProduct(idCart, itemCart.quantity)
             }
 
             itemCartDao.add(itemCart)
