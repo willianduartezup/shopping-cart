@@ -25,4 +25,4 @@ data class User(
     var deleted: Boolean? = false,
 
     var cart_id: String? = ""
-    )
+)

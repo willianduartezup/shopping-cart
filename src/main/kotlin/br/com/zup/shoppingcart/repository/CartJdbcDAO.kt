@@ -8,7 +8,7 @@ import sun.reflect.annotation.AnnotationParser.toArray
 import java.sql.Array
 
 
-class CartJdbcDAO(val connection: Connection) : CartDAO {
+class CartJdbcDAO(private val connection: Connection) : CartDAO {
     override fun get(id: String): Cart {
 
         val stm = connection.prepareStatement("SELECT * FROM cart WHERE id like ? AND status like Status.ACTIVE")

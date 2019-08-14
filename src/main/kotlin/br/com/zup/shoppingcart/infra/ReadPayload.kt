@@ -1,4 +1,4 @@
-package main.kotlin.infra
+package br.com.zup.shoppingcart.infra
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef

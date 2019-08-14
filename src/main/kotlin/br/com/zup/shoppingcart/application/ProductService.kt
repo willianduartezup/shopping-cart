@@ -5,7 +5,7 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import main.kotlin.infra.ReadPayload
+import br.com.zup.shoppingcart.infra.ReadPayload
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -37,7 +37,7 @@ class ProductService {
             try {
                 val param = req.pathInfo.replace("/", "")
 
-                var product = productDAO.get(param)
+                val product = productDAO.get(param)
 
                 val jsonString = mapper.writeValueAsString(product)
 
@@ -52,7 +52,7 @@ class ProductService {
 
     fun getListProducts(req: HttpServletRequest, resp: HttpServletResponse){
         try{
-            var listProduct = productDAO.listProduct()
+            val listProduct = productDAO.listProduct()
 
             val jsonString = mapper.writeValueAsString(listProduct)
 

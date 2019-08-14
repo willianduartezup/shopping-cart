@@ -11,7 +11,7 @@ import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import main.kotlin.infra.ReadPayload
+import br.com.zup.shoppingcart.infra.ReadPayload
 import java.util.ArrayList
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -139,12 +139,10 @@ class CartService {
 
         val quantityBefore = itemCartDao.get(idItemCart).quantity
 
-        return if (quantityBefore > quantity) {
-            "+"
-        } else if (quantityBefore < quantity) {
-            "-"
-        } else {
-            ""
+        return when {
+            quantityBefore > quantity -> "+"
+            quantityBefore < quantity -> "-"
+            else -> "a"
         }
 
     }
@@ -188,7 +186,7 @@ class CartService {
     private fun addCart(idItem: String, userCart: User, userId: String, totalPrice: Int) {
         val listItem = ArrayList<String>()
 
-        listItem.add(idItem.toString())
+        listItem.add(idItem)
 
         val cart = Cart(null, listItem, userId, totalPrice)
 
