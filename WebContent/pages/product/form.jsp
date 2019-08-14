@@ -21,7 +21,7 @@
             <td>unit:</td>
             <td>
                 <label>
-                    <input type="text" name="unit" id="unity"/>
+                    <input type="text" name="unit" id="unit"/>
                 </label>
             </td>
         </tr>
