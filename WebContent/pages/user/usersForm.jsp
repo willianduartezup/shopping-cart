@@ -18,6 +18,14 @@
             </td>
         </tr>
         <tr>
+            <td>password:</td>
+            <td>
+                <label>
+                    <input type="password" name="password" id="passwordBox" required/>
+                </label>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <button style="float: right" type="submit">add</button>
             </td>
