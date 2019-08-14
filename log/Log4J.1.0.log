@@ -113,3 +113,9 @@ INFO - 2019-08-13 - 14:38:02 - Log4J - cart total price is negative
 INFO - 2019-08-13 - 14:38:10 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
 INFO - 2019-08-13 - 14:38:10 - Log4J - cart user id not empty test 
 INFO - 2019-08-13 - 14:38:10 - Log4J - cart total price is negative 
+INFO - 2019-08-14 - 18:13:50 - Log4J - Insert Item Cart 
+INFO - 2019-08-14 - 18:13:50 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-14 - 18:17:10 - Log4J - Insert Item Cart 
+INFO - 2019-08-14 - 18:17:10 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-14 - 18:17:59 - Log4J - Insert Item Cart 
+INFO - 2019-08-14 - 18:18:00 - Log4J - Validate Insert Item Cart 
