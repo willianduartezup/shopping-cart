@@ -16,8 +16,10 @@ function onSubmit(usersForm) {
     let user = {};
     user.name = usersForm.name.value;
     user.email = usersForm.email.value;
+    user.password = usersForm.password.value;
 
     if (id){
+        user.id = id;
         userFactory.update(user);
     }else{
         userFactory.add(user);
