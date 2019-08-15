@@ -1,11 +1,11 @@
 package br.com.zup.shoppingcart.application
 
 import br.com.zup.shoppingcart.domain.Product
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import main.kotlin.infra.ReadPayload
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 

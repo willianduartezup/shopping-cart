@@ -1,23 +1,23 @@
 package br.com.zup.shoppingcart
 
+import br.com.zup.shoppingcart.infra.ReadPayload
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.junit.Before
 import org.mockito.MockitoAnnotations
 import java.util.UUID
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
-
-class ServletTestConfig(
-    var request: HttpServletRequest,
-    var response: HttpServletResponse
-) {
+class ServletTestConfig {
 
 
     companion object {
         var LOG: Logger = LogManager.getLogger(ServletTestConfig::class.java)
         val id = UUID.randomUUID().toString()
+        val mapper = jacksonObjectMapper()
+        val readPayload = ReadPayload()
+
+
     }
 
     @Before
