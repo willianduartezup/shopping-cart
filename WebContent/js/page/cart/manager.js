@@ -66,7 +66,7 @@ function getItens(){
 
                     const price  = newRow.insertCell(2);
                     price.style.textAlign = "center";
-                    price.innerHTML = "R$ "+ item.price;
+                    price.innerHTML = "R$ "+ item.price_unit_product;
 
                     const actions  = newRow.insertCell(3);
                     actions.style.textAlign = "center";
