@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<a href="index.jsp?page=product/form">add +</a>
-<table border="1" id="listProducts" style="width: 100%">
+<button href="index.jsp?page=product/form" style="font-family:sans-serif;margin-bottom: 5px;width:150px; height: 25px">Add a new item</button>
+<table class="gridtable" border="1" id="listProducts" style="width: 100%;border-collapse: collapse;">
     <thead>
-    <th>name</th>
-    <th>price</th>
-    <th>unity</th>
-    <th>quantity</th>
-    <th>actions</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Unity</th>
+    <th>Quantity</th>
+    <th>Actions</th>
     </thead>
     <tbody></tbody>
 </table>

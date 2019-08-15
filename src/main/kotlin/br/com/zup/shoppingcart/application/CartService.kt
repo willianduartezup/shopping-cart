@@ -73,7 +73,6 @@ class CartService {
 
             resp.setStatus(201, "CREATED")
 
-
         } catch (e: Exception) {
             resp.sendError(400, e.message)
         }
@@ -179,7 +178,7 @@ class CartService {
         }
     }
 
-    private fun calculatePriceItem(priceUnit: Int, quantity: Int): Int {
+    fun calculatePriceItem(priceUnit: Int, quantity: Int): Int {
         return priceUnit * quantity
     }
 
