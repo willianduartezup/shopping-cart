@@ -44,7 +44,8 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
             rs.getString("id"),
             rs.getString("product_id"),
             rs.getInt("price_unit_product"),
-            rs.getInt("quantity")
+            rs.getInt("quantity"),
+            rs.getBoolean("deleted")
         )
 
         stm.close()

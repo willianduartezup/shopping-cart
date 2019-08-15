@@ -45,9 +45,7 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
         for (i in actualObj) {
 
-            println(i)
-
-            listReturn.add(i.toString())
+            listReturn.add(i.asText())
         }
 
         return listReturn
