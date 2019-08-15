@@ -96,7 +96,7 @@ class CartService {
 
             for (idItems in ListItems) {
 
-                if (product == itemCartDao.get(idItems).product_id) {
+                if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false ) {
 
                     idItemCart = itemCartDao.get(idItems).id.toString()
 
@@ -106,12 +106,12 @@ class CartService {
 
                     val itemCartUpdB = itemCartDao.get(idItemCart)
 
-                    val quantity = itemCart.quantity + itemCartUpdB.quantity
+                        val quantity = itemCart.quantity + itemCartUpdB.quantity
 
-                    val itemCartUpdA =
-                        ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
+                        val itemCartUpdA =
+                            ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
 
-                    itemCartDao.edit(itemCartUpdA)
+                        itemCartDao.edit(itemCartUpdA)
 
                 } else {
                     itemCartDao.add(itemCart)
