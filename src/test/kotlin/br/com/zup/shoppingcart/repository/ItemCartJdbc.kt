@@ -5,6 +5,7 @@ import br.com.zup.shoppingcart.ServletTestConfig.Companion.id
 import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.domain.Product
 import junit.framework.Assert.assertTrue
+import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -34,7 +35,7 @@ class ItemCartJdbc {
             }
         }
 
-        @BeforeClass
+        @AfterClass
         @JvmStatic
         fun delete() {
             val jdbc = ConnectionFactory()
@@ -54,7 +55,7 @@ class ItemCartJdbc {
     }
 
     @Test
-    fun `validate insert user`() {
+    fun `validate insert item`() {
         LOG.info("Validate Insert Item Cart")
 
         val jdbc = ConnectionFactory()
@@ -63,6 +64,27 @@ class ItemCartJdbc {
             val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
 
             assertEquals(id, itemsCartDAO.get(id).id)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            assertTrue(false)
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
+
+    @Test
+    fun `validate update item`(){
+        LOG.info("Validate Update Item Cart")
+
+        val jdbc = ConnectionFactory()
+        try {
+            val itemCart = ItemCart(id, idProduct, 2, 2)
+            val factory = DAOFactory()
+            val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
+
+            itemsCartDAO.edit(itemCart)
+
+            assertEquals(2, itemsCartDAO.get(id).quantity)
         } catch (ex: Exception) {
             ex.printStackTrace()
             assertTrue(false)
