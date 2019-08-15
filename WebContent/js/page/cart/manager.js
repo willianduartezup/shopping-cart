@@ -85,7 +85,7 @@ function onSubmit(form){
     productFactory.get(item.product_id, function (res) {
        const product = JSON.parse(res);
 
-        item.price = product.price;
+        item.price_unit_product = product.price;
 
         cartFactory.add(item, function () {
             getItens();
@@ -111,7 +111,7 @@ function onUpdate(id, product_id, quantity){
         item.id = id;
         item.product_id = product_id;
         item.quantity = quantity;
-        item.price = product.price;
+        item.price_unit_product = product.price;
 
         cartFactory.update(item, function () {
             getItens();
