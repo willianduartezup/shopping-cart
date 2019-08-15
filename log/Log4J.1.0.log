@@ -510,3 +510,652 @@ Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator do
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
   Position: 47 
 INFO - 2019-08-15 - 15:20:56 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:26:24 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 16:26:25 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 16:26:25 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 16:26:25 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 16:26:25 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 16:26:25 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 16:26:25 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:26:25 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 16:26:25 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 16:26:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:26:26 - Log4J - should add user 
+INFO - 2019-08-15 - 16:26:26 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:26:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:26:26 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:26:26 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:26:26 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:26:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:26:26 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:26:26 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:26:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:26:26 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:26:26 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:26:26 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:28:32 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:28:32 - Log4J - should add user 
+INFO - 2019-08-15 - 16:28:32 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:28:32 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:28:32 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:28:33 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:28:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:28:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:28:33 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:28:33 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:28:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:28:33 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:28:33 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:28:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:37:38 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:37:38 - Log4J - should add user 
+INFO - 2019-08-15 - 16:37:38 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:37:38 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:37:38 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:37:38 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:37:38 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:37:38 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:37:38 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:37:38 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:37:38 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:37:38 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:37:38 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:37:38 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:39:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:26 - Log4J - should add user 
+INFO - 2019-08-15 - 16:39:26 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:39:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:26 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:39:26 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:39:26 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:39:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:26 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:39:26 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:39:26 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:26 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:39:26 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:39:26 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:39:56 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:56 - Log4J - should add user 
+INFO - 2019-08-15 - 16:39:56 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:39:56 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:56 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:39:56 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:39:56 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:39:56 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:56 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:39:56 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:39:56 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:39:56 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:39:56 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:39:56 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:40:32 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:40:32 - Log4J - should add user 
+INFO - 2019-08-15 - 16:40:32 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:40:32 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:40:32 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:40:33 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:40:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:40:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:40:33 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:40:33 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:40:33 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:40:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:40:33 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:40:33 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:40:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:41:39 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 16:41:40 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 16:41:40 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 16:41:40 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 16:41:40 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 16:41:40 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 16:41:40 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 16:41:40 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 16:41:40 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 16:41:40 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 16:41:41 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 16:41:41 - Log4J - Update User 
+INFO - 2019-08-15 - 16:41:41 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 16:41:41 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 16:41:41 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:41:41 - Log4J - should add user 
+INFO - 2019-08-15 - 16:41:41 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:41:41 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:41:41 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:41:41 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:41:41 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:41:41 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:41:41 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:41:41 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:41:41 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:41:41 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:41:41 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:41:41 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:41:41 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:44:05 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 16:44:05 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 16:44:05 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 16:44:05 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 16:44:05 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 16:44:05 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 16:44:05 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 16:44:05 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 16:44:05 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 16:44:05 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 16:44:05 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 16:44:05 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Update User 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 16:44:06 - Log4J - error occurred on add user 
+INFO - 2019-08-15 - 16:44:06 - Log4J - added successful user 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 16:44:06 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:44:06 - Log4J - should add user 
+INFO - 2019-08-15 - 16:44:06 - Log4J - user added successful 
+INFO - 2019-08-15 - 16:44:06 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:44:06 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 16:44:06 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 16:44:06 - Log4J - successful user return 
+INFO - 2019-08-15 - 16:44:06 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:44:06 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 16:44:06 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:44:06 - Log4J - User removed successful 
+INFO - 2019-08-15 - 16:44:06 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 16:44:06 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 16:44:06 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 16:44:06 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:16:32 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:16:32 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:16:32 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:16:32 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:16:32 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:16:32 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:16:32 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:16:32 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:16:32 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:16:32 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Update User 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 17:16:33 - Log4J - error occurred on add user 
+INFO - 2019-08-15 - 17:16:33 - Log4J - added successful user 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:16:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:16:33 - Log4J - should add user 
+INFO - 2019-08-15 - 17:16:33 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:16:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:16:33 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:16:33 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:16:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:16:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:16:33 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:16:33 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:16:33 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:16:33 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:16:33 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:16:33 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:16:33 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:21:42 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:21:43 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:21:43 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:21:43 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:21:43 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:21:43 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:21:43 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:21:43 - Log4J - Update User 
+INFO - 2019-08-15 - 17:21:44 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 17:21:44 - Log4J - error occurred on add user 
+INFO - 2019-08-15 - 17:21:44 - Log4J - added successful user 
+INFO - 2019-08-15 - 17:21:44 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:21:44 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:21:44 - Log4J - should add user 
+INFO - 2019-08-15 - 17:21:44 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:21:44 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:21:44 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:21:44 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:21:44 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:21:44 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:21:44 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:21:44 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:21:44 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:21:44 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:21:44 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:21:44 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:21:44 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:33:50 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:33:51 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:33:51 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:33:51 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:33:51 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:33:51 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:33:51 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Update User 
+INFO - 2019-08-15 - 17:33:51 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:33:52 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:33:52 - Log4J - should add user 
+INFO - 2019-08-15 - 17:33:52 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:33:52 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:33:52 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:33:52 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:33:52 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:33:52 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:33:52 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:33:52 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:33:52 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:33:52 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:33:52 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:33:52 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:33:52 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:43:48 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:43:48 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:43:48 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:43:48 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:43:48 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:43:48 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:43:48 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:43:48 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:43:48 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:43:48 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Update User 
+INFO - 2019-08-15 - 17:43:49 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:43:49 - Log4J - was successful on deletes user in test 
+INFO - 2019-08-15 - 17:43:50 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:43:50 - Log4J - should add user 
+INFO - 2019-08-15 - 17:43:50 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:43:50 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:43:50 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:43:50 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:43:50 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:43:50 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:43:50 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:43:50 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:43:50 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:43:50 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:43:50 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:43:50 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:43:50 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:44:26 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:44:26 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:44:26 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:44:26 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:44:26 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:44:26 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:44:26 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:44:26 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:44:26 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:26 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:44:27 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:27 - Log4J - should add user 
+INFO - 2019-08-15 - 17:44:27 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:44:27 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:27 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:44:27 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:44:27 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:44:27 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:27 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:44:27 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:44:27 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:44:27 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:27 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:44:27 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:44:27 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:44:55 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:44:56 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:44:56 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:44:56 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:44:56 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:44:56 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:44:56 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Update User 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 17:44:56 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:44:57 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:57 - Log4J - should add user 
+INFO - 2019-08-15 - 17:44:57 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:44:57 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:57 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:44:57 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:44:57 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:44:57 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:57 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:44:57 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:44:57 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:44:57 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:44:57 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:44:57 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:44:57 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:48:41 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:48:41 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:48:41 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:48:41 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:48:41 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:48:41 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:48:41 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:48:41 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:48:41 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:48:41 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:48:41 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Update User 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:48:42 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:48:42 - Log4J - should add user 
+ERROR - 2019-08-15 - 17:48:42 - Log4J - Error in 'should add user' test. Exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "users_pkey"
+  Detail: Key (id)=(ef6ca4e5-c501-4d49-a846-d1afa466d1bb) already exists. 
+INFO - 2019-08-15 - 17:48:42 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:48:42 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:48:42 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:48:42 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:48:42 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:48:42 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:48:42 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:48:42 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:48:42 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:48:42 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:48:42 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:48:42 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:48:42 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:49:36 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:49:36 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:49:36 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:49:36 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:49:36 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:49:36 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:49:36 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:49:36 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:36 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:49:36 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:36 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:49:37 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:37 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:49:37 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:37 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:49:37 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Insert Item Cart 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Insert User Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Update User 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Validate Insert User 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Delete User Test 
+INFO - 2019-08-15 - 17:49:37 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:49:37 - Log4J - should add user 
+ERROR - 2019-08-15 - 17:49:37 - Log4J - Error in 'should add user' test. Exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "users_pkey"
+  Detail: Key (id)=(5c5e5fac-ed42-44e3-88d3-399c92a80d7f) already exists. 
+INFO - 2019-08-15 - 17:49:37 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:49:37 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:49:37 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:49:37 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:49:37 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:49:37 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:49:37 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:49:37 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:49:37 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:49:37 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:49:37 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:49:37 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:49:37 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:49:58 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-15 - 17:49:59 - Log4J - items cart quantity negative 
+INFO - 2019-08-15 - 17:49:59 - Log4J - items cart price negative 
+INFO - 2019-08-15 - 17:49:59 - Log4J - items cart product id not empty test 
+INFO - 2019-08-15 - 17:49:59 - Log4J - userNameIsEmpty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - userEmailNotValid 
+INFO - 2019-08-15 - 17:49:59 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-15 - 17:49:59 - Log4J - getNameFirstProperty 
+INFO - 2019-08-15 - 17:49:59 - Log4J - cart user id not empty test 
+INFO - 2019-08-15 - 17:49:59 - Log4J - cart total price is negative 
+INFO - 2019-08-15 - 17:50:00 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:50:00 - Log4J - should add user 
+INFO - 2019-08-15 - 17:50:00 - Log4J - user added successful 
+INFO - 2019-08-15 - 17:50:00 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:50:00 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 17:50:00 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 17:50:00 - Log4J - successful user return 
+INFO - 2019-08-15 - 17:50:00 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:50:00 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 17:50:00 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:50:00 - Log4J - User removed successful 
+INFO - 2019-08-15 - 17:50:00 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 17:50:00 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 17:50:00 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Position: 47 
+INFO - 2019-08-15 - 17:50:00 - Log4J - successful user return 
