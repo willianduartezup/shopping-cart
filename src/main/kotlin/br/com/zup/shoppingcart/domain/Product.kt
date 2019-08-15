@@ -21,8 +21,5 @@ data class Product(
 
     var quantity: Int
 
-) {
-}
-
-
+)
 

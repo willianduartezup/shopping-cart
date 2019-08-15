@@ -27,7 +27,7 @@ class ProductService {
             response.setStatus(201, "CREATED")
 
         } catch (e: Exception) {
-            response.sendError(400, "ERROR")
+            response.sendError(400, e.message)
         }
     }
 
@@ -37,7 +37,7 @@ class ProductService {
             try {
                 val param = req.pathInfo.replace("/", "")
 
-                var product = productDAO.get(param)
+                val product = productDAO.get(param)
 
                 val jsonString = mapper.writeValueAsString(product)
 
@@ -50,20 +50,20 @@ class ProductService {
         } else resp.sendError(400, "Error, param not found!")
     }
 
-    fun getListProducts(req: HttpServletRequest, resp: HttpServletResponse){
-        try{
-            var listProduct = productDAO.listProduct()
+    fun getListProducts(req: HttpServletRequest, resp: HttpServletResponse) {
+        try {
+            val listProduct = productDAO.listProduct()
 
             val jsonString = mapper.writeValueAsString(listProduct)
 
             resp.writer.write(jsonString)
             resp.setStatus(200, "OK")
-        } catch(e: Exception){
-            resp.sendError(400,"List Products not found!")
+        } catch (e: Exception) {
+            resp.sendError(400, "List Products not found!")
         }
     }
 
-    fun edit(req: HttpServletRequest, resp: HttpServletResponse){
+    fun edit(req: HttpServletRequest, resp: HttpServletResponse) {
 
         try {
             val product = reader.mapper<Product>(req.inputStream)
@@ -71,12 +71,11 @@ class ProductService {
             productDAO.edit(product)
             resp.setStatus(200, "SUCCESS")
 
-        } catch(e: Exception){
+        } catch (e: Exception) {
             resp.sendError(400, "Error edit product!")
         }
 
     }
-
 
 
 }

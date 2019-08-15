@@ -1,4 +1,4 @@
-package br.com.zup.shoppingcart.service
+package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.ProductService
 import javax.servlet.annotation.WebServlet

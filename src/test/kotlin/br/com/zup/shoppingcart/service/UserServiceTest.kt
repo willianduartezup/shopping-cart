@@ -39,15 +39,22 @@ class UserServiceTest {
         LOG.info("should get user by id")
 
         try {
+
             val param: String = user.id!!
             val userGet = service.getUserById(param)
             val userString = mapper.writeValueAsString(user) as String
             assertEquals("differences between", userGet, userString)
+
         } catch (e: Exception) {
+
+            LOG.error("should get user by id\nError testing Exception is $e")
             fail("Error testing Exception is $e")
             e.printStackTrace()
+
         } finally {
+
             LOG.info("successful user return")
+
         }
 
     }
@@ -58,12 +65,18 @@ class UserServiceTest {
         LOG.info("should add user")
 
         try {
+
             val result = service.add(user)
             assertEquals("differences between", user, result)
+
         } catch (e: Exception) {
+
+            LOG.error("Error in 'should add user' test. Exception is $e")
             fail("Error in 'should add user' test. Exception is $e")
             e.printStackTrace()
+
         } finally {
+
             LOG.info("user added successful")
         }
 
@@ -72,16 +85,21 @@ class UserServiceTest {
     @Test
     fun `should successful get user list`() {
 
-        LOG.info("sshould successful get user list")
+        LOG.info("should successful get user list")
 
         try {
-            val userGet = service.getUserById(param)
-            val userString = mapper.writeValueAsString(user) as String
-            assertEquals("differences between", userGet, userString)
+
+            val jsonList = service.getListUser()
+            val user: List<User> = mapper.convertValue(jsonList)
+
         } catch (e: Exception) {
+
+            LOG.error("Error testing Exception is $e")
             fail("Error testing Exception is $e")
             e.printStackTrace()
+
         } finally {
+
             LOG.info("successful user return")
         }
 
@@ -93,6 +111,7 @@ class UserServiceTest {
         LOG.info("should successful on removes user")
 
         try {
+
             val param: String = user.id!!
             service.remove(param)
 
@@ -102,10 +121,14 @@ class UserServiceTest {
             assertTrue(user.deleted!!)
 
         } catch (e: Exception) {
+
             fail("Error in test of removes user. Exception is $e")
             e.printStackTrace()
+
         } finally {
+
             LOG.info("User removed successful")
+
         }
 
     }

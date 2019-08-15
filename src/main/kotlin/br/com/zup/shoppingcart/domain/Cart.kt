@@ -1,6 +1,6 @@
 package br.com.zup.shoppingcart.domain
 
-import java.util.Date
+import java.sql.Date
 import java.util.UUID
 import javax.persistence.Id
 import javax.validation.constraints.NotEmpty
@@ -21,9 +21,8 @@ data class Cart(
     @field:PositiveOrZero(message = "Total price is negative!")
     var total_price: Int,
 
-    var update_at: Date? = Date(),
+    var update_at: Date? = Date(java.util.Date().time),
 
     var status: Status? = Status.ACTIVE
 
-    ) {
-}
+    )

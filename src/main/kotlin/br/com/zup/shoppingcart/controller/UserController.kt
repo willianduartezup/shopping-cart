@@ -1,4 +1,4 @@
-package br.com.zup.shoppingcart.service
+package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.UserService
 import br.com.zup.shoppingcart.domain.User

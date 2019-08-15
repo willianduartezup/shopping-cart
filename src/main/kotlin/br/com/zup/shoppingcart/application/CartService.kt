@@ -40,10 +40,10 @@ class CartService {
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             var idCart = ""
 
+            val userCart = userDAO.get(userId)
+
             validateQuantity(itemCart.quantity)
             validateInventoryProduct(itemCart.product_id, itemCart.quantity)
-
-            val userCart = userDAO.get(userId)
 
             if (userCart.cart_id != "") {
 
@@ -129,7 +129,7 @@ class CartService {
 
             resp.writer.write(jsonString)
         } else {
-            resp.sendError(400, "User not found!")
+            resp.sendError(400, "Cart not found!")
         }
     }
 
@@ -138,12 +138,10 @@ class CartService {
 
         val quantityBefore = itemCartDao.get(idItemCart).quantity
 
-        return if (quantityBefore > quantity) {
-            "+"
-        } else if (quantityBefore < quantity) {
-            "-"
-        } else {
-            ""
+        return when {
+            quantityBefore > quantity -> "+"
+            quantityBefore < quantity -> "-"
+            else -> "a"
         }
 
     }
@@ -175,7 +173,7 @@ class CartService {
 
         val quantityProduct = productDAO.get(idProduct).quantity
 
-        if (quantityProduct - quantity <= 0) {
+        if (quantityProduct - quantity < 0) {
             throw Exception("Product has no quantity in stock")
         }
     }
@@ -187,9 +185,9 @@ class CartService {
     private fun addCart(idItem: String, userCart: User, userId: String, totalPrice: Int) {
         val listItem = ArrayList<String>()
 
-        listItem.add(idItem.toString())
+        listItem.add(idItem)
 
-        val cart = Cart(null, listItem, userId, totalPrice)
+        val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
 
         cartDao.add(cart)
 
