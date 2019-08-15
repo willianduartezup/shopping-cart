@@ -20,9 +20,13 @@ function onSubmit(usersForm) {
 
     if (id){
         user.id = id;
-        userFactory.update(user);
+        userFactory.update(user, function () {
+            alert('user updated success');
+        });
     }else{
-        userFactory.add(user);
+        userFactory.add(user, function () {
+            alert('user created success');
+        });
     }
     return false;
 }
