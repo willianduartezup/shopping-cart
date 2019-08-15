@@ -12,7 +12,7 @@ data class Cart(
     @Id
     var id: String? = UUID.randomUUID().toString(),
 
-    @field:NotNull(message = "Itens is null!")
+    @field:NotNull(message = "Items field is null!")
     var items: ArrayList<String>,
 
     @field:NotEmpty(message = "User ID is empty!")

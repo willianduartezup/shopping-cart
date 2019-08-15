@@ -1,8 +1,11 @@
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <!doctype html>
+
 <html>
+
 <head>
-    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="pages/style.css">
+    <title style="font-family:sans-serif;">Shopping Cart</title>
 
     <script type="text/javascript" src="js/infra/url.js"></script>
     <script type="text/javascript" src="js/infra/request.js"></script>
@@ -12,9 +15,9 @@
 </head>
 <body>
 <div>
-    <a href="index.jsp">Home</a>
-    <a href="index.jsp?page=product/list">Product</a>
-    <a href="index.jsp?page=user/usersList">Users</a>
+    <a href="index.jsp" style="font-family: sans-serif;">Home</a>
+    <a href="index.jsp?page=product/list" style="font-family:sans-serif">Product</a>
+    <a href="index.jsp?page=user/usersList" style="font-family:sans-serif">Users</a>
 </div>
 <div style="margin-top: 50px;">
     <%

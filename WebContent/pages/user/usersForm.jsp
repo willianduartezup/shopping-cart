@@ -2,7 +2,7 @@
 <form method="post" onsubmit="return onSubmit(this)">
     <table>
         <tr>
-            <td>name:</td>
+            <td>Name:</td>
             <td>
                 <label>
                     <input type="text" name="name" id="nameBox" required/>
@@ -10,7 +10,7 @@
             </td>
         </tr>
         <tr>
-            <td>email:</td>
+            <td>Email:</td>
             <td>
                 <label>
                     <input type="text" name="email" id="emailBox" required/>
@@ -18,7 +18,7 @@
             </td>
         </tr>
         <tr>
-            <td>password:</td>
+            <td>Password:</td>
             <td>
                 <label>
                     <input type="password" name="password" id="passwordBox" required/>
