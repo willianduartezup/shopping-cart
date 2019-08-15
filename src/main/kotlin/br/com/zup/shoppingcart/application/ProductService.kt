@@ -18,16 +18,8 @@ class ProductService {
     private val productDAO: ProductDAO =
         factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-    fun add(request: HttpServletRequest, response: HttpServletResponse) {
-        try {
-            val product = reader.mapper<Product>(request.inputStream)
-
-            productDAO.add(product)
-            response.setStatus(201, "CREATED")
-
-        } catch (e: Exception) {
-            response.sendError(400, e.message)
-        }
+    fun add(product: Product) {
+        productDAO.add(product)
     }
 
     fun getProductById(req: HttpServletRequest, resp: HttpServletResponse) {
@@ -62,17 +54,8 @@ class ProductService {
         }
     }
 
-    fun edit(req: HttpServletRequest, resp: HttpServletResponse) {
-
-        try {
-            val product = reader.mapper<Product>(req.inputStream)
-
-            productDAO.edit(product)
-            resp.setStatus(200, "SUCCESS")
-
-        } catch (e: Exception) {
-            resp.sendError(400, "Error edit product!")
-        }
+    fun edit(product: Product){
+        productDAO.edit(product)
     }
 
 }
