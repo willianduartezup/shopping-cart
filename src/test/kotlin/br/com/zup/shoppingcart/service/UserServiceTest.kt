@@ -14,6 +14,7 @@ import org.junit.Test
 import java.io.ByteArrayInputStream
 import java.io.FileInputStream
 import java.io.InputStream
+import kotlin.test.assertTrue
 
 class UserServiceTest {
 
@@ -90,7 +91,9 @@ class UserServiceTest {
         try {
 
             val jsonList = service.getListUser()
-            val user: List<User> = mapper.convertValue(jsonList)
+            val users: List<User> = mapper.convertValue(jsonList)
+
+            assertTrue(users.isNotEmpty())
 
         } catch (e: Exception) {
 

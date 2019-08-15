@@ -19,7 +19,7 @@ class UserController : HttpServlet() {
 
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
 
-        try {
+       try {
             val user: User = readPayload.mapper<User>(request.inputStream)
             service.add(user)
 

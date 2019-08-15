@@ -14,10 +14,7 @@ class UserService {
         private val mapper = jacksonObjectMapper()
         private val userDAO: UserDAO =
             factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-
     }
-
-    fun add(user: User) = userDAO.add(user)
 
     fun getUserById(param: String): String {
 
@@ -26,22 +23,23 @@ class UserService {
 
     }
 
-    fun getRemovedUserById(param: String): String {
-
-        val user = userDAO.getRemovedUserById(param)
-        return mapper.writeValueAsString(user)
-
-    }
-
-    fun edit(user: User) = userDAO.edit(user)
-
     fun getListUser(): String {
 
         val listUsers = userDAO.listUsers()
-
         return mapper.writeValueAsString(listUsers)
 
     }
+
+    fun getRemovedUserById(param: String): String {
+
+        val user = userDAO.get(param)
+        return mapper.writeValueAsString(user)
+//           obj = objectMapper.readValue(json, List.class);
+    }
+
+    fun add(user: User) = userDAO.add(user)
+
+    fun edit(user: User) = userDAO.edit(user)
 
     fun remove(param: String) = userDAO.remove(param)
 

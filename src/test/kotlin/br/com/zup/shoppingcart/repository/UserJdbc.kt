@@ -44,7 +44,6 @@ class UserJdbc {
                 val userDao: UserDAO =
                     factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
 
-
                 userDao.removeUserFromTable(id)
 
             } catch (ex: Exception) {
@@ -90,7 +89,7 @@ class UserJdbc {
 
             userDao.edit(user)
 
-            assertEquals(user.name, userDao.get(id).name)
+            assertEquals(user.name, userDao.get(user.id!!).name)
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals("", "error")

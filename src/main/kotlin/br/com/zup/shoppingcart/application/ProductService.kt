@@ -18,7 +18,6 @@ class ProductService {
     private val productDAO: ProductDAO =
         factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-
     fun add(request: HttpServletRequest, response: HttpServletResponse) {
         try {
             val product = reader.mapper<Product>(request.inputStream)
@@ -74,8 +73,6 @@ class ProductService {
         } catch (e: Exception) {
             resp.sendError(400, "Error edit product!")
         }
-
     }
-
 
 }

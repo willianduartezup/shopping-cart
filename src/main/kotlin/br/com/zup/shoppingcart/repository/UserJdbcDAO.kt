@@ -19,6 +19,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
                     rs.getString("email"),
                     rs.getString("password"),
                     rs.getBoolean("deleted"),
+
                     rs.getString("cart_id")
                 )
 
@@ -28,15 +29,17 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
         } catch (e: Exception) {
             e.printStackTrace()
-        }
+        }finally {
 
-        return listUser
+            return listUser
+
+        }
 
     }
 
     override fun get(id: String): User {
 
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted like false")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id = ? and deleted like false")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
@@ -78,7 +81,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun edit(e: User): User {
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, cart_id = ? WHERE id like ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ? WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
@@ -102,7 +105,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun removeUserFromTable(id: String) {
 
-        val psmt = connection.prepareStatement("DELETE FROM users WHERE id = ?")
+        val psmt = connection.prepareStatement("DELETE FROM users WHERE id like ?")
         psmt.setString(1, id)
 
         psmt.execute()
@@ -111,7 +114,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun getRemovedUserById(id: String): User {
 
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted like false")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted like true")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
@@ -126,6 +129,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             rs.getString("email"),
             "PRIVATE",
             rs.getBoolean("deleted"),
+
             rs.getString("cart_id")
         )
 
