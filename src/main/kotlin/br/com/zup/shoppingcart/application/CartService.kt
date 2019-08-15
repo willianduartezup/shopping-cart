@@ -4,6 +4,7 @@ import br.com.zup.shoppingcart.domain.Cart
 import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
@@ -11,7 +12,6 @@ import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import br.com.zup.shoppingcart.infra.ReadPayload
 import java.util.ArrayList
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -50,7 +50,12 @@ class CartService {
                 idCart = userCart.cart_id.toString()
             }
 
-            itemCartDao.add(itemCart)
+            if (idCart == "") {
+                itemCartDao.add(itemCart)
+            } else {
+                agroupItemsCart(idCart, itemCart)
+            }
+
 
             val idItem = itemCart.id.toString()
 
@@ -78,6 +83,47 @@ class CartService {
         }
 
     }
+
+    private fun agroupItemsCart(idCart: String, itemCart: ItemCart) {
+
+        try {
+
+            val product = itemCart.product_id
+
+            val ListItems = cartDao.get(idCart).items
+
+            var idItemCart = ""
+
+            for (idItems in ListItems) {
+
+                if (product == itemCartDao.get(idItems).product_id) {
+
+                    idItemCart = itemCartDao.get(idItems).id.toString()
+
+                }
+            }
+                if (idItemCart != "") {
+
+                    val itemCartUpdB = itemCartDao.get(idItemCart)
+
+                    val quantity = itemCart.quantity + itemCartUpdB.quantity
+
+                    val itemCartUpdA =
+                        ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
+
+                    itemCartDao.edit(itemCartUpdA)
+
+                } else {
+                    itemCartDao.add(itemCart)
+                }
+
+
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+
+    }
+
 
     fun remove(req: HttpServletRequest, resp: HttpServletResponse) {
 
@@ -196,7 +242,7 @@ class CartService {
 
             userDAO.edit(userUpdate)
 
-        } catch(e: Exception){
+        } catch (e: Exception) {
             throw Exception(e.message)
         }
     }

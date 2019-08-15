@@ -90,17 +90,14 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
     override fun edit(e: Cart): Cart {
         val psmt =
-            connection.prepareStatement("UPDATE cart SET items = ?, user_id = ?, total_price = ?, update_at = ?, canceledoractive = ? WHERE id = ?")
+            connection.prepareStatement("UPDATE cart SET items = ?::json, user_id = ?, total_price = ?, update_at = ?, canceledoractive = ?::bool WHERE id = ?")
 
-        val array = arrayOfNulls<String>(e.items.size)
-
-
-        psmt.setString(1, e.id)
-        psmt.setString(2, e.items.toJson())
-        psmt.setString(3, e.user_id)
-        psmt.setInt(4, e.total_price)
-        psmt.setDate(5, e.update_at as Date?)
-        psmt.setBoolean(6, true)
+        psmt.setString(1, e.items.toJson())
+        psmt.setString(2, e.user_id)
+        psmt.setInt(3, e.total_price)
+        psmt.setDate(4, e.update_at as Date?)
+        psmt.setBoolean(5, true)
+        psmt.setString(6, e.id)
 
         psmt.execute()
         psmt.close()
