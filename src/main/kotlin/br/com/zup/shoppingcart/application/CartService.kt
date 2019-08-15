@@ -52,8 +52,6 @@ class CartService {
 
             itemCartDao.add(itemCart)
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
-
             val idItem = itemCart.id.toString()
 
             var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
@@ -69,6 +67,8 @@ class CartService {
 
                 editCart(idCart, idItem, totalPrice)
             }
+
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
 
             resp.setStatus(201, "CREATED")
 
@@ -88,7 +88,7 @@ class CartService {
 
             updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
 
-            itemCartDao.remove(idItemCart)
+            itemCartDao.delete(idItemCart)
 
         } catch (e: Exception) {
             resp.sendError(400, e.message)
@@ -183,17 +183,22 @@ class CartService {
     }
 
     private fun addCart(idItem: String, userCart: User, userId: String, totalPrice: Int) {
-        val listItem = ArrayList<String>()
+        try {
+            val listItem = ArrayList<String>()
 
-        listItem.add(idItem)
+            listItem.add(idItem)
 
-        val cart = Cart(items =  listItem, user_id =  userId, total_price = totalPrice)
+            val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
 
-        cartDao.add(cart)
+            cartDao.add(cart)
 
-        val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
+            val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
-        userDAO.edit(userUpdate)
+            userDAO.edit(userUpdate)
+
+        } catch(e: Exception){
+            throw Exception(e.message)
+        }
     }
 
     private fun editCart(idCart: String, idItem: String, totalPrice: Int) {

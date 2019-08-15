@@ -21,7 +21,9 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
 
             val itemCart = get(idItem)
 
-            listItemCart.add(itemCart)
+            if (itemCart.deleted == false) {
+                listItemCart.add(itemCart)
+            }
         }
 
         return listItemCart
@@ -54,11 +56,12 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
     override fun add(e: ItemCart): ItemCart {
 
         val psmt =
-            connection.prepareStatement("INSERT INTO itemCart(id, product_id, price_unit_product, quantity) VALUES(?,?,?,?)")
+            connection.prepareStatement("INSERT INTO itemCart(id, product_id, price_unit_product, quantity, deleted) VALUES(?,?,?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.product_id)
         psmt.setInt(3, e.price_unit_product)
         psmt.setInt(4, e.quantity)
+        psmt.setBoolean(5, false)
 
         psmt.execute()
         psmt.close()
@@ -92,4 +95,13 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
         psmt.close()
 
     }
+    override fun delete(id: String) {
+        val psmt = connection.prepareStatement("UPDATE itemCart SET deleted = ? WHERE id like ?")
+        psmt.setBoolean(1, true )
+        psmt.setString(2, id)
+
+        psmt.execute()
+        psmt.close()
+    }
+
 }

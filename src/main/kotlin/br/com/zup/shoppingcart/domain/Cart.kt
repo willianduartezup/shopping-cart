@@ -23,6 +23,6 @@ data class Cart(
 
     var update_at: Date? = Date(java.util.Date().time),
 
-    var status: Status? = Status.ACTIVE
+    var cancelledOrActive: Boolean? = true
 
     )
