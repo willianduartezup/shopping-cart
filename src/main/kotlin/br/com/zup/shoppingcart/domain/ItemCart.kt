@@ -17,8 +17,9 @@ data class ItemCart(
     var price_unit_product: Int,
 
     @field:PositiveOrZero(message = "Quantity is zero or negative!")
-    var quantity: Int
+    var quantity: Int,
 
+    var deleted: Boolean? = false
 
 ) {
 }

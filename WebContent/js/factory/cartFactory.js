@@ -4,8 +4,8 @@ cartFactory.get = function(userId, callback){
     request.get("cart/"+ userId, null, callback);
 };
 
-cartFactory.add = function (item, callback) {
-    request.post('cart', item, callback);
+cartFactory.add = function (user_id, item, callback) {
+    request.post('cart/'+ user_id, item, callback);
 };
 
 cartFactory.update = function (item, callback) {

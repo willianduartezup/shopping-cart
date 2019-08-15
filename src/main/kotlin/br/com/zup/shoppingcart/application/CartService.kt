@@ -4,6 +4,7 @@ import br.com.zup.shoppingcart.domain.Cart
 import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
@@ -11,7 +12,6 @@ import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import br.com.zup.shoppingcart.infra.ReadPayload
 import java.util.ArrayList
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -43,17 +43,19 @@ class CartService {
             val userCart = userDAO.get(userId)
 
             validateQuantity(itemCart.quantity)
+            validateInventoryProduct(itemCart.product_id, itemCart.quantity)
 
             if (userCart.cart_id != "") {
 
                 idCart = userCart.cart_id.toString()
-
-                validateInventoryProduct(idCart, itemCart.quantity)
             }
 
-            itemCartDao.add(itemCart)
+            if (idCart == "") {
+                itemCartDao.add(itemCart)
+            } else {
+                agroupItemsCart(idCart, itemCart)
+            }
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
 
             val idItem = itemCart.id.toString()
 
@@ -71,6 +73,8 @@ class CartService {
                 editCart(idCart, idItem, totalPrice)
             }
 
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
+
             resp.setStatus(201, "CREATED")
 
         } catch (e: Exception) {
@@ -78,6 +82,47 @@ class CartService {
         }
 
     }
+
+    private fun agroupItemsCart(idCart: String, itemCart: ItemCart) {
+
+        try {
+
+            val product = itemCart.product_id
+
+            val ListItems = cartDao.get(idCart).items
+
+            var idItemCart = ""
+
+            for (idItems in ListItems) {
+
+                if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false ) {
+
+                    idItemCart = itemCartDao.get(idItems).id.toString()
+
+                }
+            }
+                if (idItemCart != "") {
+
+                    val itemCartUpdB = itemCartDao.get(idItemCart)
+
+                        val quantity = itemCart.quantity + itemCartUpdB.quantity
+
+                        val itemCartUpdA =
+                            ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
+
+                        itemCartDao.edit(itemCartUpdA)
+
+                } else {
+                    itemCartDao.add(itemCart)
+                }
+
+
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+
+    }
+
 
     fun remove(req: HttpServletRequest, resp: HttpServletResponse) {
 
@@ -88,7 +133,7 @@ class CartService {
 
             updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
 
-            itemCartDao.remove(idItemCart)
+            itemCartDao.delete(idItemCart)
 
         } catch (e: Exception) {
             resp.sendError(400, e.message)
@@ -129,7 +174,7 @@ class CartService {
 
             resp.writer.write(jsonString)
         } else {
-            resp.sendError(400, "User not found!")
+            resp.sendError(400, "Cart not found!")
         }
     }
 
@@ -173,7 +218,7 @@ class CartService {
 
         val quantityProduct = productDAO.get(idProduct).quantity
 
-        if (quantityProduct - quantity <= 0) {
+        if (quantityProduct - quantity < 0) {
             throw Exception("Product has no quantity in stock")
         }
     }
@@ -183,17 +228,22 @@ class CartService {
     }
 
     private fun addCart(idItem: String, userCart: User, userId: String, totalPrice: Int) {
-        val listItem = ArrayList<String>()
+        try {
+            val listItem = ArrayList<String>()
 
-        listItem.add(idItem)
+            listItem.add(idItem)
 
-        val cart = Cart(null, listItem, userId, totalPrice)
+            val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
 
-        cartDao.add(cart)
+            cartDao.add(cart)
 
-        val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
+            val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
-        userDAO.edit(userUpdate)
+            userDAO.edit(userUpdate)
+
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
     }
 
     private fun editCart(idCart: String, idItem: String, totalPrice: Int) {

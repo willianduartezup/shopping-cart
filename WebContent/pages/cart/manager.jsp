@@ -33,7 +33,7 @@
         <tr>
             <th>product</th>
             <th>quantity</th>
-            <th>price</th>
+            <th>price unit product</th>
             <th>action</th>
         </tr>
         </thead>
