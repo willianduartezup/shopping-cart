@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "Index", value = ["/user/*"])
+@WebServlet(name = "User", value = ["/user/*"])
 class UserController : HttpServlet() {
 
     private val service = UserService()

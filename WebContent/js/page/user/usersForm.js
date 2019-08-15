@@ -16,11 +16,17 @@ function onSubmit(usersForm) {
     let user = {};
     user.name = usersForm.name.value;
     user.email = usersForm.email.value;
+    user.password = usersForm.password.value;
 
     if (id){
-        userFactory.update(user);
+        user.id = id;
+        userFactory.update(user, function () {
+            alert('user updated success');
+        });
     }else{
-        userFactory.add(user);
+        userFactory.add(user, function () {
+            alert('user created success');
+        });
     }
     return false;
 }
