@@ -15,10 +15,14 @@ class ProductController : HttpServlet() {
     private val readPayload = ReadPayload()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        if (req.pathInfo != null) {
-            this.productService.getProductById(req, resp)
-        } else {
-            this.productService.getListProducts(req, resp)
+        try {
+            if (req.pathInfo != null) {
+                this.productService.getProductById(req, resp)
+            } else {
+                this.productService.getListProducts(req, resp)
+            }
+        }catch (ex: Exception){
+            resp.sendError(400, ex.message)
         }
     }
 
