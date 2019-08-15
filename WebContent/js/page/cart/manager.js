@@ -66,7 +66,7 @@ function getItens(){
 
                     const price  = newRow.insertCell(2);
                     price.style.textAlign = "center";
-                    price.innerHTML = "R$ "+ item.price;
+                    price.innerHTML = "R$ "+ item.price_unit_product;
 
                     const actions  = newRow.insertCell(3);
                     actions.style.textAlign = "center";
@@ -78,6 +78,7 @@ function getItens(){
 }
 
 function onSubmit(form){
+    const user_id = url.findGetParameter("user_id");
     const item = {};
 
     item.product_id = form.product_id.value;
@@ -85,9 +86,9 @@ function onSubmit(form){
     productFactory.get(item.product_id, function (res) {
        const product = JSON.parse(res);
 
-        item.price = product.price;
+        item.price_unit_product = product.price;
 
-        cartFactory.add(item, function () {
+        cartFactory.add(user_id, item, function () {
             getItens();
         });
     });
@@ -111,7 +112,7 @@ function onUpdate(id, product_id, quantity){
         item.id = id;
         item.product_id = product_id;
         item.quantity = quantity;
-        item.price = product.price;
+        item.price_unit_product = product.price;
 
         cartFactory.update(item, function () {
             getItens();
