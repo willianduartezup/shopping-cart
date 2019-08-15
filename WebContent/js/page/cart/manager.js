@@ -78,6 +78,7 @@ function getItens(){
 }
 
 function onSubmit(form){
+    const user_id = url.findGetParameter("user_id");
     const item = {};
 
     item.product_id = form.product_id.value;
@@ -87,7 +88,7 @@ function onSubmit(form){
 
         item.price_unit_product = product.price;
 
-        cartFactory.add(item, function () {
+        cartFactory.add(user_id, item, function () {
             getItens();
         });
     });
