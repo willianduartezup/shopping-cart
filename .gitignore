@@ -1,3 +1,4 @@
 target
 .idea
 shopping-cart.iml
+Log4J.1.0.log.*
