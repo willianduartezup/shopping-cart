@@ -7,26 +7,35 @@ import java.sql.Connection
 class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
     override fun listItemCart(idCart: String): ArrayList<ItemCart> {
 
-        val jdbc = ConnectionFactory()
-        val factory = DAOFactory()
-
-        val cartDao: CartDAO =
-            factory.getInstanceOf(CartDAO::class.java, jdbc.getConnection()) as CartDAO
-
         val listItemCart = ArrayList<ItemCart>()
 
-        val listIdItem = cartDao.get(idCart).items
+       try {
+           val jdbc = ConnectionFactory()
+           val factory = DAOFactory()
 
-        for (idItem in listIdItem) {
+           val cartDao: CartDAO =
+               factory.getInstanceOf(CartDAO::class.java, jdbc.getConnection()) as CartDAO
 
-            val itemCart = get(idItem)
 
-            if (itemCart.deleted == false) {
-                listItemCart.add(itemCart)
-            }
-        }
 
-        return listItemCart
+           val listIdItem = cartDao.get(idCart).items
+
+           for (idItem in listIdItem) {
+
+               val itemCart = get(idItem)
+
+               if (itemCart.deleted == false) {
+                   listItemCart.add(itemCart)
+               }
+           }
+
+           return listItemCart
+
+        } catch (e: Exception){
+
+           return listItemCart
+       }
+
     }
 
 
