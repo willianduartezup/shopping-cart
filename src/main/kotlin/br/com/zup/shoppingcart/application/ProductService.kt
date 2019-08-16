@@ -1,33 +1,63 @@
 package br.com.zup.shoppingcart.application
 
 import br.com.zup.shoppingcart.domain.Product
-import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
-class ProductService {
-
-    private val jdbc = ConnectionFactory()
-    private val factory = DAOFactory()
-    private val productDAO: ProductDAO =
-            factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+class ProductService(private val jdbc: ConnectionFactory,
+        private val factory: DAOFactory) {
 
     fun add(product: Product) {
-        productDAO.add(product)
+
+        try {
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+            productDAO.add(product)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
     fun getProductById(id: String): Product {
-        return productDAO.get(id)
+
+        try {
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+            return productDAO.get(id)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
     fun getListProducts(): ArrayList<Product> {
-        return productDAO.listProduct()
+
+        try {
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+            return productDAO.listProduct()
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
     fun edit(product: Product) {
-        productDAO.edit(product)
+
+        try {
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+
+            productDAO.edit(product)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
 }

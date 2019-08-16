@@ -4,6 +4,8 @@ import br.com.zup.shoppingcart.application.ProductService
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
+import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.DAOFactory
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
@@ -13,9 +15,8 @@ import javax.servlet.http.HttpServletResponse
 @WebServlet(name = "ProductController", value = ["/product/*"])
 class ProductController : HttpServlet() {
 
-    private val productService = ProductService()
+    private val productService = ProductService(ConnectionFactory(), DAOFactory())
     private val readPayload = ReadPayload()
-    private val mapper = jacksonObjectMapper()
     private val manager = ManagerResponseServlet()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
