@@ -53,8 +53,8 @@ class ProductServiceTest {
 
         LOG.info("Validate Insert Product Test")
 
-        assertEquals(id, service.getProductById(id).id)
-    }
+        assertEquals(product.id, service.getProductById(product.id!!).id)
+    }k
 
     @Test
     fun `update product`() {
@@ -64,6 +64,6 @@ class ProductServiceTest {
 
         service.edit(product)
 
-        assertEquals(product.name, service.getProductById(id).name)
+        assertEquals(product.name, service.getProductById(product.id!!).name)
     }
 }
