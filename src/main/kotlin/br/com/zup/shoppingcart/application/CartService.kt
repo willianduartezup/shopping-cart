@@ -14,9 +14,7 @@ import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.util.ArrayList
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
-//import kotlin.collections.ArrayList
+
 
 class CartService {
 
