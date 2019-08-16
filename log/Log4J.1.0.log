@@ -216,3 +216,81 @@ INFO - 2019-08-15 - 22:04:20 - Log4J - Insert Product Test
 INFO - 2019-08-15 - 22:04:20 - Log4J - Update Product Test 
 INFO - 2019-08-15 - 22:04:20 - Log4J - Validate Insert Product Test 
 INFO - 2019-08-15 - 22:04:20 - Log4J - Delete Product Test 
+INFO - 2019-08-16 - 09:14:47 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-16 - 09:14:47 - Log4J - cart user id not empty test 
+INFO - 2019-08-16 - 09:14:47 - Log4J - cart total price is negative 
+INFO - 2019-08-16 - 09:14:47 - Log4J - items cart quantity negative 
+INFO - 2019-08-16 - 09:14:47 - Log4J - items cart price negative 
+INFO - 2019-08-16 - 09:14:47 - Log4J - items cart product id not empty test 
+INFO - 2019-08-16 - 09:14:47 - Log4J - userNameIsEmpty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - userEmailNotValid 
+INFO - 2019-08-16 - 09:14:47 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-16 - 09:14:47 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:14:47 - Log4J - Insert Item Cart 
+INFO - 2019-08-16 - 09:14:47 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-16 - 09:14:47 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-16 - 09:14:47 - Log4J - Insert Product Test 
+INFO - 2019-08-16 - 09:14:47 - Log4J - Update Product Test 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Delete Product Test 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Insert User Test 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Update User 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Validate Insert User 
+INFO - 2019-08-16 - 09:14:48 - Log4J - Delete User Test 
+INFO - 2019-08-16 - 09:14:48 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:21 - Log4J - HV000001: Hibernate Validator 6.0.2.Final 
+INFO - 2019-08-16 - 09:26:21 - Log4J - cart user id not empty test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - cart total price is negative 
+INFO - 2019-08-16 - 09:26:22 - Log4J - items cart quantity negative 
+INFO - 2019-08-16 - 09:26:22 - Log4J - items cart price negative 
+INFO - 2019-08-16 - 09:26:22 - Log4J - items cart product id not empty test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - userNameIsEmpty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - userEmailIsEmpty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - userEmailNotValid 
+INFO - 2019-08-16 - 09:26:22 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - userPasswordIsEmpty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - userPasswordIsNotValid 
+INFO - 2019-08-16 - 09:26:22 - Log4J - getNameFirstProperty 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Insert Item Cart 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Validate Update Item Cart 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Validate Insert Item Cart 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Insert Product Test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Update Product Test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Delete Product Test 
+INFO - 2019-08-16 - 09:26:22 - Log4J - Insert User Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Update User 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Validate Insert User 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Delete User Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Insert Product Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Update Product Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Delete Product Test 
+INFO - 2019-08-16 - 09:26:23 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:23 - Log4J - should add user 
+ERROR - 2019-08-16 - 09:26:23 - Log4J - Error in 'should add user' test. Exception is org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "users_pkey"
+  Detalhe: Key (id)=(83b17340-6bc2-4967-9e40-8e2e526ca23a) already exists. 
+INFO - 2019-08-16 - 09:26:23 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:23 - Log4J - should successful get user list 
+INFO - 2019-08-16 - 09:26:23 - Log4J - successful user return 
+INFO - 2019-08-16 - 09:26:23 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:23 - Log4J - should successful on removes user 
+INFO - 2019-08-16 - 09:26:23 - Log4J - Error in test of removes user. Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Dica: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Posição: 47 
+INFO - 2019-08-16 - 09:26:23 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-16 - 09:26:23 - Log4J - should get user by id 
+ERROR - 2019-08-16 - 09:26:23 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Dica: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Posição: 47 
