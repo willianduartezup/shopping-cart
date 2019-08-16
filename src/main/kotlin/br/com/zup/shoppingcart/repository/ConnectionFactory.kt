@@ -23,6 +23,7 @@ class ConnectionFactory {
         pool.password = "postgres"
         pool.loginTimeout = 20
         pool.socketTimeout = 20
+        pool.isDefaultAutoCommit = false
 
         connection = pool.connection
 
