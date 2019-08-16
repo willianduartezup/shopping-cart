@@ -1,8 +1,7 @@
 package br.com.zup.shoppingcart.repository
 
-import java.lang.Exception
+import org.postgresql.ds.PGConnectionPoolDataSource
 import java.sql.Connection
-import java.sql.DriverManager
 
 class ConnectionFactory {
 
@@ -11,10 +10,22 @@ class ConnectionFactory {
     private val password = "postgres"
     private lateinit var connection: Connection
 
+
     @Throws(Exception::class)
     fun getConnection(): Connection {
         Class.forName("org.postgresql.Driver")
-        connection = DriverManager.getConnection(url, user, password)
+        val pool = PGConnectionPoolDataSource()
+
+        pool.serverName = "localhost"
+        pool.portNumber = 5432
+        pool.databaseName = "shopping-cart-db"
+        pool.user = "postgres"
+        pool.password = "postgres"
+        pool.loginTimeout = 20
+        pool.socketTimeout = 20
+
+        connection = pool.connection
+
         return connection
     }
 
