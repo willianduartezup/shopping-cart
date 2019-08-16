@@ -6,55 +6,27 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class ProductService {
 
     private val jdbc = ConnectionFactory()
-    private val mapper = jacksonObjectMapper()
-    private val reader = ReadPayload()
     private val factory = DAOFactory()
     private val productDAO: ProductDAO =
-        factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+            factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
     fun add(product: Product) {
         productDAO.add(product)
     }
 
-    fun getProductById(req: HttpServletRequest, resp: HttpServletResponse) {
-
-        if (req.pathInfo != null) {
-            try {
-                val param = req.pathInfo.replace("/", "")
-
-                val product = productDAO.get(param)
-
-                val jsonString = mapper.writeValueAsString(product)
-
-                resp.writer.write(jsonString)
-                resp.setStatus(200, "SUCCESS")
-
-            } catch (e: Exception) {
-                resp.sendError(400, "User not found!")
-            }
-        } else resp.sendError(400, "Error, param not found!")
+    fun getProductById(id: String): Product {
+        return productDAO.get(id)
     }
 
-    fun getListProducts(req: HttpServletRequest, resp: HttpServletResponse) {
-        try {
-            val listProduct = productDAO.listProduct()
-
-            val jsonString = mapper.writeValueAsString(listProduct)
-
-            resp.writer.write(jsonString)
-            resp.setStatus(200, "OK")
-        } catch (e: Exception) {
-            resp.sendError(400, "List Products not found!")
-        }
+    fun getListProducts(): ArrayList<Product> {
+        return productDAO.listProduct()
     }
 
-    fun edit(product: Product){
+    fun edit(product: Product) {
         productDAO.edit(product)
     }
 

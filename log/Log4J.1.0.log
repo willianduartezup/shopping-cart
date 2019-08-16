@@ -510,3 +510,33 @@ Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator do
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.
   Position: 47 
 INFO - 2019-08-15 - 15:20:56 - Log4J - successful user return 
+INFO - 2019-08-15 - 21:24:15 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 21:24:16 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 21:24:16 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 21:24:16 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 21:25:53 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 21:25:53 - Log4J - should add user 
+INFO - 2019-08-15 - 21:25:53 - Log4J - user added successful 
+INFO - 2019-08-15 - 21:25:53 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 21:25:53 - Log4J - should successful get user list 
+ERROR - 2019-08-15 - 21:25:53 - Log4J - Error testing Exception is java.lang.IllegalArgumentException: Cannot deserialize instance of `java.util.ArrayList` out of VALUE_STRING token
+ at [Source: UNKNOWN; line: -1, column: -1] 
+INFO - 2019-08-15 - 21:25:53 - Log4J - successful user return 
+INFO - 2019-08-15 - 21:25:53 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 21:25:53 - Log4J - should successful on removes user 
+INFO - 2019-08-15 - 21:25:53 - Log4J - User removed successful 
+INFO - 2019-08-15 - 21:25:53 - Log4J - UserServiceTest.setup 
+INFO - 2019-08-15 - 21:25:53 - Log4J - should get user by id 
+ERROR - 2019-08-15 - 21:25:53 - Log4J - should get user by id
+Error testing Exception is org.postgresql.util.PSQLException: ERROR: operator does not exist: boolean ~~ boolean
+  Dica: No operator matches the given name and argument types. You might need to add explicit type casts.
+  Posição: 47 
+INFO - 2019-08-15 - 21:25:53 - Log4J - successful user return 
+INFO - 2019-08-15 - 21:38:52 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 21:38:52 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 21:38:52 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 21:38:52 - Log4J - Delete Product Test 
+INFO - 2019-08-15 - 21:39:23 - Log4J - Insert Product Test 
+INFO - 2019-08-15 - 21:39:23 - Log4J - Update Product Test 
+INFO - 2019-08-15 - 21:39:23 - Log4J - Validate Insert Product Test 
+INFO - 2019-08-15 - 21:39:23 - Log4J - Delete Product Test 
