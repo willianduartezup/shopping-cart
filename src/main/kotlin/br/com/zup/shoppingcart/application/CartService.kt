@@ -16,6 +16,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.util.ArrayList
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+//import kotlin.collections.ArrayList
 
 class CartService {
 
@@ -140,14 +141,14 @@ class CartService {
 
     }
 
-    fun get(idUser: String): String {
+    fun get(idUser: String): ArrayList<ItemCart> {
 
         val idCart = userDAO.get(idUser).cart_id.toString()
 
-        val listItems = itemCartDao.listItemCart(idCart)
+        /*val listItems = itemCartDao.listItemCart(idCart)
 
-        return mapper.writeValueAsString(listItems)
-
+        return mapper.writeValueAsString(listItems)*/
+        return itemCartDao.listItemCart(idCart)
     }
 
 
