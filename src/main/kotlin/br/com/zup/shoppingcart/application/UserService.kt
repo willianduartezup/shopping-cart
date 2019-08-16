@@ -1,91 +1,46 @@
 package br.com.zup.shoppingcart.application
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import br.com.zup.shoppingcart.domain.User
-import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
 class UserService {
 
-    private val factory = DAOFactory()
-    private val jdbc = ConnectionFactory()
-    private val mapper = jacksonObjectMapper()
-    private val readPayload = ReadPayload()
-    private val userDAO: UserDAO =
-        factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-
-    fun add(request: HttpServletRequest, response: HttpServletResponse){
-        try {
-            val user: User = readPayload.mapper(request.inputStream)
-
-            userDAO.add(user)
-
-            response.setStatus(201, "CREATED")
-
-        } catch (e: Exception) {
-            response.sendError(400, e.message)
-        }
+    companion object {
+        private val factory = DAOFactory()
+        private val jdbc = ConnectionFactory()
+        private val mapper = jacksonObjectMapper()
+        private val userDAO: UserDAO =
+            factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
     }
 
-    fun getUserById(req: HttpServletRequest, resp: HttpServletResponse){
-        if (req.pathInfo != null) {
-            val param = req.pathInfo.replace("/", "")
-            try {
+    fun getUserById(param: String): String {
 
-                val user = userDAO.get(param)
-                val jsonString = mapper.writeValueAsString(user)
+        val user = userDAO.get(param)
+        return mapper.writeValueAsString(user)
 
-                resp.writer.write(jsonString)
-
-                resp.setStatus(200, "Ok!")
-
-            } catch (e: Exception) {
-                resp.sendError(400, "User not found!")
-            }
-        } else resp.sendError(400, "Error, param not found!")
     }
 
-    fun getListUser(req: HttpServletRequest, resp: HttpServletResponse){
+    fun getListUser(): String {
 
         val listUsers = userDAO.listUsers()
-
-        val jsonString = mapper.writeValueAsString(listUsers)
-
-        resp.writer.write(jsonString)
-
-        resp.setStatus(200, "Ok!")
+        return mapper.writeValueAsString(listUsers)
 
     }
 
-    fun edit(req: HttpServletRequest, resp: HttpServletResponse) {
-        try {
+    fun getRemovedUserById(param: String): String {
 
-            val user = readPayload.mapper<User>(req.inputStream)
-            userDAO.edit(user)
-
-            resp.setStatus(200, "SUCCESS")
-        } catch (e: Exception) {
-            resp.sendError(400, "ERROR")
-        }
+        val user = userDAO.get(param)
+        return mapper.writeValueAsString(user)
+//           obj = objectMapper.readValue(json, List.class);
     }
 
-    fun remove(req: HttpServletRequest, resp: HttpServletResponse) {
-        if (req.pathInfo != null) {
-            val param = req.pathInfo.replace("/", "")
-            try {
+    fun add(user: User) = userDAO.add(user)
 
-                userDAO.remove(param)
+    fun edit(user: User) = userDAO.edit(user)
 
-                resp.setStatus(204, "SUCCESS")
-
-            } catch (e: Exception) {
-                resp.sendError(400, "ERROR")
-            }
-        }
-    }
+    fun remove(param: String) = userDAO.remove(param)
 
 }

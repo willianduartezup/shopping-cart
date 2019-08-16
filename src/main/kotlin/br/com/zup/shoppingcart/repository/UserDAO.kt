@@ -8,6 +8,8 @@ interface UserDAO: CrudDAO<User, String> {
     fun  removeUserFromTable(id: String)
 
     @Throws(Exception::class)
+    fun getRemovedUserById(id: String): User
+
     fun listUsers(): ArrayList<User>
 
 }

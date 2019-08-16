@@ -17,7 +17,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -111,15 +110,32 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/httpunit/httpunit -->
         <dependency>
             <groupId>httpunit</groupId>
             <artifactId>httpunit</artifactId>
             <version>1.7</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.47</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mockrunner</groupId>
+            <artifactId>mockrunner-servlet</artifactId>
+            <version>2.0.1</version>
+            <scope>test</scope>
+        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/cactus/cactus-maven -->
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>4.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--
         <dependency>
             <groupId>cactus</groupId>
@@ -142,6 +158,7 @@
                 </excludes>
             </resource>
         </resources>
+
 
         <plugins>
             <plugin>
@@ -193,27 +210,7 @@
                     <jvmTarget>${java.version}</jvmTarget>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
+            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
