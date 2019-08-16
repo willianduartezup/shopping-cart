@@ -5,10 +5,8 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 
-class ProductService {
-
-    private val jdbc = ConnectionFactory()
-    private val factory = DAOFactory()
+class ProductService(private val jdbc: ConnectionFactory,
+        private val factory: DAOFactory) {
 
     fun add(product: Product) {
 
