@@ -25,9 +25,14 @@ function onSubmit(form) {
         product.quantity = form.quantity.value;
 
         if (id){
-            productFactory.update(product);
+            product.id = id;
+            productFactory.update(product, function () {
+                alert('product updated success');
+            });
         }else{
-            productFactory.add(product);
+            productFactory.add(product, function () {
+                alert('product created success');
+            });
         }
 
         return false;

@@ -22,6 +22,7 @@ class CartService {
     private val jdbc = ConnectionFactory()
     private val mapper = jacksonObjectMapper()
     private val reader = ReadPayload()
+
     private val factory = DAOFactory()
     private val userDAO: UserDAO =
         factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
@@ -33,105 +34,119 @@ class CartService {
     private val productDAO: ProductDAO =
         factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-    fun add(req: HttpServletRequest, resp: HttpServletResponse) {
+    fun add(userId: String, itemCart: ItemCart) {
 
-        try {
+        var idCart = ""
 
-            val userId = req.pathInfo.replace("/", "")
-            val itemCart = reader.mapper<ItemCart>(req.inputStream)
-            var idCart = ""
+        val userCart = userDAO.get(userId)
 
-            val userCart = userDAO.get(userId)
+        validateQuantity(itemCart.quantity)
+        validateInventoryProduct(itemCart.product_id, itemCart.quantity)
 
-            validateQuantity(itemCart.quantity)
-            validateInventoryProduct(itemCart.product_id, itemCart.quantity)
+        if (userCart.cart_id != "") {
 
-            if (userCart.cart_id != "") {
+            idCart = userCart.cart_id.toString()
+        }
 
-                idCart = userCart.cart_id.toString()
-            }
-
+        if (idCart == "") {
             itemCartDao.add(itemCart)
-
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
-
-            val idItem = itemCart.id.toString()
-
-            var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
-
-            if (idCart == "") {
-                addCart(idItem, userCart, userId, totalPrice)
-
-            } else if (idCart != "") {
-
-                val totalPriceInCart = recalculateTotalPrice(idCart)
-
-                totalPrice += totalPriceInCart
-
-                editCart(idCart, idItem, totalPrice)
-            }
-
-            resp.setStatus(201, "CREATED")
-
-
-        } catch (e: Exception) {
-            resp.sendError(400, e.message)
-        }
-
-    }
-
-    fun remove(req: HttpServletRequest, resp: HttpServletResponse) {
-
-        try {
-            val idItemCart = req.pathInfo.replace("/", "")
-
-            val itemCart = itemCartDao.get(idItemCart)
-
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
-
-            itemCartDao.remove(idItemCart)
-
-        } catch (e: Exception) {
-            resp.sendError(400, e.message)
-        }
-    }
-
-    fun edit(req: HttpServletRequest, resp: HttpServletResponse) {
-
-        try {
-            val itemCart = reader.mapper<ItemCart>(req.inputStream)
-
-            val operator = getOperatorStock(itemCart.id.toString(), itemCart.quantity)
-
-            if (operator != "") {
-                val product = productDAO.get(itemCart.product_id)
-
-                updateQuantityProduct(product.id.toString(), itemCart.quantity, operator)
-            }
-
-            itemCartDao.edit(itemCart)
-
-        } catch (e: Exception) {
-            resp.sendError(400, e.message)
-        }
-    }
-
-    fun get(req: HttpServletRequest, resp: HttpServletResponse) {
-
-        if (req.pathInfo != "") {
-
-            val idUser = req.pathInfo.replace("/", "")
-
-            val idCart = userDAO.get(idUser).cart_id.toString()
-
-            val listItems = itemCartDao.listItemCart(idCart)
-
-            val jsonString = mapper.writeValueAsString(listItems)
-
-            resp.writer.write(jsonString)
         } else {
-            resp.sendError(400, "Cart not found!")
+            agroupItemsCart(idCart, itemCart)
         }
+
+        val idItem = itemCart.id.toString()
+
+        var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
+
+        if (idCart == "") {
+            addCart(idItem, userCart, userId, totalPrice)
+
+        } else if (idCart != "") {
+
+            val totalPriceInCart = recalculateTotalPrice(idCart)
+
+            totalPrice += totalPriceInCart
+
+            editCart(idCart, idItem, totalPrice)
+        }
+
+        updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
+
+    }
+
+    private fun agroupItemsCart(idCart: String, itemCart: ItemCart) {
+
+        try {
+
+            val product = itemCart.product_id
+
+            val ListItems = cartDao.get(idCart).items
+
+            var idItemCart = ""
+
+            for (idItems in ListItems) {
+
+                if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false) {
+
+                    idItemCart = itemCartDao.get(idItems).id.toString()
+
+                }
+            }
+            if (idItemCart != "") {
+
+                val itemCartUpdB = itemCartDao.get(idItemCart)
+
+                val quantity = itemCart.quantity + itemCartUpdB.quantity
+
+                val itemCartUpdA =
+                    ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
+
+                itemCartDao.edit(itemCartUpdA)
+
+            } else {
+                itemCartDao.add(itemCart)
+            }
+
+
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+
+    }
+
+
+    fun remove(idItemCart: String) {
+
+        val itemCart = itemCartDao.get(idItemCart)
+
+        updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
+
+        itemCartDao.delete(idItemCart)
+
+    }
+
+    fun edit(itemCart: ItemCart) {
+
+        val operator = getOperatorStock(itemCart.id.toString(), itemCart.quantity)
+
+        if (operator != "") {
+            val product = productDAO.get(itemCart.product_id)
+
+            updateQuantityProduct(product.id.toString(), itemCart.quantity, operator)
+        }
+
+        itemCartDao.edit(itemCart)
+
+    }
+
+    fun get(idUser: String): String {
+
+        val idCart = userDAO.get(idUser).cart_id.toString()
+
+        val listItems = itemCartDao.listItemCart(idCart)
+
+        return mapper.writeValueAsString(listItems)
+
     }
 
 
@@ -179,22 +194,27 @@ class CartService {
         }
     }
 
-    private fun calculatePriceItem(priceUnit: Int, quantity: Int): Int {
+    fun calculatePriceItem(priceUnit: Int, quantity: Int): Int {
         return priceUnit * quantity
     }
 
     private fun addCart(idItem: String, userCart: User, userId: String, totalPrice: Int) {
-        val listItem = ArrayList<String>()
+        try {
+            val listItem = ArrayList<String>()
 
-        listItem.add(idItem)
+            listItem.add(idItem)
 
-        val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
+            val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
 
-        cartDao.add(cart)
+            cartDao.add(cart)
 
-        val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
+            val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
-        userDAO.edit(userUpdate)
+            userDAO.edit(userUpdate)
+
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
     }
 
     private fun editCart(idCart: String, idItem: String, totalPrice: Int) {
@@ -224,6 +244,6 @@ class CartService {
         }
         return totalPrice
     }
-
+//aa
 
 }

@@ -1,30 +1,34 @@
 package br.com.zup.shoppingcart.repository
 
 import br.com.zup.shoppingcart.domain.Cart
-import br.com.zup.shoppingcart.domain.Status
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.sql.Connection
 import java.sql.Date
 
+fun ArrayList<String>.toJson() = jacksonObjectMapper().writeValueAsString(this)
+
 
 class CartJdbcDAO(private val connection: Connection) : CartDAO {
+
+    private val mapper = jacksonObjectMapper()
+
     override fun get(id: String): Cart {
 
-        val stm = connection.prepareStatement("SELECT * FROM cart WHERE id like ? AND status like Status.ACTIVE")
+        val stm = connection.prepareStatement("SELECT * FROM cart WHERE id like ?")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
 
         if (!rs.next()) {
-            throw Exception("User not found")
+            throw Exception("Cart not found")
         }
 
         val cart = Cart(
-                rs.getString("id"),
-                rs.getObject("items") as ArrayList<String>,
-                rs.getString("user_id"),
-                rs.getInt("total_price"),
-                rs.getDate("update_at"),
-                rs.getObject("status") as Status
+            rs.getString("id"),
+            getArrayList(rs.getString("items")),
+            rs.getString("user_id"),
+            rs.getInt("total_price"),
+            rs.getDate("update_at")
         )
 
         stm.close()
@@ -32,9 +36,25 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
         return cart
     }
 
+    private fun getArrayList(listCart: String): ArrayList<String> {
+
+
+        val actualObj = mapper.readTree(listCart)
+
+        val listReturn = ArrayList<String>()
+
+        for (i in actualObj) {
+
+            listReturn.add(i.asText())
+        }
+
+        return listReturn
+
+    }
+
     override fun getCartActive(): Cart {
 
-        val stm = connection.prepareStatement("SELECT * FROM cart WHERE status like Status.ACTIVE")
+        val stm = connection.prepareStatement("SELECT * FROM cart WHERE canceledoractive like true")
 
         val rs = stm.executeQuery()
 
@@ -49,16 +69,18 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
     override fun add(e: Cart): Cart {
 
-        val psmt = connection.prepareStatement("INSERT INTO cart(id, items, user_id, total_price, update_at, status) VALUES(?,?,?,?,?,?)")
+        val psmt =
+            connection.prepareStatement("INSERT INTO cart(id, items, user_id, total_price, update_at, canceledoractive) VALUES(?,?::json,?,?,?,?)")
 
         println(e.id)
 
+
         psmt.setString(1, e.id)
-        psmt.setObject(2, connection.createArrayOf("text", e.items.toArray()))
+        psmt.setString(2, e.items.toJson())
         psmt.setString(3, e.user_id)
         psmt.setString(4, e.total_price.toString())
         psmt.setDate(5, e.update_at as Date)
-        psmt.setString(6, e.status.toString())
+        psmt.setBoolean(6, true)
 
         psmt.execute()
         psmt.close()
@@ -68,17 +90,14 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
 
     override fun edit(e: Cart): Cart {
         val psmt =
-                connection.prepareStatement("UPDATE cart SET itens = ?, user_id = ?, total_price = ?, update_at = ?, status = ? WHERE id = ?")
+            connection.prepareStatement("UPDATE cart SET items = ?::json, user_id = ?, total_price = ?, update_at = ?, canceledoractive = ?::bool WHERE id = ?")
 
-        val array = arrayOfNulls<String>(e.items.size)
-
-
-        psmt.setString(1, e.id)
-        // psmt.set
-        psmt.setString(3, e.user_id)
-        psmt.setInt(4, e.total_price)
-        psmt.setDate(5, e.update_at as Date?)
-        psmt.setObject(6, e.status)
+        psmt.setString(1, e.items.toJson())
+        psmt.setString(2, e.user_id)
+        psmt.setInt(3, e.total_price)
+        psmt.setDate(4, e.update_at as Date?)
+        psmt.setBoolean(5, true)
+        psmt.setString(6, e.id)
 
         psmt.execute()
         psmt.close()
@@ -87,8 +106,8 @@ class CartJdbcDAO(private val connection: Connection) : CartDAO {
     }
 
     override fun remove(id: String) {
-        val psmt = connection.prepareStatement("UPDATE cart SET status = ? WHERE id like ?")
-        psmt.setObject(1, Status.CANCELLED)
+        val psmt = connection.prepareStatement("UPDATE cart SET canceledoractive = ? WHERE id like ?")
+        psmt.setBoolean(1, false)
         psmt.setString(2, id)
 
         psmt.execute()

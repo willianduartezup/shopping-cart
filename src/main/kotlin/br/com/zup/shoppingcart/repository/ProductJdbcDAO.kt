@@ -46,7 +46,7 @@ class ProductJdbcDAO(val connection: Connection) : ProductDAO {
 
     override fun edit(e: Product): Product {
         val psmt =
-            connection.prepareStatement("UPDATE product SET name = ?, price = ?, unit = ?, quantity = ? WHERE id = ?")
+            connection.prepareStatement("UPDATE product SET name = ?, price = ?, unit = ?, quantity = ? WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setInt(2, e.price)
         psmt.setString(3, e.unit)
