@@ -68,10 +68,10 @@ class UserJdbc {
             val userDAO: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
             val result = userDAO.add(user)
+            assertEquals(result.id, user.id)
 
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
-            assertEquals(id, "")
         } finally {
             jdbc.closeConnection()
         }

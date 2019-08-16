@@ -7,14 +7,12 @@ import br.com.zup.shoppingcart.application.UserService
 import br.com.zup.shoppingcart.domain.User
 import com.fasterxml.jackson.module.kotlin.convertValue
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import java.io.ByteArrayInputStream
 import java.io.FileInputStream
 import java.io.InputStream
-import kotlin.test.assertTrue
 
 class UserServiceTest {
 
@@ -41,23 +39,20 @@ class UserServiceTest {
 
         try {
 
-            val param: String = user.id!!
+            val param = user.id!!
             val userGet = service.getUserById(param)
             val userString = mapper.writeValueAsString(user) as String
             LOG.info(userGet)
             LOG.info(userString)
             assertEquals("differences between", userGet as String, userString as String)
+            LOG.info("successful user return")
 
         } catch (e: Exception) {
 
             LOG.error("should get user by id\nError testing Exception is $e")
             e.printStackTrace()
 
-        } finally {
-
-            LOG.info("successful user return")
-
-        }
+        } finally { }
 
     }
 
@@ -70,6 +65,7 @@ class UserServiceTest {
 
             val result = service.add(user)
             assertEquals("differences between", user, result)
+            LOG.info("user added successful")
 
         } catch (e: Exception) {
 
@@ -78,7 +74,6 @@ class UserServiceTest {
 
         } finally {
 
-            LOG.info("user added successful")
         }
 
     }
@@ -94,16 +89,14 @@ class UserServiceTest {
             val users: List<User> = mapper.convertValue(jsonList)
 
             assertTrue(users.isNotEmpty())
+            LOG.info("successful user return")
 
         } catch (e: Exception) {
 
             LOG.error("Error testing Exception is $e")
             e.printStackTrace()
 
-        } finally {
-
-            LOG.info("successful user return")
-        }
+        } finally { }
 
     }
 
@@ -119,6 +112,7 @@ class UserServiceTest {
 
             val userGet = service.getUserById(param)
             val user: User = mapper.convertValue(userGet)
+            LOG.info("User removed successful")
 
             assertTrue(user.deleted!!)
 
@@ -127,11 +121,7 @@ class UserServiceTest {
             LOG.info("Error in test of removes user. Exception is $e")
             e.printStackTrace()
 
-        } finally {
-
-            LOG.info("User removed successful")
-
-        }
+        } finally { }
 
     }
 }
