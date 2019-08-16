@@ -2,15 +2,15 @@
 <form method="post" onsubmit="return onSubmit(this)">
     <table>
         <tr>
-            <td>name:</td>
+            <td>Name:</td>
             <td>
                 <label>
-                    <input type="text" name="name" id="name" required/>
+                    <input  type="text" name="name" id="name" required/>
                 </label>
             </td>
         </tr>
         <tr>
-            <td>price:</td>
+            <td>Price:</td>
             <td>
                 <label>
                     <input type="number" name="price" id="price" required/>
@@ -18,7 +18,7 @@
             </td>
         </tr>
         <tr>
-            <td>unit:</td>
+            <td>Unit:</td>
             <td>
                 <label>
                     <input type="text" name="unit" id="unit"/>
@@ -26,7 +26,7 @@
             </td>
         </tr>
         <tr>
-            <td>quantity:</td>
+            <td>Quantity:</td>
             <td>
                 <label>
                     <input type="number" name="quantity" id="quantity" required/>

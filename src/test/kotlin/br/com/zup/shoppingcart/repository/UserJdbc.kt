@@ -3,19 +3,22 @@ package br.com.zup.shoppingcart.repository
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.id
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import kotlin.test.assertEquals
 
 class UserJdbc {
+
+    private val user = User(id, "Tester", "teste@teste.com", "piece!")
+
     companion object {
 
         @BeforeClass
         @JvmStatic
         fun insertUser() {
             LOG.info("Insert User Test")
-            val user = User(id, "Tester", "teste@teste.com", "piece!")
 
             val jdbc = ConnectionFactory()
             try {
@@ -64,11 +67,11 @@ class UserJdbc {
             val factory = DAOFactory()
             val userDAO: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+            val result = userDAO.add(user)
+            assertEquals(result.id, user.id)
 
-            assertEquals(id, userDAO.get(id).id)
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
-            assertEquals(id, "")
         } finally {
             jdbc.closeConnection()
         }
@@ -89,10 +92,8 @@ class UserJdbc {
 
             userDao.edit(user)
 
-            assertEquals(user.name, userDao.get(user.id!!).name)
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
-            assertEquals("", "error")
 
         } finally {
             jdbc.closeConnection()

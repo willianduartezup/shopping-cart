@@ -20,7 +20,7 @@ class CartTest {
         items.add("id1")
         items.add("id2")
 
-        val cart = Cart(null,items,"",10,null,Status.CANCELLED)
+        val cart = Cart(null,items,"",10)
 
         val violations = validator.validate(cart)
 
@@ -37,7 +37,7 @@ class CartTest {
         items.add("id1")
         items.add("id2")
 
-        val cart = Cart(null,items,"abc123",-1,null,Status.CANCELLED)
+        val cart = Cart(null,items,"abc123",-1)
 
         val violations = validator.validate(cart)
 
