@@ -56,6 +56,7 @@ class CartService {
 
         val idItem = itemCart.id.toString()
 
+
         var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
 
         if (idCart == "") {
@@ -74,6 +75,7 @@ class CartService {
 
     }
 
+
     private fun agroupItemsCart(idCart: String, itemCart: ItemCart) {
 
         try {
@@ -86,26 +88,26 @@ class CartService {
 
             for (idItems in ListItems) {
 
-                if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false) {
+                if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false ) {
 
                     idItemCart = itemCartDao.get(idItems).id.toString()
 
                 }
             }
-            if (idItemCart != "") {
+                if (idItemCart != "") {
 
-                val itemCartUpdB = itemCartDao.get(idItemCart)
+                    val itemCartUpdB = itemCartDao.get(idItemCart)
 
-                val quantity = itemCart.quantity + itemCartUpdB.quantity
+                        val quantity = itemCart.quantity + itemCartUpdB.quantity
 
-                val itemCartUpdA =
-                    ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
+                        val itemCartUpdA =
+                            ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
 
-                itemCartDao.edit(itemCartUpdA)
+                        itemCartDao.edit(itemCartUpdA)
 
-            } else {
-                itemCartDao.add(itemCart)
-            }
+                } else {
+                    itemCartDao.add(itemCart)
+                }
 
 
         } catch (e: Exception) {
@@ -113,7 +115,6 @@ class CartService {
         }
 
     }
-
 
     fun remove(idItemCart: String) {
 
@@ -211,6 +212,7 @@ class CartService {
             val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
             userDAO.edit(userUpdate)
+
 
         } catch (e: Exception) {
             throw Exception(e.message)
