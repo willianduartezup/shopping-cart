@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "UserController", value = ["/user/*"])
+@WebServlet(name = "User", value = ["/user/*"])
 class UserController : HttpServlet() {
 
     private val mapper = jacksonObjectMapper()

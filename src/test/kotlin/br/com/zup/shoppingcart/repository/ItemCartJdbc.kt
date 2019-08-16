@@ -28,8 +28,11 @@ class ItemCartJdbc {
 
                 productDAO.add(product)
                 itemsCartDAO.add(itemCart)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
+            } catch (e: Exception) {
+                e.printStackTrace()
+
+                LOG.info("error on 'Insert Item Cart' test. Exception is $e")
+
             } finally {
                 jdbc.closeConnection()
             }
@@ -46,8 +49,10 @@ class ItemCartJdbc {
 
                 itemsCartDAO.remove(id)
                 productDAO.remove(idProduct)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                LOG.info("error on 'Insert Item Cart' test. Exception is $e")
+
             } finally {
                 jdbc.closeConnection()
             }
@@ -64,9 +69,13 @@ class ItemCartJdbc {
             val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
 
             assertEquals(id, itemsCartDAO.get(id).id)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-            assertTrue(false)
+        } catch (e: Exception) {
+
+          //  assertTrue(false)
+            LOG.error("Error on 'Validate insert Item Cart' test. Exception is $e")
+            e.printStackTrace()
+
+
         } finally {
             jdbc.closeConnection()
         }
@@ -79,15 +88,20 @@ class ItemCartJdbc {
         val jdbc = ConnectionFactory()
         try {
             val itemCart = ItemCart(id, idProduct, 2, 2)
+            LOG.info(" ")
             val factory = DAOFactory()
             val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
 
             itemsCartDAO.edit(itemCart)
 
             assertEquals(2, itemsCartDAO.get(id).quantity)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-            assertTrue(false)
+        } catch (e: Exception) {
+            LOG.info(" ")
+
+            e.printStackTrace()
+//            assertTrue(false)
+            LOG.error("Error on 'Validate Update Item Cart' test. Exception is $e")
+
         } finally {
             jdbc.closeConnection()
         }
