@@ -2,6 +2,7 @@ package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.ProductService
 import br.com.zup.shoppingcart.domain.Product
+import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import javax.servlet.annotation.WebServlet
@@ -15,6 +16,7 @@ class ProductController : HttpServlet() {
     private val productService = ProductService()
     private val readPayload = ReadPayload()
     private val mapper = jacksonObjectMapper()
+    private val manager = ManagerResponseServlet()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
         try {
@@ -23,18 +25,12 @@ class ProductController : HttpServlet() {
 
                 val product = productService.getProductById(id)
 
-                val jsonString = mapper.writeValueAsString(product)
-
-                resp.writer.write(jsonString)
-                resp.setStatus(200, "SUCCESS")
+                manager.succcessObject(resp, product)
             } else {
-                val jsonString = mapper.writeValueAsString(this.productService.getListProducts())
-
-                resp.writer.write(jsonString)
-                resp.setStatus(200, "OK")
+                manager.succcessObject(resp, this.productService.getListProducts())
             }
         }catch (ex: Exception){
-            resp.sendError(400, ex.message)
+            manager.badRequest(resp, ex)
         }
     }
 
@@ -45,9 +41,9 @@ class ProductController : HttpServlet() {
 
             productService.add(product)
 
-            resp.setStatus(201, "CREATED")
+            manager.created(resp, "Product created success")
         }catch (ex: Exception){
-            resp.sendError(400, ex.message)
+            manager.badRequest(resp, ex)
         }
     }
 
@@ -58,9 +54,9 @@ class ProductController : HttpServlet() {
 
             productService.edit(product)
 
-            resp.setStatus(200, "UPDATED")
+            manager.succcess(resp, "Product updated success")
         }catch (ex: Exception){
-            resp.sendError(400, ex.message)
+            manager.badRequest(resp, ex)
         }
     }
 }
