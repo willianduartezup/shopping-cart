@@ -1,4 +1,5 @@
-target
-.idea
+target/
+.idea/
+out/
+log/
 shopping-cart.iml
-Log4J.1.0.log.*
