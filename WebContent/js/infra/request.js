@@ -21,14 +21,8 @@ request.getType = function(callback, callbackError){
                     callback(this.responseText);
                 }
             }else{
-                if (this.status === 400){
-                    let message = res.message + ': ';
-
-                    res.fields.map(function (obj) {
-                        message += '- '+ obj.field +': '+ obj.message;
-                    });
-
-                    alert(message);
+                if (res.message){
+                    alert(res.message);
                 }else{
                     alert('We were unable to respond to your request. Please try again later.');
                 }

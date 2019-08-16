@@ -2,6 +2,7 @@ package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.UserService
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import javax.servlet.annotation.WebServlet
@@ -14,6 +15,7 @@ class UserController : HttpServlet() {
 
     private val mapper = jacksonObjectMapper()
     private val readPayload = ReadPayload()
+    private val manager = ManagerResponseServlet()
 
     private val service = UserService()
 
@@ -23,10 +25,11 @@ class UserController : HttpServlet() {
             val user: User = readPayload.mapper<User>(request.inputStream)
             service.add(user)
 
+           //response.setStatus(HttpServletResponse.SC_CREATED, "User successful created!")
+           manager.created(response, "User created success")
         } catch (e: Exception) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
-        } finally {
-            response.setStatus(HttpServletResponse.SC_CREATED, "User successful created!")
+            //response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
+           manager.badRequest(response, e)
         }
     }
 
@@ -37,23 +40,33 @@ class UserController : HttpServlet() {
         if (request.pathInfo != null) {
             val param = request.pathInfo.replace("/", "")
             try {
-                jsonUser = service.getUserById(param)
+                /*jsonUser = service.getUserById(param)
+                response.setStatus(HttpServletResponse.SC_OK, jsonUser)*/
+                manager.succcessObject(response, service.getUserById(param))
             } catch (e: Exception) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User not found!")
-            } finally {
-                response.setStatus(HttpServletResponse.SC_OK, jsonUser)
+                //response.sendError(HttpServletResponse.SC_BAD_REQUEST, "User not found!")
+                manager.badRequest(response, e)
             }
-        } else response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error, param not found!")
+        } else {
+            //response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error, param not found!")
+            //manager.badRequest(response, Exception("Error, param not found!"))
+            try {
+                manager.succcessObject(response, service.getListUser())
+            }catch (e: Exception){
+                manager.badRequest(response, e)
+            }
+        }
     }
 
     override fun doPut(request: HttpServletRequest, response: HttpServletResponse) {
         try {
             val user = readPayload.mapper<User>(request.inputStream)
             this.service.edit(user)
+            //response.setStatus(HttpServletResponse.SC_OK, "User successful updated!")
+            manager.succcess(response, "User updated success")
         } catch (e: Exception) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
-        } finally {
-            response.setStatus(HttpServletResponse.SC_OK, "User successful updated!")
+            //response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
+            manager.badRequest(response, e)
         }
     }
 
@@ -63,10 +76,11 @@ class UserController : HttpServlet() {
             val param = request.pathInfo.replace("/", "")
             try {
                 this.service.remove(param)
+                //response.setStatus(HttpServletResponse.SC_NO_CONTENT, "User successful removed!")
+                manager.succcess(response, "User successful removed!")
             } catch (e: Exception) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
-            } finally {
-                response.setStatus(HttpServletResponse.SC_NO_CONTENT, "User successful removed!")
+                //response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString())
+                manager.badRequest(response, e)
             }
         }
     }
