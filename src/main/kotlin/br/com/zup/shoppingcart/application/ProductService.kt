@@ -5,17 +5,26 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 
-class ProductService(private val jdbc: ConnectionFactory,
-        private val factory: DAOFactory) {
+class ProductService(
+    private val jdbc: ConnectionFactory,
+    private val factory: DAOFactory
+) {
 
     fun add(product: Product) {
 
+        val connection = jdbc.getConnection()
         try {
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
             productDAO.add(product)
+
+            connection.commit()
+
         } catch (ex: Exception) {
+
+            connection.rollback()
             throw ex
+
         } finally {
             jdbc.closeConnection()
         }
@@ -23,12 +32,23 @@ class ProductService(private val jdbc: ConnectionFactory,
 
     fun getProductById(id: String): Product {
 
-        try {
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+        val connection = jdbc.getConnection()
 
-            return productDAO.get(id)
+        try {
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
+            val product = productDAO.get(id)
+
+            connection.commit()
+
+            return product
+
         } catch (ex: Exception) {
+
+            connection.rollback()
             throw ex
+
         } finally {
             jdbc.closeConnection()
         }
@@ -36,12 +56,23 @@ class ProductService(private val jdbc: ConnectionFactory,
 
     fun getListProducts(): ArrayList<Product> {
 
-        try {
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+        val connection = jdbc.getConnection()
 
-            return productDAO.listProduct()
+        try {
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
+            val listProducts = productDAO.listProduct()
+
+            connection.commit()
+
+            return listProducts
+
         } catch (ex: Exception) {
+
+            connection.rollback()
             throw ex
+
         } finally {
             jdbc.closeConnection()
         }
@@ -49,12 +80,21 @@ class ProductService(private val jdbc: ConnectionFactory,
 
     fun edit(product: Product) {
 
+        val connection = jdbc.getConnection()
+
         try {
-            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
             productDAO.edit(product)
+
+            connection.commit()
+
         } catch (ex: Exception) {
+
+            connection.rollback()
             throw ex
+
         } finally {
             jdbc.closeConnection()
         }
