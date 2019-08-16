@@ -4,6 +4,7 @@ import br.com.zup.shoppingcart.infra.response.ServletResponse
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.lang.Exception
 import javax.servlet.http.HttpServletResponse
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class ManagerResponseServlet {
 
@@ -31,8 +32,8 @@ class ManagerResponseServlet {
     }
 
     fun badRequest(resp: HttpServletResponse, exception: Exception){
+        
         val jsonString = mapper.writeValueAsString(ServletResponse(exception.message))
-
         resp.writer.write(jsonString)
         resp.status = 400
     }

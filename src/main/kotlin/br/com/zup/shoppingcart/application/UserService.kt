@@ -5,6 +5,8 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import java.lang.Exception
+import javax.validation.Validation
 
 class UserService {
 
@@ -39,7 +41,18 @@ class UserService {
 //           obj = objectMapper.readValue(json, List.class);
     }
 
-    fun add(user: User) = userDAO.add(user)
+    fun add(user: User) {
+        val validator = Validation.buildDefaultValidatorFactory().validator
+        val violations = validator.validate(user)
+        var message = ""
+        if(violations.size > 0){
+                for(item in violations){
+                    message += "${item.message} "
+                }
+                throw Exception (message)
+        }
+        userDAO.add(user)
+    }
 
     fun edit(user: User) = userDAO.edit(user)
 
