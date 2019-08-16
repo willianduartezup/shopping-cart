@@ -39,7 +39,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun get(id: String): User {
 
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id = ? and deleted like false")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id = ? and deleted = false")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()

@@ -26,13 +26,9 @@ function onSubmit(form) {
 
         if (id){
             product.id = id;
-            productFactory.update(product, function () {
-                alert('product updated success');
-            });
+            productFactory.update(product);
         }else{
-            productFactory.add(product, function () {
-                alert('product created success');
-            });
+            productFactory.add(product);
         }
 
         return false;

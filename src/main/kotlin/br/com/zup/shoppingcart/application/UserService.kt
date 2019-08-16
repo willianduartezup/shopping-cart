@@ -16,17 +16,19 @@ class UserService {
             factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
     }
 
-    fun getUserById(param: String): String {
+    fun getUserById(param: String): User {
 
-        val user = userDAO.get(param)
-        return mapper.writeValueAsString(user)
+        /*val user = userDAO.get(param)
+        return mapper.writeValueAsString(user)*/
+        return userDAO.get(param)
 
     }
 
-    fun getListUser(): String {
+    fun getListUser(): ArrayList<User> {
 
-        val listUsers = userDAO.listUsers()
-        return mapper.writeValueAsString(listUsers)
+        /*val listUsers = userDAO.listUsers()
+        return mapper.writeValueAsString(listUsers)*/
+        return userDAO.listUsers()
 
     }
 
