@@ -4,58 +4,101 @@ import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import java.lang.Exception
 import javax.validation.Validation
 
-class UserService {
+class UserService(private val factory: DAOFactory,
+                  private val jdbc: ConnectionFactory) {
 
-    companion object {
+    /*companion object {
         private val factory = DAOFactory()
         private val jdbc = ConnectionFactory()
-        private val mapper = jacksonObjectMapper()
         private val userDAO: UserDAO =
             factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-    }
+    }*/
 
     fun getUserById(param: String): User {
 
-        /*val user = userDAO.get(param)
-        return mapper.writeValueAsString(user)*/
-        return userDAO.get(param)
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
+            return userDAO.get(param)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
     fun getListUser(): ArrayList<User> {
 
-        /*val listUsers = userDAO.listUsers()
-        return mapper.writeValueAsString(listUsers)*/
-        return userDAO.listUsers()
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
+            return userDAO.listUsers()
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
-    fun getRemovedUserById(param: String): String {
+    /*fun getRemovedUserById(param: String): String {
 
         val user = userDAO.get(param)
         return mapper.writeValueAsString(user)
 //           obj = objectMapper.readValue(json, List.class);
-    }
+    }*/
 
     fun add(user: User) {
         val validator = Validation.buildDefaultValidatorFactory().validator
         val violations = validator.validate(user)
         var message = ""
-        if(violations.size > 0){
-                for(item in violations){
-                    message += "${item.message} "
-                }
-                throw Exception (message)
+        if (violations.size > 0) {
+            for (item in violations) {
+                message += "${item.message} "
+            }
+            throw Exception(message)
         }
-        userDAO.add(user)
+
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
+
+            userDAO.add(user)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
     }
 
-    fun edit(user: User) = userDAO.edit(user)
+    fun edit(user: User) {
 
-    fun remove(param: String) = userDAO.remove(param)
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
+            userDAO.edit(user)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
+
+    fun remove(param: String) {
+
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
+
+            userDAO.remove(param)
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
 }
