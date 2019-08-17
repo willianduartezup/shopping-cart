@@ -4,6 +4,8 @@ import br.com.zup.shoppingcart.application.UserService
 import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
+import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.DAOFactory
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -14,7 +16,7 @@ class UserController : HttpServlet() {
 
     private val readPayload = ReadPayload()
     private val manager = ManagerResponseServlet()
-    private val service = UserService()
+    private val service = UserService(DAOFactory(), ConnectionFactory())
 
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
 

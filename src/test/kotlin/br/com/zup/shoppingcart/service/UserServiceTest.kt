@@ -5,6 +5,8 @@ import br.com.zup.shoppingcart.ServletTestConfig.Companion.mapper
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.readPayload
 import br.com.zup.shoppingcart.application.UserService
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.DAOFactory
 import com.fasterxml.jackson.module.kotlin.convertValue
 import junit.framework.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -21,7 +23,7 @@ class UserServiceTest {
         val input = FileInputStream("./src/test/resources/userTest.json")
         val inputStream: InputStream = ByteArrayInputStream(input.readBytes())
         val user: User = readPayload.mapper<User>(inputStream)
-        var service = UserService()
+        var service = UserService(DAOFactory(), ConnectionFactory())
 
     }
 
