@@ -34,6 +34,7 @@
             <th>product</th>
             <th>quantity</th>
             <th>price unit product</th>
+            <th>price total product</th>
             <th>action</th>
         </tr>
         </thead>
