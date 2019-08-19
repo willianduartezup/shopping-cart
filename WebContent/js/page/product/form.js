@@ -26,9 +26,14 @@ function onSubmit(form) {
 
         if (id){
             product.id = id;
-            productFactory.update(product);
+            productFactory.update(product, function(){
+                document.getElementById("productForm").reset();
+            });
         }else{
-            productFactory.add(product);
+            productFactory.add(product, function() {
+                document.getElementById("productForm").reset();
+            });
+
         }
 
         return false;
