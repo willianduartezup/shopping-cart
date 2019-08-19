@@ -60,7 +60,9 @@ class UserService(
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             userDAO.add(user)
+            connection.commit()
         } catch (ex: Exception) {
+            connection.rollback()
             throw ex
         } finally {
             jdbc.closeConnection()
@@ -74,7 +76,9 @@ class UserService(
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             userDAO.edit(user)
+            connection.commit()
         } catch (ex: Exception) {
+            connection.rollback()
             throw ex
         } finally {
             jdbc.closeConnection()
@@ -88,7 +92,9 @@ class UserService(
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             userDAO.remove(param)
+            connection.commit()
         } catch (ex: Exception) {
+            connection.rollback()
             throw ex
         } finally {
             jdbc.closeConnection()
