@@ -5,7 +5,6 @@ import br.com.zup.shoppingcart.domain.Cart
 import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
-import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.infra.exception.FieldValidator
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
@@ -34,7 +33,6 @@ class CartService(
                 factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             userCart = userDAO.get(userId)
-            connection.commit()
 
             validateQuantity(itemCart.quantity)
             validateInventoryProduct(itemCart.product_id, itemCart.quantity)
@@ -266,8 +264,10 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
         try {
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
             val product = productDAO.get(idProduct)
 
             var newQuantity = 0
@@ -281,9 +281,10 @@ class CartService(
             val productUpdate = Product(idProduct, product.name, product.price, product.unit, newQuantity)
 
             productDAO.edit(productUpdate)
+            connection.commit()
 
         } catch (e: Exception) {
-
+            connection.rollback()
             throw e
 
         } finally {
@@ -341,16 +342,18 @@ class CartService(
             val cart = Cart(items = listItem, user_id = userId, total_price = totalPrice)
 
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
-            cartDao.add(cart)
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
 
-            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
+            cartDao.add(cart)
+
             userDAO.edit(userUpdate)
+
+            connection.commit()
 
 
         } catch (e: Exception) {
-
             connection.rollback()
             throw e
 
@@ -365,9 +368,9 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
-
         try {
+
+            val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
 
             val cart = cartDao.get(idCart)
 
@@ -378,9 +381,13 @@ class CartService(
             val cartUpdate = Cart(idCart, items, cart.user_id, totalPrice)
 
             cartDao.edit(cartUpdate)
+
+            connection.commit()
+
         } catch (e: Exception) {
 
             connection.rollback()
+
             throw e
 
         } finally {
