@@ -215,8 +215,12 @@ class CartService(
         val connection = jdbc.getConnection()
 
         try {
+
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
             val idCart = userDAO.get(idUser).cart_id!!
+
+            jdbc.closeConnection()
+
             val itemCartDao: ItemsCartDAO =
                 factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
             return itemCartDao.listItemCart(idCart)
