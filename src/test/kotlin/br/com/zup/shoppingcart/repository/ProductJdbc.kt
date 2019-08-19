@@ -10,21 +10,25 @@ import kotlin.test.assertEquals
 
 class ProductJdbc {
     companion object {
+        private val product = Product(id, "Apple", 2, "piece", 1)
+
         @BeforeClass
         @JvmStatic
         fun insertProduct() {
 
             LOG.info("Insert Product Test")
-            val product = Product(id, "Apple", 2, "piece", 1)
 
             val jdbc = ConnectionFactory()
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val productDAO: ProductDAO =
-                    factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                    factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
                 productDAO.add(product)
+                connection.commit()
             } catch (ex: Exception) {
+                connection.rollback()
                 ex.printStackTrace()
             } finally {
                 jdbc.closeConnection()
@@ -37,15 +41,16 @@ class ProductJdbc {
             LOG.info("Delete Product Test")
 
             val jdbc = ConnectionFactory()
-
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val productDAO: ProductDAO =
-                    factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                    factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
-                productDAO.remove(id)
-
+                productDAO.remove(product.id!!)
+                connection.commit()
             } catch (ex: Exception) {
+                connection.rollback()
                 ex.printStackTrace()
             } finally {
                 jdbc.closeConnection()
@@ -64,10 +69,10 @@ class ProductJdbc {
             val productDAO: ProductDAO =
                 factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
 
-            assertEquals(id, productDAO.get(id).id.toString())
+            assertEquals(product.id, productDAO.get(product.id!!).id)
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
-            assertEquals(id, "")
+            assertEquals(product.id, "")
         } finally {
             jdbc.closeConnection()
         }
@@ -79,17 +84,19 @@ class ProductJdbc {
         LOG.info("Update Product Test")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val productDAO: ProductDAO =
-                factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
-            val product = Product(id, "Orange", 2, "piece", 1)
+            val productUpdated = Product(product.id, "Orange", 2, "piece", 1)
 
-            productDAO.edit(product)
-
-            assertEquals(product.name, productDAO.get(id).name)
+            productDAO.edit(productUpdated)
+            connection.commit()
+            assertEquals(productUpdated.name, productDAO.get(product.id!!).name)
         } catch (ex: java.lang.Exception) {
+            connection.rollback()
             ex.printStackTrace()
             assertEquals("", "error")
         } finally {

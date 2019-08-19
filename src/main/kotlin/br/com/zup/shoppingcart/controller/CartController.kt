@@ -4,6 +4,8 @@ import br.com.zup.shoppingcart.application.CartService
 import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
+import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.DAOFactory
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletResponse
 class CartController : HttpServlet() {
 
     private val reader = ReadPayload()
-    private val service = CartService()
     private val manager = ManagerResponseServlet()
+    private val service = CartService(ConnectionFactory(), DAOFactory())
 
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
 
