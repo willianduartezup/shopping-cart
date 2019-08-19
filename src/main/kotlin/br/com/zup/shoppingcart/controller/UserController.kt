@@ -16,7 +16,7 @@ class UserController : HttpServlet() {
 
     private val readPayload = ReadPayload()
     private val manager = ManagerResponseServlet()
-    private val service = UserService(DAOFactory(), ConnectionFactory())
+    private val service = UserService(ConnectionFactory(), DAOFactory())
 
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
 

@@ -16,13 +16,11 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.util.ArrayList
 
 
-class CartService {
+class CartService(
+    private val jdbc: ConnectionFactory,
+    private val factory: DAOFactory
+) {
 
-    private val jdbc = ConnectionFactory()
-    private val mapper = jacksonObjectMapper()
-    private val reader = ReadPayload()
-
-    private val factory = DAOFactory()
     private val userDAO: UserDAO =
         factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
     private val cartDao: CartDAO =

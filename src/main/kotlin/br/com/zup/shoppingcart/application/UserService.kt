@@ -6,9 +6,10 @@ import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
 import javax.validation.Validation
 
-class UserService(private val factory: DAOFactory,
-                  private val jdbc: ConnectionFactory) {
-
+class UserService(
+    private val jdbc: ConnectionFactory,
+    private val factory: DAOFactory
+) {
     /*companion object {
         private val factory = DAOFactory()
         private val jdbc = ConnectionFactory()
