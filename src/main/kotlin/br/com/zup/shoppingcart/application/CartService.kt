@@ -70,7 +70,7 @@ class CartService(
                 editCart(idCart, idItem, totalPrice)
             }
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity,0, "-")
 
             connection.commit()
 
@@ -152,7 +152,7 @@ class CartService(
 
             val itemCart = itemCartDao.get(idItemCart)
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity,0, "+")
 
             itemCartDao.delete(idItemCart)
 
@@ -185,6 +185,8 @@ class CartService(
             val itemCartDao: ItemsCartDAO =
                 factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
+            val itemCartOld = itemCartDao.get(itemCart.id!!)
+
             val productDAO: ProductDAO =
                 factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
@@ -192,7 +194,7 @@ class CartService(
             if (operator != "") {
                 val product = productDAO.get(itemCart.product_id)
 
-                updateQuantityProduct(product.id.toString(), itemCart.quantity, operator)
+                updateQuantityProduct(product.id.toString(), itemCart.quantity, itemCartOld.quantity, operator)
             }
 
             itemCartDao.edit(itemCart)
@@ -260,7 +262,7 @@ class CartService(
 
     }
 
-    private fun updateQuantityProduct(idProduct: String, quantity: Int, operator: String) {
+    private fun updateQuantityProduct(idProduct: String, quantity: Int, quantityOld: Int, operator: String) {
 
         val connection = jdbc.getConnection()
 
@@ -273,7 +275,9 @@ class CartService(
             var newQuantity = 0
 
             if (operator == "-") {
-                newQuantity = product.quantity - quantity
+                val quantityReal = quantity - quantityOld;
+
+                newQuantity = product.quantity - quantityReal
             } else if (operator == "+") {
                 newQuantity = product.quantity + quantity
             }
