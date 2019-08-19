@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <div>
-    <form onsubmit="return onSubmit(this)">
+    <form id="cartForm" onsubmit="return onSubmit(this)">
         <table class="gridtable">
             <tr>
                 <td id="userName"></td>

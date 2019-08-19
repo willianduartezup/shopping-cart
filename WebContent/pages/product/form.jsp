@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<form method="post" onsubmit="return onSubmit(this)">
+<form id="productForm" method="post" onsubmit="return onSubmit(this)">
     <table>
         <tr>
             <td>Name:</td>

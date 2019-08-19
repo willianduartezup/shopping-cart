@@ -20,11 +20,19 @@ function onSubmit(usersForm) {
 
     if (id){
         user.id = id;
-        userFactory.update(user);
+        userFactory.update(user, function () {
+            document.getElementById("usersForm").reset();
+        });
     }else{
-        userFactory.add(user);
+        userFactory.add(user, function () {
+            document.getElementById("usersForm").reset();
+
+        });
+
     }
+
     return false;
+
 }
 
 getUser();

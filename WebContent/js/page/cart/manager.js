@@ -89,6 +89,7 @@ function onSubmit(form){
         item.price_unit_product = product.price;
 
         cartFactory.add(user_id, item, function () {
+            document.getElementById("cartForm").reset();
             getItens();
         });
     });
