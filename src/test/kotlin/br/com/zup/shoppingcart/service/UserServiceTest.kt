@@ -25,7 +25,7 @@ class UserServiceTest {
 
     companion object {
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", cart_id = "")
+        val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", cart_id = "")
         private val service = UserService(ConnectionFactory(), DAOFactory())
 
 
