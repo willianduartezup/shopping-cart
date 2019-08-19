@@ -21,7 +21,7 @@ function onSubmit(usersForm) {
     if (id){
         user.id = id;
         userFactory.update(user, function () {
-            document.getElementById("usersForm").reset();
+            window.location.href="index.jsp?page=user/usersList"
         });
     }else{
         userFactory.add(user, function () {
