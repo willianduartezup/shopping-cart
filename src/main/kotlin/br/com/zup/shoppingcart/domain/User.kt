@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
 data class User(
-
     @Id
     var id: String? = UUID.randomUUID().toString(),
 
@@ -18,7 +17,7 @@ data class User(
     @field:NotEmpty(message = "Email is blank!")
     var email: String?,
 
-    @field:Size(min = 6, message = "Password is not valid!")
+    @field:Size(min = 6, message = "Use six characters or more for your password")
     @field:NotEmpty(message = "Password is blank!")
     var password: String?,
 
