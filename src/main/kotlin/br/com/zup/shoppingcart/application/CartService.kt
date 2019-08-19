@@ -6,13 +6,13 @@ import br.com.zup.shoppingcart.domain.ItemCart
 import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.infra.ReadPayload
+import br.com.zup.shoppingcart.infra.exception.FieldValidator
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.util.ArrayList
 
 
@@ -22,7 +22,7 @@ class CartService(
 ) {
 
     fun add(userId: String, itemCart: ItemCart) {
-
+        FieldValidator.validate(itemCart)
         var idCart = ""
 
         val connection = jdbc.getConnection()

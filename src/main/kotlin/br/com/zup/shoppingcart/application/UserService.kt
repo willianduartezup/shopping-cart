@@ -1,6 +1,7 @@
 package br.com.zup.shoppingcart.application
 
 import br.com.zup.shoppingcart.domain.User
+import br.com.zup.shoppingcart.infra.exception.FieldValidator
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
@@ -53,16 +54,7 @@ class UserService(
     }*/
 
     fun add(user: User) {
-        val validator = Validation.buildDefaultValidatorFactory().validator
-        val violations = validator.validate(user)
-        var message = ""
-        if (violations.size > 0) {
-            for (item in violations) {
-                message += "${item.message} "
-            }
-            throw Exception(message)
-        }
-
+        FieldValidator.validate(user)
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -78,7 +70,7 @@ class UserService(
     }
 
     fun edit(user: User) {
-
+        FieldValidator.validate(user)
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
