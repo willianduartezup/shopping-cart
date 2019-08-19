@@ -1,6 +1,7 @@
 package br.com.zup.shoppingcart.application
 
 import br.com.zup.shoppingcart.domain.Product
+import br.com.zup.shoppingcart.infra.exception.FieldValidator
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
@@ -11,7 +12,7 @@ class ProductService(
 ) {
 
     fun add(product: Product) {
-
+        FieldValidator.validate(product)
         val connection = jdbc.getConnection()
         try {
             val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
@@ -79,7 +80,7 @@ class ProductService(
     }
 
     fun edit(product: Product) {
-
+        FieldValidator.validate(product)
         val connection = jdbc.getConnection()
 
         try {
