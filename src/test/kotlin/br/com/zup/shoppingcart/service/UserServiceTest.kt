@@ -11,7 +11,9 @@ import com.fasterxml.jackson.module.kotlin.convertValue
 import junit.framework.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.FixMethodOrder
 import org.junit.Test
+import org.junit.runners.MethodSorters
 import java.io.ByteArrayInputStream
 import java.io.FileInputStream
 import java.io.InputStream
@@ -23,7 +25,7 @@ class UserServiceTest {
         val input = FileInputStream("./src/test/resources/userTest.json")
         val inputStream: InputStream = ByteArrayInputStream(input.readBytes())
         val user: User = readPayload.mapper<User>(inputStream)
-        var service = UserService(DAOFactory(), ConnectionFactory())
+        var service = UserService(ConnectionFactory(), DAOFactory())
 
     }
 
@@ -52,9 +54,9 @@ class UserServiceTest {
         } catch (e: Exception) {
 
             LOG.error("should get user by id\nError testing Exception is $e")
-            e.printStackTrace()
-
-        } finally { }
+            assertTrue(false)
+        } finally {
+        }
 
     }
 
@@ -65,16 +67,13 @@ class UserServiceTest {
 
         try {
 
-            val result = service.add(user)
-            assertEquals("differences between", user, result)
+            service.add(user)
             LOG.info("user added successful")
 
         } catch (e: Exception) {
 
             LOG.error("Error in 'should add user' test. Exception is $e")
-            e.printStackTrace()
-
-        } finally {
+            assertTrue(false)
 
         }
 
@@ -96,10 +95,9 @@ class UserServiceTest {
         } catch (e: Exception) {
 
             LOG.error("Error testing Exception is $e")
-            e.printStackTrace()
+            assertTrue(false)
 
-        } finally { }
-
+        }
     }
 
     @Test
@@ -121,9 +119,9 @@ class UserServiceTest {
         } catch (e: Exception) {
 
             LOG.info("Error in test of removes user. Exception is $e")
-            e.printStackTrace()
+            assertTrue(false)
 
-        } finally { }
+        }
 
     }
 }
