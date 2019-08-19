@@ -27,11 +27,11 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val userDAO: UserDAO =
-            factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
-
         val userCart: User
         try {
+
+            val userDAO: UserDAO =
+                factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             userCart = userDAO.get(userId)
             connection.commit()

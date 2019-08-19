@@ -11,7 +11,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.id as idProduct
 
-class ItemCartJdbc {
+class ItemCartJdbcTest {
     companion object {
         @BeforeClass
         @JvmStatic

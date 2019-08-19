@@ -27,7 +27,7 @@ function onSubmit(form) {
         if (id){
             product.id = id;
             productFactory.update(product, function(){
-                document.getElementById("productForm").reset();
+                window.location.href="index.jsp?page=product/list"
             });
         }else{
             productFactory.add(product, function() {

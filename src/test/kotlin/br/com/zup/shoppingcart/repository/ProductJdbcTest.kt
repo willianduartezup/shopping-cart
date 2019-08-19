@@ -8,7 +8,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class ProductJdbc {
+class ProductJdbcTest {
     companion object {
         private val product = Product(id, "Apple", 2, "piece", 1)
 
