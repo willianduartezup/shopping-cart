@@ -3,17 +3,16 @@ package br.com.zup.shoppingcart.repository
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.id
 import br.com.zup.shoppingcart.domain.User
-import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class UserJdbc {
-
-    private val user = User(id, "Tester", "teste@teste.com", "piece!")
+class UserJdbcTest {
 
     companion object {
+
+        private val user = User(id, "Tester", "teste@teste.com", "piece!")
 
         @BeforeClass
         @JvmStatic
