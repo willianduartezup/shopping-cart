@@ -4,6 +4,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="pages/style.css">
     <title style="font-family:sans-serif;">Shopping Cart</title>
 
