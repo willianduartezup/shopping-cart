@@ -46,12 +46,25 @@ class UserService(
         }
     }
 
-    /*fun getRemovedUserById(param: String): String {
+    @Throws(Exception::class)
+    fun getRemovedUserById(param: String): User {
+        val connection = jdbc.getConnection()
+        try {
+            val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
-        val user = userDAO.get(param)
-        return mapper.writeValueAsString(user)
-//           obj = objectMapper.readValue(json, List.class);
-    }*/
+            val user = userDAO.getRemovedUserById(param)
+            connection.commit()
+            return user
+
+        } catch (ex: Exception) {
+
+            connection.rollback()
+            throw ex
+
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
 
     fun add(user: User) {
         FieldValidator.validate(user)

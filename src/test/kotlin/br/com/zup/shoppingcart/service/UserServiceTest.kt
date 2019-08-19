@@ -9,6 +9,8 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import com.fasterxml.jackson.module.kotlin.convertValue
 import junit.framework.Assert.assertEquals
+import org.junit.AfterClass
+import org.junit.Assert
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.FixMethodOrder
@@ -18,26 +20,35 @@ import java.io.ByteArrayInputStream
 import java.io.FileInputStream
 import java.io.InputStream
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class UserServiceTest {
 
     companion object {
 
-        val input = FileInputStream("./src/test/resources/userTest.json")
-        val inputStream: InputStream = ByteArrayInputStream(input.readBytes())
-        val user: User = readPayload.mapper<User>(inputStream)
-        var service = UserService(ConnectionFactory(), DAOFactory())
+        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", cart_id = "")
+        private val service = UserService(ConnectionFactory(), DAOFactory())
 
-    }
 
-    @Before
-    fun setup() {
+        /*@AfterClass
+        @JvmStatic
+        fun deleteUser() {
 
-        LOG.info("UserServiceTest.setup")
+            try {
 
+                val param = user.id!!
+                service.removeFromTable(param)
+                LOG.info("Delete user Test")
+
+            } catch (e: Exception) {
+
+                Assert.assertTrue(false)
+                e.printStackTrace()
+            }
+        }*/
     }
 
     @Test
-    fun `should get user by id`() {
+    fun `C | should get user by id`() {
 
         LOG.info("should get user by id")
 
@@ -45,30 +56,30 @@ class UserServiceTest {
 
             val param = user.id!!
             val userGet = service.getUserById(param)
-            val userString = mapper.writeValueAsString(user) as String
             LOG.info(userGet)
-            LOG.info(userString)
-            assertEquals("differences between", userGet as String, userString as String)
+            Assert.assertEquals("differences between", userGet, user)
             LOG.info("successful user return")
 
         } catch (e: Exception) {
 
             LOG.error("should get user by id\nError testing Exception is $e")
             assertTrue(false)
-        } finally {
         }
-
     }
 
     @Test
-    fun `should add user`() {
+    fun `A | should add user`() {
 
-        LOG.info("should add user")
+        LOG.info("Insert user for tests")
+
+        service.add(user)
+
+        LOG.info("should validates add user")
 
         try {
-
-            service.add(user)
-            LOG.info("user added successful")
+            val confirmUser = service.getUserById(user.id!!)
+            LOG.info(confirmUser.id)
+            assertTrue(user.id == confirmUser.id)
 
         } catch (e: Exception) {
 
@@ -76,11 +87,10 @@ class UserServiceTest {
             assertTrue(false)
 
         }
-
     }
 
     @Test
-    fun `should successful get user list`() {
+    fun `B | should successful get user list`() {
 
         LOG.info("should successful get user list")
 
@@ -96,31 +106,27 @@ class UserServiceTest {
 
             LOG.error("Error testing Exception is $e")
             assertTrue(false)
-
         }
     }
 
     @Test
-    fun `should successful on removes user`() {
+    fun `D | should successful on removes user`() {
 
         LOG.info("should successful on removes user")
 
         try {
 
             val param: String = user.id!!
-            service.remove(param)
 
-            val userGet = service.getUserById(param)
-            val user: User = mapper.convertValue(userGet)
+            service.remove(param)
+            assertTrue(service.getRemovedUserById(param).deleted!!)
             LOG.info("User removed successful")
 
-            assertTrue(user.deleted!!)
 
         } catch (e: Exception) {
 
-            LOG.info("Error in test of removes user. Exception is $e")
+            LOG.error("Error in test of removes user. Exception is $e")
             assertTrue(false)
-
         }
 
     }
