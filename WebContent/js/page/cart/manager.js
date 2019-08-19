@@ -83,10 +83,6 @@ function getItens(){
                     }
                 });
             });
-            /*const totalPrice = tableRef.insertRow();
-            totalPrice.style.textAlign = "left";
-            totalPrice.innerHTML = "Price"*/
-
         }
     });
 
