@@ -210,7 +210,6 @@ class CartServiceTest {
 
             val cartUser = userService.getUserById(user.id!!).cart_id!!
 
-
             cartService.remove(orangeCart.id!!)
 
         } catch (e: Exception) {
@@ -232,7 +231,6 @@ class CartServiceTest {
             jdbc.closeConnection()
         }
     }
-
 
     @Test
     fun `G | should successfully get list of the cart `() {
@@ -272,4 +270,5 @@ class CartServiceTest {
     fun calculatePrice() {
         Assert.assertEquals(9,cartService.calculatePriceItem(3,3))
     }
+
 }
