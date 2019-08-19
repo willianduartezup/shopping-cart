@@ -49,10 +49,7 @@ class CartService(
                 val itemCartDao: ItemsCartDAO =
                     factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
-
                 itemCartDao.add(itemCart)
-                connection.commit()
-
 
             } else {
                 groupItemsCart(idCart, itemCart)
@@ -77,13 +74,15 @@ class CartService(
 
             updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
 
+            connection.commit()
+
         } catch (e: Exception) {
 
             connection.rollback()
             throw e
 
         } finally {
-            connection.close()
+            jdbc.closeConnection()
         }
     }
 
@@ -110,7 +109,6 @@ class CartService(
                 if (product == itemCartDao.get(idItems).product_id && itemCartDao.get(idItems).deleted == false) {
 
                     idItemCart = itemCartDao.get(idItems).id.toString()
-                    connection.commit()
 
                 }
             }
@@ -124,14 +122,12 @@ class CartService(
                     ItemCart(idItemCart, itemCartUpdB.product_id, itemCartUpdB.price_unit_product, quantity)
 
                 itemCartDao.edit(itemCartUpdA)
-                connection.commit()
-
 
             } else {
                 itemCartDao.add(itemCart)
-                connection.commit()
-
             }
+
+            connection.commit()
 
 
         } catch (e: Exception) {
@@ -152,14 +148,17 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val itemCartDao: ItemsCartDAO =
-            factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
         try {
+            val itemCartDao: ItemsCartDAO =
+                factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+
             val itemCart = itemCartDao.get(idItemCart)
 
             updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
 
             itemCartDao.delete(idItemCart)
+
+            connection.commit()
 
         } catch (e: Exception) {
 
@@ -180,12 +179,18 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val itemCartDao: ItemsCartDAO =
-            factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
-
-        val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
-
         try {
+
+            validateQuantity(itemCart.quantity)
+            validateInventoryProduct(itemCart.product_id, itemCart.quantity)
+
+            val itemCartDao: ItemsCartDAO =
+                factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+
+            val productDAO: ProductDAO =
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
+
             if (operator != "") {
                 val product = productDAO.get(itemCart.product_id)
 
@@ -193,6 +198,7 @@ class CartService(
             }
 
             itemCartDao.edit(itemCart)
+            connection.commit()
 
         } catch (e: Exception) {
 
@@ -219,7 +225,6 @@ class CartService(
 
         } catch (e: Exception) {
 
-            connection.rollback()
             throw e
 
         } finally {
@@ -234,9 +239,10 @@ class CartService(
 
         val connection = jdbc.getConnection()
 
-        val itemCartDao: ItemsCartDAO =
-            factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
         try {
+            val itemCartDao: ItemsCartDAO =
+                factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+
             val quantityBefore = itemCartDao.get(idItemCart).quantity
 
             return when {
@@ -246,7 +252,6 @@ class CartService(
             }
         } catch (e: Exception) {
 
-            connection.rollback()
             throw e
 
         } finally {
@@ -276,9 +281,9 @@ class CartService(
             val productUpdate = Product(idProduct, product.name, product.price, product.unit, newQuantity)
 
             productDAO.edit(productUpdate)
+
         } catch (e: Exception) {
 
-            connection.rollback()
             throw e
 
         } finally {
