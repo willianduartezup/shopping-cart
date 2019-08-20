@@ -6,37 +6,33 @@ import java.sql.Connection
 
 class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
     override fun listItemCart(idCart: String): ArrayList<ItemCart> {
+        val listItems = ArrayList<ItemCart>()
 
-        val listItemCart = ArrayList<ItemCart>()
+        val query =
+            "select * from itemcart ic where ic.id in(select json_array_elements_text(items) as id from cart where id = ?)"
 
-       try {
-           val jdbc = ConnectionFactory()
-           val factory = DAOFactory()
+        val stm = connection.prepareStatement(query)
+        stm.setString(1, idCart)
 
-           val cartDao: CartDAO =
-               factory.getInstanceOf(CartDAO::class.java, jdbc.getConnection()) as CartDAO
+        val rs = stm.executeQuery()
+
+        while (rs.next()) {
+            val itemCart = ItemCart(
+                rs.getString("id"),
+                rs.getString("product_id"),
+                rs.getInt("price_unit_product"),
+                rs.getInt("quantity"),
+                rs.getBoolean("deleted")
+            )
+            listItems.add(itemCart)
+        }
+        rs.close()
+        stm.close()
 
 
-
-           val listIdItem = cartDao.get(idCart).items
-
-           for (idItem in listIdItem) {
-
-               val itemCart = get(idItem)
-
-               if (itemCart.deleted == false) {
-                   listItemCart.add(itemCart)
-               }
-           }
-
-           return listItemCart
-
-        } catch (e: Exception){
-
-           return listItemCart
-       }
-
+        return listItems
     }
+
 
 
     override fun get(id: String): ItemCart {
