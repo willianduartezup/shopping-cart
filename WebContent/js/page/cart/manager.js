@@ -143,7 +143,7 @@ function onUpdate(id, product_id, quantity){
 
 function createOrder(){
     if (confirm("Confirm buy cart?")){
-        window.location.href="index.jsp"
+        window.location.href="index.jsp?page=purchaseOrder/purchaseOrder"
     }
 }
 

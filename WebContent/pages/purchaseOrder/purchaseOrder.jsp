@@ -16,4 +16,4 @@
         <tbody></tbody>
     </table>
 </div>
-<script type="text/javascript" src="js/page/cart/manager.js"></script>
+<script type="text/javascript" src="js/page/purchaseOrder/purchaseOrder.js"></script>
