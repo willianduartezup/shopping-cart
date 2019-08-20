@@ -7,7 +7,7 @@ import org.junit.Test
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
 
-class ItemCartDAOTest {
+class ItemCartTest {
 
     private var validator = Validation.buildDefaultValidatorFactory().validator
 
