@@ -63,14 +63,14 @@ request.get = function(url, queryParam, callback, callbackError){
         urlEncode = url;
     }
 
-    type.open("GET", urlEncode, true);
+    type.open("GET", urlEncode, false);
     type.send();
 };
 
 request.post = function(url, body, callback, callbackError){
     const type = request.getType(callback, callbackError);
 
-    type.open("POST", url, true);
+    type.open("POST", url, false);
     type.setRequestHeader("Content-Type", "application/json");
     type.send(JSON.stringify(body));
 };
@@ -78,7 +78,7 @@ request.post = function(url, body, callback, callbackError){
 request.put = function(url, body, callback, callbackError){
     const type = request.getType(callback, callbackError);
 
-    type.open("PUT", url, true);
+    type.open("PUT", url, false);
     type.setRequestHeader("Content-Type", "application/json");
     type.send(JSON.stringify(body));
 };
@@ -92,6 +92,6 @@ request.delete = function(url, queryParam, callback, callbackError){
         urlEncode = url;
     }
 
-    type.open("DELETE", urlEncode, true);
+    type.open("DELETE", urlEncode, false);
     type.send();
 };
