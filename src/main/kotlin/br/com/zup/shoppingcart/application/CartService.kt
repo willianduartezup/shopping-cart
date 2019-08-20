@@ -34,7 +34,9 @@ class CartService(
 
     fun add(userId: String, itemCart: ItemCart) {
         FieldValidator.validate(itemCart)
+
         var idCart = ""
+        var idItemCartAdd = ""
 
         val connection = jdbc.getConnection()
 
@@ -63,10 +65,10 @@ class CartService(
                 itemCartDao.add(itemCart)
 
             } else {
-                groupItemsCart(idCart, itemCart)
+                idItemCartAdd = groupItemsCart(idCart, itemCart)
             }
 
-            val idItem = itemCart.id.toString()
+            var idItem = itemCart.id.toString()
 
 
             var totalPrice = calculatePriceItem(itemCart.price_unit_product, itemCart.quantity)
@@ -79,6 +81,9 @@ class CartService(
                 val totalPriceInCart = recalculateTotalPrice(idCart)
 
                 totalPrice += totalPriceInCart
+
+                if (idItemCartAdd != ""){ idItem = idItemCartAdd }
+
 
                 editCart(idCart, idItem, totalPrice)
             }
@@ -98,9 +103,11 @@ class CartService(
     }
 
 
-    private fun groupItemsCart(idCart: String, itemCart: ItemCart) {
+    private fun groupItemsCart(idCart: String, itemCart: ItemCart): String {
 
         val connection = jdbc.getConnection()
+
+        var idItemCart = ""
 
         try {
 
@@ -108,8 +115,6 @@ class CartService(
 
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, jdbc.getConnection()) as CartDAO
             val listItems = cartDao.get(idCart).items
-
-            var idItemCart = ""
 
             val itemCartDao: ItemsCartDAO =
                 factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
@@ -152,6 +157,7 @@ class CartService(
 
         }
 
+        return idItemCart
 
     }
 
@@ -338,7 +344,6 @@ class CartService(
             }
         } catch (e: Exception) {
 
-            connection.rollback()
             throw e
 
         } finally {
