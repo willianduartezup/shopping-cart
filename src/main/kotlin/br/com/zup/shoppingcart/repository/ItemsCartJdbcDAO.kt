@@ -17,14 +17,16 @@ class ItemsCartJdbcDAO(private val connection: Connection) : ItemsCartDAO {
         val rs = stm.executeQuery()
 
         while (rs.next()) {
-            val itemCart = ItemCart(
-                rs.getString("id"),
-                rs.getString("product_id"),
-                rs.getInt("price_unit_product"),
-                rs.getInt("quantity"),
-                rs.getBoolean("deleted")
-            )
-            listItems.add(itemCart)
+            if (!rs.getBoolean("deleted")) {
+                val itemCart = ItemCart(
+                    rs.getString("id"),
+                    rs.getString("product_id"),
+                    rs.getInt("price_unit_product"),
+                    rs.getInt("quantity"),
+                    rs.getBoolean("deleted")
+                )
+                listItems.add(itemCart)
+            }
         }
         rs.close()
         stm.close()
