@@ -21,8 +21,16 @@
             <td>Unit:</td>
             <td>
                 <label>
-                    <input type="text" name="unit" id="unit"/>
+                    <select id="unit" style="font-family:sans-serif;margin-bottom: 5px;width:181px; height: 25px" name="product_id" id="listProduct" required>
+                        <option value="">Select product unit</option>
+                        <option value="Piece">Piece</option>
+                        <option value="Pair">Pair</option>
+                        <option value="Kilogram">Kilogram</option>
+                        <option value="Gram">Gram</option>
+                        <option value="Box">Box</option>
+                    </select>
                 </label>
+
             </td>
         </tr>
         <tr>

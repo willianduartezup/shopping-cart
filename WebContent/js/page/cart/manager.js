@@ -50,7 +50,7 @@ function getItens(){
         if (list.length > 0){
             tableRef.innerHTML = '';
             let i = 0;
-            let totalPricee = 0;
+            let cartPrice = 0;
             list.map(function (item) {
                 productFactory.get(item.product_id,function (res) {
                     const product = JSON.parse(res);
@@ -73,13 +73,13 @@ function getItens(){
                     actions.style.textAlign = "center";
                     actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
                     i++;
-                    totalPricee += item.price_unit_product * item.quantity;
+                    cartPrice += item.price_unit_product * item.quantity;
                     if(list.length === i){
                         const totalPrice   = tableRef.insertRow();
                         const totalPriceCell = totalPrice.insertCell(-1);
                         totalPriceCell.style.textAlign = "right";
                         totalPriceCell.colSpan = 4;
-                        totalPriceCell.innerHTML = "Total price = " + totalPricee;
+                        totalPriceCell.innerHTML = "Total price:" + cartPrice+"R$";
                     }
                 });
             });
