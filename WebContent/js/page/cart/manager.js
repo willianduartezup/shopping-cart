@@ -84,7 +84,7 @@ function getItens(){
                         const totalPrice   = tableRef.insertRow();
                         const totalPriceCell = totalPrice.insertCell(-1);
                         totalPriceCell.style.textAlign = "right";
-                        totalPriceCell.colSpan = 4;
+                        totalPriceCell.colSpan = 5;
                         totalPriceCell.innerHTML = "Total price = " + totalPricee;
                     }
                 });
