@@ -1,2 +1,5 @@
-target
-.idea
+target/
+.idea/
+out/
+log/
+shopping-cart.iml
