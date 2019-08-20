@@ -85,7 +85,7 @@ function getItens(){
                         const totalPriceCell = totalPrice.insertCell(-1);
                         totalPriceCell.style.textAlign = "right";
                         totalPriceCell.colSpan = 5;
-                        totalPriceCell.innerHTML = "Total price:" + cartPrice+"R$";
+                        totalPriceCell.innerHTML = "Total price: R$ " + cartPrice;
 
                        
 
@@ -139,6 +139,12 @@ function onUpdate(id, product_id, quantity){
             getItens();
         });
     });
+}
+
+function createOrder(){
+    if (confirm("Confirm buy cart?")){
+        window.location.href="index.jsp"
+    }
 }
 
 getUser();
