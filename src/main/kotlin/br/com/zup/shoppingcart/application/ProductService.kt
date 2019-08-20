@@ -57,15 +57,9 @@ class ProductService(
             val productDAO: ProductDAO =
                 factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
-            val listProducts = productDAO.listProduct()
-
-            connection.commit()
-
-            return listProducts
+            return productDAO.listProduct()
 
         } catch (ex: Exception) {
-
-            connection.rollback()
             throw ex
 
         } finally {
