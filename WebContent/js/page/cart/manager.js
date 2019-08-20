@@ -79,6 +79,7 @@ function getItens(){
                     actions.style.textAlign = "center";
                     actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
                     i++;
+
                     cartPrice += item.price_unit_product * item.quantity;
                     if(list.length === i){
                         const totalPrice   = tableRef.insertRow();
@@ -94,7 +95,6 @@ function getItens(){
             });
         }
     });
-
 }
 
 function onSubmit(form){
