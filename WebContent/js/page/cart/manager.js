@@ -41,7 +41,7 @@ function getItens(){
     const cell = newRowNotFound.insertCell(0);
 
     cell.style.textAlign = "center";
-    cell.colSpan = 4;
+    cell.colSpan = 5;
     cell.innerHTML = "No products found";
 
     cartFactory.get(user_id, function(res){
@@ -49,7 +49,8 @@ function getItens(){
 
         if (list.length > 0){
             tableRef.innerHTML = '';
-
+            let i = 0;
+            let totalPricee = 0;
             list.map(function (item) {
                 productFactory.get(item.product_id,function (res) {
                     const product = JSON.parse(res);
@@ -64,17 +65,33 @@ function getItens(){
                     quantity.style.textAlign = "center";
                     quantity.innerHTML = "<label><input class='quantity_item' onchange='onUpdate(\""+ item.id +"\",\""+ item.product_id +"\", this.value)' type='number' min=\"1\" required value='"+ item.quantity +"'/></label>";
 
-                    const price  = newRow.insertCell(2);
-                    price.style.textAlign = "center";
-                    price.innerHTML = "R$ "+ item.price_unit_product;
+                    const priceUnitProduct  = newRow.insertCell(2);
+                    priceUnitProduct.style.textAlign = "center";
+                    priceUnitProduct.innerHTML = "R$ "+ item.price_unit_product;
 
-                    const actions  = newRow.insertCell(3);
+                    const totalProduct = item.price_unit_product * item.quantity;
+
+                    const priceTotalProduct  = newRow.insertCell(3);
+                    priceTotalProduct.style.textAlign = "center";
+                    priceTotalProduct.innerHTML = "R$ "+ totalProduct;
+
+                    const actions  = newRow.insertCell(4);
                     actions.style.textAlign = "center";
                     actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
+                    i++;
+                    totalPricee += item.price_unit_product * item.quantity;
+                    if(list.length === i){
+                        const totalPrice   = tableRef.insertRow();
+                        const totalPriceCell = totalPrice.insertCell(-1);
+                        totalPriceCell.style.textAlign = "right";
+                        totalPriceCell.colSpan = 5;
+                        totalPriceCell.innerHTML = "Total price = " + totalPricee;
+                    }
                 });
             });
         }
     });
+
 }
 
 function onSubmit(form){

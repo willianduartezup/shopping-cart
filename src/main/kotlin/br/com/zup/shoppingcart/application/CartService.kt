@@ -12,6 +12,7 @@ import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.UserDAO
+import java.sql.Connection
 import java.util.ArrayList
 
 
@@ -19,6 +20,17 @@ class CartService(
     private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
+
+    fun getQuantityOld(idItem: String, connection: Connection): Int{
+        val itemCartDao: ItemsCartDAO =
+                factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+        return try {
+            val itemCartOld = itemCartDao.get(idItem)
+            itemCartOld.quantity
+        }catch (ex: Exception){
+            0
+        }
+    }
 
     fun add(userId: String, itemCart: ItemCart) {
         FieldValidator.validate(itemCart)
@@ -28,6 +40,7 @@ class CartService(
 
         val userCart: User
         try {
+            val quantityOld = getQuantityOld(itemCart.id!!, connection)
 
             val userDAO: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -45,7 +58,7 @@ class CartService(
             if (idCart == "") {
 
                 val itemCartDao: ItemsCartDAO =
-                    factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+                        factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
                 itemCartDao.add(itemCart)
 
@@ -70,7 +83,7 @@ class CartService(
                 editCart(idCart, idItem, totalPrice)
             }
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "-")
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity, quantityOld, "-")
 
             connection.commit()
 
@@ -149,10 +162,11 @@ class CartService(
         try {
             val itemCartDao: ItemsCartDAO =
                 factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+            val quantityOld = getQuantityOld(idItemCart, connection)
 
             val itemCart = itemCartDao.get(idItemCart)
 
-            updateQuantityProduct(itemCart.product_id, itemCart.quantity, "+")
+            updateQuantityProduct(itemCart.product_id, itemCart.quantity, quantityOld, "+")
 
             itemCartDao.delete(idItemCart)
 
@@ -178,12 +192,12 @@ class CartService(
         val connection = jdbc.getConnection()
 
         try {
+            val itemCartDao: ItemsCartDAO =
+                    factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+            val quantityOld = getQuantityOld(itemCart.id!!, connection)
 
             validateQuantity(itemCart.quantity)
             validateInventoryProduct(itemCart.product_id, itemCart.quantity)
-
-            val itemCartDao: ItemsCartDAO =
-                factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
             val productDAO: ProductDAO =
                 factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
@@ -192,7 +206,7 @@ class CartService(
             if (operator != "") {
                 val product = productDAO.get(itemCart.product_id)
 
-                updateQuantityProduct(product.id.toString(), itemCart.quantity, operator)
+                updateQuantityProduct(product.id.toString(), itemCart.quantity, quantityOld, operator)
             }
 
             itemCartDao.edit(itemCart)
@@ -264,12 +278,18 @@ class CartService(
 
     }
 
-    private fun updateQuantityProduct(idProduct: String, quantity: Int, operator: String) {
+    private fun updateQuantityProduct(idProduct: String, quantity: Int, quantityOld: Int, operator: String) {
 
         val connection = jdbc.getConnection()
 
 
         try {
+            val quantityReal = when {
+                quantity == quantityOld -> quantity
+                quantityOld > quantity -> quantityOld - quantity
+                else -> quantity - quantityOld
+            }
+
             val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
             val product = productDAO.get(idProduct)
@@ -277,9 +297,9 @@ class CartService(
             var newQuantity = 0
 
             if (operator == "-") {
-                newQuantity = product.quantity - quantity
+                newQuantity = product.quantity - quantityReal
             } else if (operator == "+") {
-                newQuantity = product.quantity + quantity
+                newQuantity = product.quantity + quantityReal
             }
 
             val productUpdate = Product(idProduct, product.name, product.price, product.unit, newQuantity)
