@@ -21,10 +21,28 @@ class SalesOrderController: HttpServlet() {
 
         val param = req.pathInfo.replace("/","")
 
+
+
         resp.writer.write(service.getByUserId(param).toString())
 
         } else {
             resp.sendError(400,"User id not found")
+        }
+
+    }
+
+    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
+
+        try {
+
+            val userId = req.pathInfo.replace("/", "")
+            val orderId = this.service.addOrder(userId)
+
+            manager.created(resp, "Item created success -> orderId is: $orderId" )
+
+        } catch (e: Exception) {
+
+            manager.badRequest(resp, e)
         }
 
     }
