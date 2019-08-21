@@ -9,6 +9,7 @@ class DAOFactory {
             UserDAO::class.java -> UserJdbcDAO(connection)
             CartDAO::class.java -> CartJdbcDAO(connection)
             ItemsCartDAO::class.java -> ItemsCartJdbcDAO(connection)
+            SalesOrderDAO::class.java -> SalesOrderJdbcDAO(connection)
             else ->  null
         }
     }

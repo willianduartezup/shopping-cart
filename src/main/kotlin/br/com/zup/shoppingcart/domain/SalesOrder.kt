@@ -1,6 +1,6 @@
 package br.com.zup.shoppingcart.domain
 
-import java.util.Date
+import java.sql.Date
 import java.util.UUID
 import javax.persistence.Id
 import javax.validation.constraints.NotEmpty
@@ -13,7 +13,7 @@ class SalesOrder(
     @field:NotEmpty(message = "Cart ID is empty!")
     var cart_id: String,
 
-    var number: Int?,
+    var number: Int? = -1,
 
     var date_generation: Date? = Date(java.util.Date().time)
 
