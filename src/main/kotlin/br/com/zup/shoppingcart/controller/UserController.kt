@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "User", value = ["/user/*"])
+@WebServlet(name = "UserController", value = ["/user/*"])
 class UserController : HttpServlet() {
 
     private val readPayload = ReadPayload()
@@ -69,4 +69,5 @@ class UserController : HttpServlet() {
             }
         }
     }
+
 }

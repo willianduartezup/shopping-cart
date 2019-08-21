@@ -32,7 +32,7 @@ function loadUsers(){
                 actions.style.textAlign = "center";
                 actions.innerHTML = "<a href=\"index.jsp?page=user/usersForm&id="+ user.id +"\">update</a>\n" +
                     "<a href=\"index.jsp?page=cart/manager&user_id="+ user.id +"\">cart</a>\n" +
-                    "<a href=\"index.jsp?page=purchaseOrder/purchaseOrder&user_id="+ user.id +"\">order</a>";
+                    "<a href=\"index.jsp?page=order/list&user_id="+ user.id +"\">orders</a>";
             });
         }
     });
