@@ -9,7 +9,7 @@ import br.com.zup.shoppingcart.repository.UserDAO
 import org.json.JSONArray
 import org.json.JSONObject
 
-class SellerOrderService(
+class SalesOrderService(
     private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
