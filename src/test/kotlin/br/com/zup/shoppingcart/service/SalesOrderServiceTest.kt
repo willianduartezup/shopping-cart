@@ -164,12 +164,13 @@ class SalesOrderServiceTest {
         }
     }
 
+    // REQUIRED REVIEW THE TESTS OF GET
     @Test
     fun `E | should successfully get order`() {
         LOG.info("E | should successfully get order")
 
         try {
-            val order = salesOrderService.getByUserId(user.id!!)
+            val order = salesOrderService.getByOrderId(user.id!!)
             LOG.info("order is: $order")
 
         } catch (e: Exception) {
@@ -187,7 +188,7 @@ class SalesOrderServiceTest {
         LOG.info("F | should failed because user never bought")
 
         try {
-            val order = salesOrderService.getByUserId(user.id!!)
+            val order = salesOrderService.getByOrderId(user.id!!)
             LOG.error("order is: $order")
             assertTrue(false)
 
