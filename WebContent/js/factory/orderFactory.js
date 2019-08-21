@@ -1,5 +1,9 @@
 const orderFactory = {};
 
+orderFactory.get = function (idUser, callback) {
+    request.get('sales/'+ idUser, {}, callback)
+};
+
 orderFactory.create = function (idUser, callBack) {
     request.post('sales/'+ idUser, {}, callBack)
 };
