@@ -341,7 +341,7 @@ class CartService(
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
-            val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id)
+            val userUpdate = User(userId, userCart.name, userCart.email, userCart.password, userCart.deleted, cart.id, userCart.orders)
 
             cartDao.add(cart)
 

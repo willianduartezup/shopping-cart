@@ -23,7 +23,9 @@ data class User(
 
     var deleted: Boolean? = false,
 
-    var cart_id: String? = ""
+    var cart_id: String? = "",
+
+    var orders: ArrayList<String>
 ){
 }
 

@@ -12,7 +12,9 @@ class UserJdbcTest {
 
     companion object {
 
-        private val user = User(id, "Tester", "teste@teste.com", "piece!")
+        private val array = ArrayList<String>()
+
+        private val user = User(id, "Tester", "teste@teste.com", "piece!", orders = array)
 
         @BeforeClass
         @JvmStatic
@@ -87,7 +89,7 @@ class UserJdbcTest {
             val userDao: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
 
-            val user = User(id, "Test Modify", "teste@teste.com", "12345678")
+            val user = User(id, "Test Modify", "teste@teste.com", "12345678", orders = array)
 
             userDao.edit(user)
 
