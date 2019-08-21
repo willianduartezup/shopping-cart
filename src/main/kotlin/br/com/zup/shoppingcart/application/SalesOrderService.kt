@@ -52,7 +52,7 @@ class SalesOrderService(
         }
     }
 
-    fun getByUserId(idUser: String): JSONObject {
+    /*fun getByUserId(idUser: String): JSONObject {
 
         val connection = jdbc.getConnection()
 
@@ -76,7 +76,6 @@ class SalesOrderService(
             val jsonItems = JSONObject()
             val jsonArray = JSONArray()
 
-
             for (items in listItems) {
 
                 val product = productDAO.get(items.product_id)
@@ -89,8 +88,6 @@ class SalesOrderService(
 
                 jsonArray.put(jsonItems)
             }
-
-
 
             jsonCart.put("id", cart.id)
             jsonCart.put("total_price", cart.total_price)
@@ -108,8 +105,67 @@ class SalesOrderService(
             jdbc.closeConnection()
         }
 
+    }*/
+
+    fun getByOrderId(idOrder: String): JSONObject {
+
+        val connection = jdbc.getConnection()
+
+        try {
+
+            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
+                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
+            val order = salesOrderJdbcDAO.get(idOrder)
+
+            val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
+            val cart = cartDao.get(order.cart_id)
+
+            val itemCartDao: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
+            val listItems = itemCartDao.listItemCart(order.cart_id)
+
+            val jsonUser = JSONObject()
+            val jsonOne = JSONObject()
+            val jsonCart = JSONObject()
+            val jsonItems = JSONObject()
+            val jsonArray = JSONArray()
+
+            val user = userService.getUserById(cart.user_id)
+
+            jsonUser.put("id", user.id)
+            jsonUser.put("name", user.name)
+
+            val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+
+            for (items in listItems) {
+
+                val product = productDAO.get(items.product_id)
+
+                jsonItems.put("id", items.id)
+                jsonItems.put("name", product.name)
+                jsonItems.put("unit_price", items.price_unit_product)
+                jsonItems.put("unit", product.unit)
+                jsonItems.put("quantity", items.quantity)
+
+                jsonArray.put(jsonItems)
+            }
+
+            jsonCart.put("id", cart.id)
+            jsonCart.put("total_price", cart.total_price)
+            jsonCart.put("items", jsonArray)
+
+            jsonOne.put("id", order.id)
+            jsonOne.put("number", order.number)
+            jsonOne.put("cart", jsonCart)
+            jsonOne.put("user", jsonUser)
+
+            return jsonOne
+
+        } catch (e: Exception) {
+            throw e
+        } finally {
+            jdbc.closeConnection()
+        }
 
     }
-
 
 }

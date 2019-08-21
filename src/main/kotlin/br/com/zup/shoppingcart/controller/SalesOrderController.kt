@@ -21,7 +21,7 @@ class SalesOrderController: HttpServlet() {
 
         val param = req.pathInfo.replace("/","")
 
-        resp.writer.write(service.getByUserId(param).toString())
+        resp.writer.write(service.getByOrderId(param).toString())
 
         } else {
             resp.sendError(400,"User id not found")

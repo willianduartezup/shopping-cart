@@ -28,10 +28,12 @@ class SalesOrderServiceTest {
         private val factory = DAOFactory()
         private val jdbc = ConnectionFactory()
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
+        private val array = ArrayList<String>()
+
+        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
+        private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
+        private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
+        private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
 
         private val apple = Product(name = "Apple", price = 210, unit = "kg", quantity = 6)
         private val orange = Product(name = "Orange", price = 150, unit = "kg", quantity = 6)
@@ -164,12 +166,13 @@ class SalesOrderServiceTest {
         }
     }
 
+    // REQUIRED REVIEW THE TESTS OF GET
     @Test
     fun `E | should successfully get order`() {
         LOG.info("E | should successfully get order")
 
         try {
-            val order = salesOrderService.getByUserId(user.id!!)
+            val order = salesOrderService.getByOrderId(user.id!!)
             LOG.info("order is: $order")
 
         } catch (e: Exception) {
@@ -187,7 +190,7 @@ class SalesOrderServiceTest {
         LOG.info("F | should failed because user never bought")
 
         try {
-            val order = salesOrderService.getByUserId(user.id!!)
+            val order = salesOrderService.getByOrderId(user.id!!)
             LOG.error("order is: $order")
             assertTrue(false)
 
