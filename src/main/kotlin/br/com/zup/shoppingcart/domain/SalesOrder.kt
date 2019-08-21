@@ -13,7 +13,7 @@ class SalesOrder(
     @field:NotEmpty(message = "Cart ID is empty!")
     var cart_id: String,
 
-    var number: Int?,
+    var number: Int? = -1,
 
     var date_generation: Date? = Date(java.util.Date().time)
 
