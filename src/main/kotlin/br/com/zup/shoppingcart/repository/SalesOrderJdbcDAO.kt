@@ -5,6 +5,56 @@ import java.sql.Connection
 import java.sql.Date
 
 class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
+    override fun listOrders(): ArrayList<SalesOrder> {
+        val listOrders = ArrayList<SalesOrder>()
+
+        val stm = connection.createStatement()
+        val rs = stm.executeQuery("Select * from salesorder")
+
+
+        while (rs.next()){
+
+            val salesOrder = SalesOrder(
+                rs.getString("id"),
+                rs.getString("cart_id"),
+                rs.getInt("number"),
+                rs.getDate("date_generation")
+            )
+            listOrders.add(salesOrder)
+        }
+
+        rs.close()
+        stm.close()
+
+        return listOrders
+
+    }
+
+    override fun getListOrdersUser(id: String): ArrayList<SalesOrder> {
+        val listOrders = ArrayList<SalesOrder>()
+
+        val query =
+            "select * from salesorder ic where ic.id in(select json_array_elements_text(orders) as id from user where id = ?)"
+
+        val stm = connection.prepareStatement(query)
+        stm.setString(1, id)
+
+        val rs = stm.executeQuery()
+
+        while (!rs.next()){
+
+            val salesOrder = SalesOrder(
+                rs.getString("id"),
+                rs.getString("cart_id"),
+                rs.getInt("number"),
+                rs.getDate("date_generation")
+            )
+            listOrders.add(salesOrder)
+        }
+        return listOrders
+
+    }
+
     override fun get(id: String): SalesOrder {
         val stm = connection.prepareStatement("SELECT * FROM salesorder WHERE id = ?")
         stm.setString(1, id)

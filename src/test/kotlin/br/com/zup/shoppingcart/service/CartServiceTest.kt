@@ -28,7 +28,9 @@ class CartServiceTest {
         private val factory = DAOFactory()
         private val jdbc = ConnectionFactory()
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
+        private val array = ArrayList<String>()
+
+        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
 
         private val apple = Product(name = "Apple", price = 210, unit = "kg", quantity = 6)
         private val orange = Product(name = "Orange", price = 150, unit = "kg", quantity = 6)
@@ -252,7 +254,7 @@ class CartServiceTest {
     fun `J | should failure in get list of the cart because user not have cart `() {
         LOG.info("J | should failure in get list of the cart because user not have cart")
 
-        val userNotHave: User = User(name = "user not car", email = "not_car@user.com", password = "PRIVATE")
+        val userNotHave: User = User(name = "user not car", email = "not_car@user.com", password = "PRIVATE", orders = array)
 
         try {
 
