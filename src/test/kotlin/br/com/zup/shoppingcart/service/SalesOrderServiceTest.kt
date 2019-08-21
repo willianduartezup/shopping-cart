@@ -28,10 +28,12 @@ class SalesOrderServiceTest {
         private val factory = DAOFactory()
         private val jdbc = ConnectionFactory()
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
-        private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE")
+        private val array = ArrayList<String>()
+
+        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
+        private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
+        private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
+        private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
 
         private val apple = Product(name = "Apple", price = 210, unit = "kg", quantity = 6)
         private val orange = Product(name = "Orange", price = 150, unit = "kg", quantity = 6)
