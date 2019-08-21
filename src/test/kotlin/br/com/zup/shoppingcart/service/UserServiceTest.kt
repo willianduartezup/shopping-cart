@@ -121,7 +121,8 @@ class UserServiceTest {
             val param: String = user.id!!
 
             service.remove(param)
-            assertTrue(service.getRemovedUserById(param).deleted!!)
+            val deletedTre = service.getRemovedUserById(param).deleted!!
+            assertTrue(deletedTre)
             LOG.info("User removed successful")
 
 
