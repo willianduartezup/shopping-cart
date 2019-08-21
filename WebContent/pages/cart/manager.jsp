@@ -42,6 +42,6 @@
     </table>
 </div>
 <div>
-    <button style="font-family:sans-serif;margin-top: 5px;width:150px; height: 25px; float: right;" id="" onclick="createOrder()">Buy now</button>
+    <button style="font-family:sans-serif;margin-top: 5px;width:150px; height: 25px; float: right;" onclick="createOrder()">Buy now</button>
 </div>
 <script type="text/javascript" src="js/page/cart/manager.js"></script>

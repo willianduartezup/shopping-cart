@@ -13,7 +13,17 @@
             <th>Total product price</th>
         </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        <tr>
+            <td style="text-align: center">cs go</td>
+            <td style="text-align: center">1</td>
+            <td style="text-align: center">5</td>
+            <td style="text-align: center">5</td>
+        </tr>
+        </tbody>
     </table>
+</div>
+<div>
+    <button style="font-family:sans-serif;margin-top: 5px;width:150px; height: 25px; float: right;">Pay</button>
 </div>
 <script type="text/javascript" src="js/page/purchaseOrder/purchaseOrder.js"></script>
