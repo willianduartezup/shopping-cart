@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@WebServlet(name = "SellerIOrder", value = ["/sales/*"])
+@WebServlet(name = "SalesOrderController", value = ["/sales/*"])
 class SalesOrderController: HttpServlet() {
 
     private val service = SalesOrderService(ConnectionFactory(), DAOFactory())
@@ -20,8 +20,6 @@ class SalesOrderController: HttpServlet() {
         if (req.pathInfo != ""){
 
         val param = req.pathInfo.replace("/","")
-
-
 
         resp.writer.write(service.getByUserId(param).toString())
 
@@ -46,6 +44,5 @@ class SalesOrderController: HttpServlet() {
         }
 
     }
-
 
 }

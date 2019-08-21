@@ -11,14 +11,16 @@ import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
-import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.BeforeClass
+import org.junit.FixMethodOrder
 import org.junit.Test
+import org.junit.runners.MethodSorters
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class SalesOrderServiceTest {
 
     companion object {
@@ -161,4 +163,44 @@ class SalesOrderServiceTest {
             jdbc.closeConnection()
         }
     }
+
+    @Test
+    fun `E | should successfully get order`() {
+        LOG.info("E | should successfully get order")
+
+        try {
+            val order = salesOrderService.getByUserId(user.id!!)
+            LOG.info("order is: $order")
+
+        } catch (e: Exception) {
+            LOG.error("Failed into get order. Exception is $e")
+            assertTrue(false)
+
+        } finally {
+            jdbc.closeConnection()
+        }
+
+    }
+
+    @Test
+    fun `F | should failed because user never bought`() {
+        LOG.info("F | should failed because user never bought")
+
+        try {
+            val order = salesOrderService.getByUserId(user.id!!)
+            LOG.error("order is: $order")
+            assertTrue(false)
+
+        } catch (e: Exception) {
+            assertEquals(e.message, "Order not found")
+            LOG.info("Failed into get order. Order not found. Exception is $e")
+            assertTrue(false)
+
+        } finally {
+            jdbc.closeConnection()
+        }
+
+    }
+
 }
+
