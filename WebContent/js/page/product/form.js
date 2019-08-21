@@ -9,6 +9,8 @@ function getProduct(){
             document.getElementById("price").value = product.price;
             document.getElementById("unit").value = product.unit;
             document.getElementById("quantity").value = product.quantity;
+            document.getElementById("Lt").value = product.quantity;
+
         });
     }
 }
