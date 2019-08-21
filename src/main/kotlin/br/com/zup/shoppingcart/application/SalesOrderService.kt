@@ -1,10 +1,12 @@
 package br.com.zup.shoppingcart.application
 
+import br.com.zup.shoppingcart.domain.SalesOrder
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
+import br.com.zup.shoppingcart.repository.SalesOrderJdbcDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import org.json.JSONArray
 import org.json.JSONObject
@@ -14,11 +16,47 @@ class SalesOrderService(
     private val factory: DAOFactory
 ) {
 
-    fun getByUserId(idUser: String): JSONObject{
+    private val cartService = CartService(ConnectionFactory(), DAOFactory())
+    private val userService = UserService(ConnectionFactory(), DAOFactory())
+
+
+    fun addOrder(userId: String): String {
+
+        val user = userService.getUserById(userId)
+        val cart = cartService.get(userId)
+        val order: SalesOrder
+        if (user.cart_id != "" && !cart.isEmpty()) {
+            order = SalesOrder(cart_id = user.cart_id!!)
+        } else throw Exception("Invalid cart")
+
+        val connection = jdbc.getConnection()
+        try {
+            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
+                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
+
+            salesOrderJdbcDAO.add(order)
+
+            connection.commit()
+
+            // FieldValidator.validate(product)
+
+            return order.id!!
+            
+        } catch (ex: Exception) {
+
+            connection.rollback()
+            throw ex
+
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
+
+    fun getByUserId(idUser: String): JSONObject {
 
         val connection = jdbc.getConnection()
 
-        try{
+        try {
 
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
@@ -39,7 +77,7 @@ class SalesOrderService(
             val jsonArray = JSONArray()
 
 
-            for (items in listItems){
+            for (items in listItems) {
 
                 val product = productDAO.get(items.product_id)
 
@@ -56,7 +94,7 @@ class SalesOrderService(
 
             jsonCart.put("id", cart.id)
             jsonCart.put("total_price", cart.total_price)
-            jsonCart.put("items",jsonArray)
+            jsonCart.put("items", jsonArray)
 
             jsonOne.put("id", "2000")
             jsonOne.put("number", "1")
@@ -64,7 +102,7 @@ class SalesOrderService(
 
             return jsonOne
 
-        } catch (e: Exception){
+        } catch (e: Exception) {
             throw e
         } finally {
             jdbc.closeConnection()
@@ -72,7 +110,6 @@ class SalesOrderService(
 
 
     }
-
 
 
 }
