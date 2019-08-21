@@ -1,6 +1,6 @@
 package br.com.zup.shoppingcart.domain
 
-import java.util.Date
+import java.sql.Date
 import java.util.UUID
 import javax.persistence.Id
 import javax.validation.constraints.NotEmpty
