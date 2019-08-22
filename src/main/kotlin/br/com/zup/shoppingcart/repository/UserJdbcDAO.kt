@@ -101,7 +101,6 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.setString(5, e.orders?.toJson())
         psmt.setString(6, e.id)
 
-
         psmt.execute()
         psmt.close()
 
