@@ -1,3 +1,29 @@
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
 function getUser(){
     const user_id = url.findGetParameter("user_id");
 
@@ -148,6 +174,32 @@ function createOrder(){
         orderFactory.create(user_id, function(){
             window.location.href="index.jsp?page=purchaseOrder/purchaseOrder";
         });
+    }
+
+    return false;
+}
+
+function showNewCredit() {
+
+    if (document.getElementById("new_credit_card").style.display === 'none'){
+        document.getElementById("select_id_credit").required = false;
+
+        document.getElementById("name").required = true;
+        document.getElementById("expiration_date").required = true;
+        document.getElementById("number").required = true;
+        document.getElementById("new_credit_card").style.display = 'block';
+        document.getElementById("btnNewCredit").innerHTML = "Close New Credit Card";
+    }else if (document.getElementById("new_credit_card").style.display === 'block'){
+        document.getElementById("select_id_credit").required = true;
+
+        document.getElementById("name").required = false;
+        document.getElementById("name").value = "";
+        document.getElementById("expiration_date").required = false;
+        document.getElementById("expiration_date").value = "";
+        document.getElementById("number").required = false;
+        document.getElementById("number").value = "";
+        document.getElementById("new_credit_card").style.display = 'none';
+        document.getElementById("btnNewCredit").innerHTML = "New Credit Card";
     }
 }
 
