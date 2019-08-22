@@ -6,6 +6,7 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
+import br.com.zup.shoppingcart.repository.SalesOrderDAO
 import br.com.zup.shoppingcart.repository.SalesOrderJdbcDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import org.json.JSONArray
@@ -31,8 +32,8 @@ class SalesOrderService(
 
         val connection = jdbc.getConnection()
         try {
-            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
-                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
+            val salesOrderJdbcDAO: SalesOrderDAO =
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
             salesOrderJdbcDAO.add(order)
 
