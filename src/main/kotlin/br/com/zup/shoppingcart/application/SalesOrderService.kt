@@ -35,8 +35,13 @@ class SalesOrderService(
             val salesOrderJdbcDAO: SalesOrderDAO =
                 factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
+
             salesOrderJdbcDAO.add(order)
 
+            user.orders?.add(order.id.toString())
+            user.cart_id = ""
+
+            userService.edit(user)
             connection.commit()
 
             // FieldValidator.validate(product)
@@ -127,7 +132,6 @@ class SalesOrderService(
             val jsonUser = JSONObject()
             val jsonOne = JSONObject()
             val jsonCart = JSONObject()
-            val jsonItems = JSONObject()
             val jsonArray = JSONArray()
 
             val user = userService.getUserById(cart.user_id)
@@ -141,6 +145,7 @@ class SalesOrderService(
 
                 val product = productDAO.get(items.product_id)
 
+                val jsonItems = JSONObject()
                 jsonItems.put("id", items.id)
                 jsonItems.put("name", product.name)
                 jsonItems.put("unit_price", items.price_unit_product)
