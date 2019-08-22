@@ -6,8 +6,10 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.SalesOrderDAO
 import br.com.zup.shoppingcart.repository.UserDAO
+import com.fasterxml.jackson.databind.annotation.JsonAppend
 import org.json.JSONArray
 import org.json.JSONObject
+import org.json.JSONString
 import java.util.ArrayList
 
 class OrdersHistoryService (
@@ -34,23 +36,23 @@ class OrdersHistoryService (
                 salesOrderDAO.listOrders()
             }
 
-            val json = JSONObject()
             val jsonArray = JSONArray()
 
-            for (selOrder in order){
+
+            for ((i, selOrder) in order.withIndex()){
 
                 val cart = cartDao.get(selOrder.cart_id)
 
                 val user = userDAO.get(cart.user_id)
 
+                val json = JSONObject()
                 json.put("id",selOrder.id)
                 json.put("number",selOrder.number)
                 json.put("date", selOrder.date_generation)
                 json.put("total",cart.total_price)
                 json.put("user",user.name)
 
-                jsonArray.put(json)
-
+               jsonArray.put(json)
             }
 
             return jsonArray

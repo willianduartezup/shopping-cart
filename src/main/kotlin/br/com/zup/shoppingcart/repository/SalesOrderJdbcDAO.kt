@@ -41,7 +41,7 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
         val rs = stm.executeQuery()
 
-        while (!rs.next()){
+        while (rs.next()){
 
             val salesOrder = SalesOrder(
                 rs.getString("id"),
