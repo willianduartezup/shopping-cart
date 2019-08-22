@@ -18,6 +18,7 @@ import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
 import java.io.IOException
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -56,6 +57,7 @@ class CartServiceTest {
                 this.userService.add(user)
                 this.productService.add(apple)
                 this.productService.add(orange)
+                this.productService.add(strawberry)
 
             } catch (e: Exception) {
                 LOG.error("Failed into prepare requirements for tests (product or user). Exception is $e")
@@ -85,7 +87,6 @@ class CartServiceTest {
         }
 
     }
-
 
     @Test
     fun `A | should successfully add cart`() {
@@ -190,8 +191,8 @@ class CartServiceTest {
         LOG.info("F | should successfully add more items ")
 
         try {
-            cartService.edit(orangeCart)
-            cartService.edit(strawberryCart)
+           // cartService.edit(orangeCart)
+            cartService.add(user.id!!, strawberryCart)
 
 
         } catch (e: Exception) {
@@ -210,13 +211,31 @@ class CartServiceTest {
 
         try {
 
-            val cartUser = userService.getUserById(user.id!!).cart_id!!
-
-            cartService.remove(orangeCart.id!!)
+            cartService.remove(appleCart.id!!)
 
         } catch (e: Exception) {
             LOG.error("Failed. Exception is $e")
             assertTrue(false)
+        } finally {
+            jdbc.closeConnection()
+        }
+    }
+
+    @Test
+    fun `K | should result in failed on removes item of cart because not have it`() {
+
+        LOG.info("K | should result in failed on removes item of cart because not have it")
+
+        try {
+
+            val cartUser = userService.getUserById(user.id!!).cart_id!!
+
+            cartService.remove(orangeCart.id!!)
+            assertTrue(false)
+
+        } catch (e: Exception) {
+            LOG.info("Failed. Exception is $e")
+            assertEquals(e.message, "Item Cart not found")
         } finally {
             jdbc.closeConnection()
         }

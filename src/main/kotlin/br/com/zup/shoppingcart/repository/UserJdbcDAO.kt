@@ -109,7 +109,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun remove(id: String) {
-        val psmt = connection.prepareStatement("UPDATE users SET deleted = ? WHERE id like ?")
+        val psmt = connection.prepareStatement("UPDATE users SET deleted = ? WHERE id = ?")
         psmt.setBoolean(1, true)
         psmt.setString(2, id)
 
@@ -128,7 +128,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun getRemovedUserById(id: String): User {
 
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted like true")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted = true")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()

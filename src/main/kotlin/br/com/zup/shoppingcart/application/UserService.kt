@@ -53,7 +53,6 @@ class UserService(
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             val user = userDAO.getRemovedUserById(param)
-            connection.commit()
             return user
 
         } catch (ex: Exception) {
