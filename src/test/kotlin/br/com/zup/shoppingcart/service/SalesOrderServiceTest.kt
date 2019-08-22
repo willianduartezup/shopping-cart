@@ -71,7 +71,6 @@ class SalesOrderServiceTest {
                 this.productService.add(strawberry)
 
                 this.cartService.add(userA.id!!, strawberryCart)
-                //this.cartService.add(userB.id!!, strawberryCart)
 
             } catch (e: Exception) {
                 ServletTestConfig.LOG.error("Failed into prepare requirements for tests. Exception is $e")
@@ -112,7 +111,7 @@ class SalesOrderServiceTest {
             orderId = salesOrderService.addOrder(userA.id!!)
 
             val userCart = userService.getUserById(userA.id!!)
-            assertTrue(userCart.id == userA.id && userCart.cart_id != "")
+            assertTrue(userCart.id == userA.id && userCart.cart_id == "")
             LOG.info("SUCCESS")
 
         } catch (e: Exception) {
@@ -176,7 +175,6 @@ class SalesOrderServiceTest {
         }
     }
 
-    // REQUIRED REVIEW THE TESTS OF GET
     @Test
     fun `E | should successfully get order`() {
         LOG.info("E | should successfully get order")
@@ -224,7 +222,7 @@ class SalesOrderServiceTest {
             val jsonList = ordersHistoryService.getOrdersUser("")
 
             LOG.info(" success! returns all orders list\n$jsonList")
-            assertTrue(jsonList.isEmpty)
+            assertTrue(!jsonList.isEmpty)
 
         } catch (e: Exception) {
 
