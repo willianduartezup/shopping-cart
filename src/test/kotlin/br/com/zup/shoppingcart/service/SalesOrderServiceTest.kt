@@ -2,7 +2,9 @@ package br.com.zup.shoppingcart.service
 
 import br.com.zup.shoppingcart.ServletTestConfig
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
+import br.com.zup.shoppingcart.ServletTestConfig.Companion.mapper
 import br.com.zup.shoppingcart.application.CartService
+import br.com.zup.shoppingcart.application.OrdersHistoryService
 import br.com.zup.shoppingcart.application.ProductService
 import br.com.zup.shoppingcart.application.SalesOrderService
 import br.com.zup.shoppingcart.application.UserService
@@ -12,6 +14,7 @@ import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
+import com.fasterxml.jackson.module.kotlin.convertValue
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.BeforeClass
@@ -50,6 +53,7 @@ class SalesOrderServiceTest {
         private val productService = ProductService(jdbc, factory)
         private val cartService = CartService(jdbc, factory)
         private val salesOrderService = SalesOrderService(ConnectionFactory(), DAOFactory())
+        private val ordersHistoryService = OrdersHistoryService(ConnectionFactory(), DAOFactory())
 
         private lateinit var orderId: String
 
@@ -208,6 +212,41 @@ class SalesOrderServiceTest {
             jdbc.closeConnection()
         }
 
+    }
+
+    @Test
+    fun `G | should successfully returns to all orders list`() {
+
+        LOG.info("should successful get user list")
+
+        try {
+
+            val jsonList = ordersHistoryService.getOrdersUser("")
+
+            LOG.info(" success! returns all orders list\n$jsonList")
+            assertTrue(jsonList.isEmpty)
+
+        } catch (e: Exception) {
+
+            LOG.error("Error. Exception is $e")
+            Assert.assertTrue(false)
+        }
+    }
+
+    @Test
+    fun `H | should successful get list of orders per users`() {
+
+        LOG.info("should successful get user list")
+
+        try {
+            val jsonList = ordersHistoryService.getOrdersUser(userA.id!!)
+            LOG.info(" success! returns orders list of user\n$jsonList")
+
+        } catch (e: Exception) {
+
+            LOG.error("Error. Exception is $e")
+            Assert.assertTrue(false)
+        }
     }
 
 }
