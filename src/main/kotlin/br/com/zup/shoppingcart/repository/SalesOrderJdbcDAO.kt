@@ -80,11 +80,10 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
     override fun add(e: SalesOrder): SalesOrder {
         val psmt =
-            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, number, date_generation) VALUES(?,?,?,?)")
+            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, date_generation) VALUES(?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.cart_id)
-        psmt.setInt(3, e.number as Int)
-        psmt.setDate(4, e.date_generation as Date)
+        psmt.setDate(3, e.date_generation as Date)
 
         psmt.execute()
         psmt.close()
