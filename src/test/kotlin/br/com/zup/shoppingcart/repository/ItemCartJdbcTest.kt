@@ -21,14 +21,21 @@ class ItemCartJdbcTest {
             val itemCart = ItemCart(id, idProduct, product.price, 1)
 
             val jdbc = ConnectionFactory()
+
+            val connection = jdbc.getConnection()
+
             try {
                 val factory = DAOFactory()
-                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
-                val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
+                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+                val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
                 productDAO.add(product)
                 itemsCartDAO.add(itemCart)
+
+                connection.commit()
+
             } catch (e: Exception) {
+                connection.rollback()
                 e.printStackTrace()
 
                 LOG.info("error on 'Insert Item Cart' test. Exception is $e")
@@ -42,14 +49,19 @@ class ItemCartJdbcTest {
         @JvmStatic
         fun delete() {
             val jdbc = ConnectionFactory()
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
-                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
-                val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
+                val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
+                val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
                 itemsCartDAO.remove(id)
                 productDAO.remove(idProduct)
+
+                connection.commit()
+
             } catch (e: Exception) {
+                connection.rollback()
                 e.printStackTrace()
                 LOG.info("error on 'Insert Item Cart' test. Exception is $e")
 
@@ -86,18 +98,21 @@ class ItemCartJdbcTest {
         LOG.info("Validate Update Item Cart")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val itemCart = ItemCart(id, idProduct, 2, 2)
             LOG.info(" ")
             val factory = DAOFactory()
-            val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
+            val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
             itemsCartDAO.edit(itemCart)
+            connection.commit()
 
             assertEquals(2, itemsCartDAO.get(id).quantity)
         } catch (e: Exception) {
             LOG.info(" ")
 
+            connection.rollback()
             e.printStackTrace()
 //            assertTrue(false)
             LOG.error("Error on 'Validate Update Item Cart' test. Exception is $e")
