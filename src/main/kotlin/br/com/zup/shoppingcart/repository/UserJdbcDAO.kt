@@ -76,7 +76,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.setString(4, e.password)
         psmt.setBoolean(5, false)
         psmt.setString(6, e.cart_id)
-        psmt.setString(7, e.orders.toJson())
+        psmt.setString(7, e.orders?.toJson())
 
         psmt.execute()
         psmt.close()
@@ -98,7 +98,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
         psmt.setString(4, e.cart_id)
-        psmt.setString(5, e.orders.toJson())
+        psmt.setString(5, e.orders?.toJson())
         psmt.setString(6, e.id)
 
 

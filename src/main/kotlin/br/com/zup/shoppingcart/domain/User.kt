@@ -25,7 +25,7 @@ data class User(
 
     var cart_id: String? = "",
 
-    var orders: ArrayList<String>
+    var orders: ArrayList<String>?
 ){
 }
 
