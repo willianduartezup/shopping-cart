@@ -44,8 +44,6 @@ class SalesOrderService(
             userService.edit(user)
             connection.commit()
 
-            // FieldValidator.validate(product)
-
             return order.id!!
 
         } catch (ex: Exception) {
@@ -119,9 +117,9 @@ class SalesOrderService(
 
         try {
 
-            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
-                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
-            val order = salesOrderJdbcDAO.get(idOrder)
+            val salesOrderDAO: SalesOrderDAO =
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
+            val order = salesOrderDAO.get(idOrder)
 
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
             val cart = cartDao.get(order.cart_id)

@@ -35,6 +35,7 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
         val query =
             "select * from salesorder ic where ic.id in(select json_array_elements_text(orders) as id from users where id = ?)"
+
         val stm = connection.prepareStatement(query)
         stm.setString(1, id)
 

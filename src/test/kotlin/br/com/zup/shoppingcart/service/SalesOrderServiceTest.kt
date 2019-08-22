@@ -11,6 +11,7 @@ import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
+import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.BeforeClass
@@ -30,7 +31,7 @@ class SalesOrderServiceTest {
 
         private val array = ArrayList<String>()
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
+        private val userA: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
         private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
         private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
         private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
@@ -41,6 +42,7 @@ class SalesOrderServiceTest {
 
         private val appleCart = ItemCart(product_id = apple.id!!, price_unit_product = apple.price, quantity = 3)
         private val orangeCart = ItemCart(product_id = orange.id!!, price_unit_product = orange.price, quantity = 3)
+
         private val strawberryCart =
             ItemCart(product_id = strawberry.id!!, price_unit_product = strawberry.price, quantity = 5)
 
@@ -49,6 +51,7 @@ class SalesOrderServiceTest {
         private val cartService = CartService(jdbc, factory)
         private val salesOrderService = SalesOrderService(ConnectionFactory(), DAOFactory())
 
+        private lateinit var orderId: String
 
         @BeforeClass
         @JvmStatic
@@ -57,11 +60,14 @@ class SalesOrderServiceTest {
             ServletTestConfig.LOG.info("Setup to CartServiceTest")
 
             try {
-                this.userService.add(user)
+                this.userService.add(userA)
                 this.userService.add(userB)
                 this.userService.add(userC)
+
                 this.productService.add(strawberry)
-                this.cartService.add(user.id!!, strawberryCart)
+
+                this.cartService.add(userA.id!!, strawberryCart)
+                //this.cartService.add(userB.id!!, strawberryCart)
 
             } catch (e: Exception) {
                 ServletTestConfig.LOG.error("Failed into prepare requirements for tests. Exception is $e")
@@ -99,10 +105,10 @@ class SalesOrderServiceTest {
         LOG.info("A | should successfully creates sales-order")
 
         try {
-            val orderId = salesOrderService.addOrder(user.id!!)
+            orderId = salesOrderService.addOrder(userA.id!!)
 
-            val userCart = userService.getUserById(user.id!!)
-            assertTrue(userCart.id == user.id && userCart.cart_id != "")
+            val userCart = userService.getUserById(userA.id!!)
+            assertTrue(userCart.id == userA.id && userCart.cart_id != "")
             LOG.info("SUCCESS")
 
         } catch (e: Exception) {
@@ -172,7 +178,7 @@ class SalesOrderServiceTest {
         LOG.info("E | should successfully get order")
 
         try {
-            val order = salesOrderService.getByOrderId(user.id!!)
+            val order = salesOrderService.getByOrderId(orderId)
             LOG.info("order is: $order")
 
         } catch (e: Exception) {
@@ -195,9 +201,8 @@ class SalesOrderServiceTest {
             assertTrue(false)
 
         } catch (e: Exception) {
-            assertEquals(e.message, "Order not found")
+            assertEquals(e.message, "Sales order not found")
             LOG.info("Failed into get order. Order not found. Exception is $e")
-            assertTrue(false)
 
         } finally {
             jdbc.closeConnection()
