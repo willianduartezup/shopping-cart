@@ -1,0 +1,44 @@
+CREATE TABLE public.users (
+    id varchar(60) NOT NULL,
+    "name" varchar(60) NOT NULL,
+    email varchar(255) NOT NULL,
+    "password" varchar(60) NULL,
+    deleted bool NOT NULL,
+    cart_id varchar(60) NULL,
+    orders json ,
+    CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.product (
+    id varchar(60) NOT NULL,
+    "name" varchar(60) NOT NULL,
+    price int4 NOT NULL,
+    unit varchar(60) NULL,
+    quantity int4 NULL,
+    CONSTRAINT firstkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.cart (
+    id varchar(60) NOT NULL,
+    items json NULL,
+    user_id varchar(60) NULL,
+    total_price varchar(60) NULL,
+    update_at date NULL,
+    canceledoractive bool NOT NULL,
+    CONSTRAINT cart_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.itemcart (
+    id varchar(60) NOT NULL,
+    product_id varchar(60) NULL,
+    price_unit_product varchar(60) NULL,
+    quantity varchar(60) NULL,
+    deleted bool NOT NULL,
+    CONSTRAINT itemcart_pkey PRIMARY KEY (id)
+);
+
+create table salesorder (
+id varchar(60) not null,
+cart_id varchar(60) not null,
+number serial,
+date_generation date not null,
+constraint order_pkey primary key (id)
+);
