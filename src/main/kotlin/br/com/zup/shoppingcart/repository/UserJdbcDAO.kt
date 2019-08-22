@@ -76,7 +76,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.setString(4, e.password)
         psmt.setBoolean(5, false)
         psmt.setString(6, e.cart_id)
-        psmt.setString(7, e.orders?.toJson())
+        psmt.setString(7, "[]")
 
         psmt.execute()
         psmt.close()
@@ -152,17 +152,19 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         return user
 
     }
-    private fun getArrayList(listCart: String): ArrayList<String> {
+    private fun getArrayList(listUser: String): ArrayList<String> {
         val mapper = jacksonObjectMapper()
         val listReturn = ArrayList<String>()
 
-            val actualObj = mapper.readTree(listCart)
+        if (listUser != "" && listUser != "[]") {
+
+            val actualObj = mapper.readTree(listUser)
 
             for (i in actualObj) {
 
                 listReturn.add(i.asText())
             }
-
+        }
         return listReturn
 
     }
