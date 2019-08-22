@@ -115,21 +115,26 @@
             <div id="new_credit_card" style="display: none;">
                 <table style="width: 100%;">
                     <tr>
-                        <td colspan="2" style="width: 100%;">
+                        <td colspan="3" style="width: 100%;">
                             <label>
                                 <input style="width: 100%;" type="text" id="name" name="name" placeholder="Name"/>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 50%;">
+                        <td style="width: 45%;">
                             <label>
-                                <input style="width: 95%;" type="text" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/>
+                                <input type="number" style="width: 99%;" id="number" name="number" placeholder="Number"/>
                             </label>
                         </td>
-                        <td style="width: 50%;">
+                        <td style="width: 5%;">
                             <label>
-                                <input style="width: 100%;" type="text" id="number" name="number" placeholder="Number"/>
+                                <input type="number" min="100" max="999" style="width: 90%;" id="cvv" name="cvv" placeholder="CVV"/>
+                            </label>
+                        </td>
+                        <td style="width: 45%;">
+                            <label>
+                                <input type="text" style="width: 100%;" onkeyup="maskExpiration(this)" pattern="\d{1,2}/\d{4}" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/>
                             </label>
                         </td>
                     </tr>

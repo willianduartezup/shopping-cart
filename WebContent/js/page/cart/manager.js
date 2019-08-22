@@ -187,6 +187,7 @@ function showNewCredit() {
         document.getElementById("name").required = true;
         document.getElementById("expiration_date").required = true;
         document.getElementById("number").required = true;
+        document.getElementById("cvv").required = true;
         document.getElementById("new_credit_card").style.display = 'block';
         document.getElementById("btnNewCredit").innerHTML = "Close New Credit Card";
     }else if (document.getElementById("new_credit_card").style.display === 'block'){
@@ -194,6 +195,8 @@ function showNewCredit() {
 
         document.getElementById("name").required = false;
         document.getElementById("name").value = "";
+        document.getElementById("cvv").required = false;
+        document.getElementById("cvv").value = "";
         document.getElementById("expiration_date").required = false;
         document.getElementById("expiration_date").value = "";
         document.getElementById("number").required = false;
@@ -201,6 +204,16 @@ function showNewCredit() {
         document.getElementById("new_credit_card").style.display = 'none';
         document.getElementById("btnNewCredit").innerHTML = "New Credit Card";
     }
+}
+
+function maskExpiration(input) {
+    let value = input.value;
+
+    value = value.replace(/\D/g,"");
+    value = value.replace(/(\d{2})(\d+)/g,"$1/$2");
+    value = value.replace(/(\d{2})\/(\d{4}).*/g,"$1/$2");
+
+    document.getElementById("expiration_date").value = value;
 }
 
 getUser();
