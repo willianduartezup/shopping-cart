@@ -18,7 +18,6 @@ import org.junit.BeforeClass
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
-import java.awt.Color.orange
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -202,9 +201,8 @@ class SalesOrderServiceTest {
             assertTrue(false)
 
         } catch (e: Exception) {
-            assertEquals(e.message, "Order not found")
+            assertEquals(e.message, "Sales order not found")
             LOG.info("Failed into get order. Order not found. Exception is $e")
-            assertTrue(false)
 
         } finally {
             jdbc.closeConnection()

@@ -39,8 +39,6 @@ class SalesOrderService(
 
             connection.commit()
 
-            // FieldValidator.validate(product)
-
             return order.id!!
 
         } catch (ex: Exception) {
