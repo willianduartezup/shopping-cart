@@ -99,7 +99,7 @@ function getItens(){
 
                     const quantity  = newRow.insertCell(1);
                     quantity.style.textAlign = "center";
-                    quantity.innerHTML = "<label><input class='quantity_item' onchange='onUpdate(\""+ item.id +"\",\""+ item.product_id +"\", this.value)' type='number' min=\"1\" required value='"+ item.quantity +"'/></label>";
+                    quantity.innerHTML = "<label><input class='quantity_item' onchange='onUpdate(\""+ item.id +"\",\""+ item.product_id +"\", this.value)' type='number' required value='"+ item.quantity +"' min='1' max='25'/></label>";
 
                     const priceUnitProduct  = newRow.insertCell(2);
                     priceUnitProduct.style.textAlign = "center";

@@ -301,7 +301,7 @@ class CartService(
 
     private fun validateQuantity(quantity: Int) {
         if (quantity <= 0) {
-            throw Exception("Quantity is zero!")
+            throw Exception("Quantity negative or zero")
         }
     }
 
