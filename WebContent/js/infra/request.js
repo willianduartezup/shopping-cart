@@ -71,7 +71,7 @@ request.post = function(url, body, callback, callbackError){
     const type = request.getType(callback, callbackError);
 
     type.open("POST", url, false);
-    type.setRequestHeader("Content-Type", "application/json");
+    type.setRequestHeader("Content-Type", "application/json;  charset=utf-8");
     type.send(JSON.stringify(body));
 };
 
@@ -79,7 +79,7 @@ request.put = function(url, body, callback, callbackError){
     const type = request.getType(callback, callbackError);
 
     type.open("PUT", url, false);
-    type.setRequestHeader("Content-Type", "application/json");
+    type.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     type.send(JSON.stringify(body));
 };
 

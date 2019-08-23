@@ -14,6 +14,7 @@ class ManagerResponseServlet {
         val jsonString = mapper.writeValueAsString(ServletResponse(message))
 
         resp.writer.write(jsonString)
+        resp.contentType = "application/json; charset=utf-8";
         resp.status = 201
     }
 
@@ -21,6 +22,7 @@ class ManagerResponseServlet {
         val jsonString = mapper.writeValueAsString(ServletResponse(message))
 
         resp.writer.write(jsonString)
+        resp.contentType = "application/json; charset=utf-8";
         resp.status = 200
     }
 
@@ -28,6 +30,7 @@ class ManagerResponseServlet {
         val jsonString = mapper.writeValueAsString(obj)
 
         resp.writer.write(jsonString)
+        resp.contentType = "application/json; charset=utf-8";
         resp.status = 200
     }
 
@@ -35,6 +38,7 @@ class ManagerResponseServlet {
         
         val jsonString = mapper.writeValueAsString(ServletResponse(exception.message))
         resp.writer.write(jsonString)
+        resp.contentType = "application/json; charset=utf-8";
         resp.status = 400
     }
 }
