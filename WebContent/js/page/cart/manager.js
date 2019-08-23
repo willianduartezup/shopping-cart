@@ -209,7 +209,7 @@ function createOrder(form){
 }
 
 function validExpiration(input) {
-    const today = new Date();
+  /*  const today = new Date();
     const date = parseInt((today.getMonth()+1) + '' + today.getFullYear());
     const dateInput = parseInt(input.value.replace("/",""));
 
@@ -218,6 +218,8 @@ function validExpiration(input) {
     }else{
         input.setCustomValidity('')
     }
+
+   */
 }
 
 function showNewCredit() {
@@ -267,7 +269,7 @@ function getCreditCardUser() {
             let options = "<option value=''>Credit Card</option>";
 
             list.map(function (credit) {
-                options += "<option value='"+ credit.id +"'>"+ credit.name +"</option>";
+                options += "<option value='"+ credit.id +"'>"+ credit.cardName +"</option>";
             });
 
             document.getElementById("select_id_credit").innerHTML = options;

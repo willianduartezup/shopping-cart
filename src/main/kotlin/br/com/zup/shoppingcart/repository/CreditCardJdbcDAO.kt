@@ -72,10 +72,10 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
             while (rs.next()) {
                 val card = CreditCard(
                     rs.getString("id"),
-                    rs.getString("userId"),
+                    rs.getString("user_id"),
                     rs.getString("number"),
-                    rs.getInt("expirationDate"),
-                    rs.getString("cardName"),
+                    rs.getInt("expiration_data"),
+                    rs.getString("card_name"),
                     null
 
                 )
