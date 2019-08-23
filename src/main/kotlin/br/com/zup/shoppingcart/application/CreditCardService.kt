@@ -20,11 +20,11 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
             jdbc.closeConnection()
         }
     }
-    fun getCreditCards(): ArrayList<CreditCard> {
+    fun getCreditCards(idUser: String): ArrayList<CreditCard> {
         val connection = jdbc.getConnection()
         try {
             val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
-            return creditCardDAO.listCardsByUser()
+            return creditCardDAO.listCardsByUser(idUser)
         } catch (ex: Exception) {
             throw ex
         } finally {
@@ -33,10 +33,14 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
     }
 
     fun insertCard(card: CreditCard){
-        FieldValidator.validate(card)
+
         val connection = jdbc.getConnection()
         try {
+
+            FieldValidator.validate(card)
+
             val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
+
             creditCardDAO.add(card)
             connection.commit()
         } catch (ex: Exception) {

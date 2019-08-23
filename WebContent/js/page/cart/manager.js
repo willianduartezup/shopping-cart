@@ -181,11 +181,11 @@ function createOrder(form){
         if (document.getElementById("new_credit_card").style.display === 'block'){
             const credit_card= {};
 
-            credit_card.user_id = user_id;
-            credit_card.name = form.name.value;
+            credit_card.userId = user_id;
+            credit_card.cardName = form.name.value;
             credit_card.number = form.number.value;
             credit_card.cvv = form.cvv.value;
-            credit_card.expiration_date = form.expiration_date.value;
+            credit_card.expirationDate = form.expiration_date.value.replace("/","");
 
             creditCardFactory.create(credit_card, function (res) {
                 const cr_created = JSON.parse(res);

@@ -18,7 +18,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
             rs.getString("id"),
             rs.getString("userId"),
             rs.getString("number"),
-            rs.getDate("expirationDate"),
+            rs.getInt("expirationDate"),
             rs.getString("cardName"),
             null
         )
@@ -29,11 +29,12 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
     override fun add(e: CreditCard): CreditCard {
 
         val pstm =
-            connection.prepareStatement("INSERT INTO creditcard (id, user_id, number, card_name) VALUES(?, ?, ?,?)")
+            connection.prepareStatement("INSERT INTO creditcard (id, user_id, number, card_name, expiration_data) VALUES(?, ?, ?, ?, ?)")
         pstm.setString(1, e.id)
         pstm.setString(2, e.userId)
         pstm.setString(3, e.number)
         pstm.setString(4, e.cardName)
+        pstm.setInt(5, e.expirationDate)
         pstm.execute()
         pstm.close()
         return e
@@ -44,7 +45,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
         val psmt =
             connection.prepareStatement("UPDATE creditCard SET number = ?, expiration_data = ?, card_name = ? WHERE id like ?")
         psmt.setString(1, e.number)
-        psmt.setDate(2, e.expirationDate)
+        psmt.setInt(2, e.expirationDate)
         psmt.setString(3, e.cardName)
         psmt.setString(4, e.id)
         psmt.execute()
@@ -72,7 +73,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
                     rs.getString("id"),
                     rs.getString("userId"),
                     rs.getString("number"),
-                    rs.getDate("expirationDate"),
+                    rs.getInt("expirationDate"),
                     rs.getString("cardName"),
                     null
                 )
