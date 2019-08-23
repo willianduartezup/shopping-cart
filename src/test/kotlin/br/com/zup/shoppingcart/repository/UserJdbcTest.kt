@@ -12,7 +12,9 @@ class UserJdbcTest {
 
     companion object {
 
-        private val user = User(id, "Tester", "teste@teste.com", "piece!")
+        private val array = ArrayList<String>()
+
+        private val user = User(id, "Tester", "teste@teste.com", "piece!", orders = array)
 
         @BeforeClass
         @JvmStatic
@@ -20,13 +22,17 @@ class UserJdbcTest {
             LOG.info("Insert User Test")
 
             val jdbc = ConnectionFactory()
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val userDao: UserDAO =
-                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                    factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
                 userDao.add(user)
+                connection.commit()
             } catch (ex: Exception) {
+
+                connection.rollback()
                 ex.printStackTrace()
             } finally {
                 jdbc.closeConnection()
@@ -40,15 +46,17 @@ class UserJdbcTest {
             LOG.info("Delete User Test")
 
             val jdbc = ConnectionFactory()
-
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val userDao: UserDAO =
-                    factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                    factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
                 userDao.removeUserFromTable(id)
+                connection.commit()
 
             } catch (ex: Exception) {
+                connection.rollback()
                 ex.printStackTrace()
             } finally {
                 jdbc.closeConnection()
@@ -66,8 +74,8 @@ class UserJdbcTest {
             val factory = DAOFactory()
             val userDAO: UserDAO =
                 factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-            val result = userDAO.add(user)
-            assertEquals(result.id, user.id)
+
+            assertEquals(id, userDAO.get(id).id)
 
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
@@ -82,16 +90,19 @@ class UserJdbcTest {
         LOG.info("Update User")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val userDao: UserDAO =
-                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
-            val user = User(id, "Test Modify", "teste@teste.com", "12345678")
+            val user = User(id, "Test Modify", "teste@teste.com", "12345678", orders = array)
 
             userDao.edit(user)
+            connection.commit()
 
         } catch (ex: java.lang.Exception) {
+            connection.rollback()
             ex.printStackTrace()
 
         } finally {

@@ -1,10 +1,12 @@
 package br.com.zup.shoppingcart.repository
 
 import br.com.zup.shoppingcart.domain.User
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.sql.Connection
 
-
 class UserJdbcDAO(val connection: Connection) : UserDAO {
+
+    fun ArrayList<String>.toJson() = jacksonObjectMapper().writeValueAsString(this)
 
     override fun listUsers(): ArrayList<User> {
         val listUser = ArrayList<User>()
@@ -19,8 +21,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
                     rs.getString("email"),
                     rs.getString("password"),
                     rs.getBoolean("deleted"),
-
-                    rs.getString("cart_id")
+                    rs.getString("cart_id"),
+                    getArrayList(rs.getString("orders"))
                 )
 
                 listUser.add(user)
@@ -54,7 +56,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             rs.getString("email"),
             "PRIVATE",
             rs.getBoolean("deleted"),
-            rs.getString("cart_id")
+            rs.getString("cart_id"),
+            getArrayList(rs.getString("orders"))
         )
 
         stm.close()
@@ -64,14 +67,16 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun add(e: User): User {
+
         val psmt =
-            connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted, cart_id) VALUES(?,?,?,?,?,?)")
+            connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted, cart_id, orders) VALUES(?,?,?,?,?,?,?::json)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.name)
         psmt.setString(3, e.email)
         psmt.setString(4, e.password)
         psmt.setBoolean(5, false)
         psmt.setString(6, e.cart_id)
+        psmt.setString(7, "[]")
 
         psmt.execute()
         psmt.close()
@@ -80,13 +85,21 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun edit(e: User): User {
+
+        if (e.orders.isNullOrEmpty()) {
+            val userB = get(e.id.toString())
+
+            e.orders = userB.orders
+        }
+
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ? WHERE id like ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ?, orders = ?::json WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
         psmt.setString(4, e.cart_id)
-        psmt.setString(5, e.id)
+        psmt.setString(5, e.orders?.toJson())
+        psmt.setString(6, e.id)
 
         psmt.execute()
         psmt.close()
@@ -95,7 +108,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     }
 
     override fun remove(id: String) {
-        val psmt = connection.prepareStatement("UPDATE users SET deleted = ? WHERE id like ?")
+        val psmt = connection.prepareStatement("UPDATE users SET deleted = ? WHERE id = ?")
         psmt.setBoolean(1, true)
         psmt.setString(2, id)
 
@@ -114,7 +127,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
     override fun getRemovedUserById(id: String): User {
 
-        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted like true")
+        val stm = connection.prepareStatement("SELECT * FROM users WHERE id like ? and deleted = true")
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
@@ -129,13 +142,29 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             rs.getString("email"),
             "PRIVATE",
             rs.getBoolean("deleted"),
-
-            rs.getString("cart_id")
+            rs.getString("cart_id"),
+            getArrayList(rs.getString("orders"))
         )
 
         stm.close()
 
         return user
+
+    }
+    private fun getArrayList(listUser: String): ArrayList<String> {
+        val mapper = jacksonObjectMapper()
+        val listReturn = ArrayList<String>()
+
+        if (listUser != "" && listUser != "[]") {
+
+            val actualObj = mapper.readTree(listUser)
+
+            for (i in actualObj) {
+
+                listReturn.add(i.asText())
+            }
+        }
+        return listReturn
 
     }
 

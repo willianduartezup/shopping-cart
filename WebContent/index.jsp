@@ -13,12 +13,14 @@
     <script type="text/javascript" src="js/factory/productFactory.js"></script>
     <script type="text/javascript" src="js/factory/userFactory.js"></script>
     <script type="text/javascript" src="js/factory/cartFactory.js"></script>
+    <script type="text/javascript" src="js/factory/orderFactory.js"></script>
 </head>
 <body>
 <div>
     <a href="index.jsp" style="font-family: sans-serif;">Home</a>
     <a href="index.jsp?page=product/list" style="font-family:sans-serif">Product</a>
     <a href="index.jsp?page=user/usersList" style="font-family:sans-serif">Users</a>
+    <a href="index.jsp?page=order/list" style="font-family:sans-serif">Orders</a>
 </div>
 <div style="margin-top: 50px;">
     <%

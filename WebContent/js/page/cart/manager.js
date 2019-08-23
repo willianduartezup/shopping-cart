@@ -79,13 +79,14 @@ function getItens(){
                     actions.style.textAlign = "center";
                     actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
                     i++;
+
                     cartPrice += item.price_unit_product * item.quantity;
                     if(list.length === i){
                         const totalPrice   = tableRef.insertRow();
                         const totalPriceCell = totalPrice.insertCell(-1);
                         totalPriceCell.style.textAlign = "right";
                         totalPriceCell.colSpan = 5;
-                        totalPriceCell.innerHTML = "Total price:" + cartPrice+"R$";
+                        totalPriceCell.innerHTML = "Total price: R$ " + cartPrice;
 
                        
 
@@ -94,7 +95,6 @@ function getItens(){
             });
         }
     });
-
 }
 
 function onSubmit(form){
@@ -139,6 +139,17 @@ function onUpdate(id, product_id, quantity){
             getItens();
         });
     });
+}
+
+function createOrder(){
+    if (confirm("Confirm buy cart?")){
+        const user_id = url.findGetParameter("user_id");
+
+        orderFactory.create(user_id, function(res){
+            const order = JSON.parse(res);
+            window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
+        });
+    }
 }
 
 getUser();

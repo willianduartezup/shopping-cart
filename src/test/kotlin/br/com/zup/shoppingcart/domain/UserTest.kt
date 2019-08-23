@@ -15,11 +15,16 @@ class UserTest {
 
     private var validator = Validation.buildDefaultValidatorFactory().validator
 
+    private val array = ArrayList<String>()
+
+
     @Test
     fun userNameIsEmpty() {
         LOG.info("userNameIsEmpty")
 
-        val user = User(null, "", "teste@teste.com", "123456")
+        array.add("123")
+
+        val user = User(null, "", "teste@teste.com", "123456", orders = array)
 
         val violations = validator.validate(user)
 
@@ -31,7 +36,9 @@ class UserTest {
     fun userEmailIsEmpty() {
         LOG.info("userEmailIsEmpty")
 
-        val user = User(null, "test", "", "123456")
+        array.add("123")
+
+        val user = User(null, "test", "", "123456", orders = array)
 
         val violations = validator.validate(user)
 
@@ -44,7 +51,9 @@ class UserTest {
     fun userEmailNotValid() {
         LOG.info("userEmailNotValid")
 
-        val user = User(null, "test name", "", "123456")
+        array.add("123")
+
+        val user = User(null, "test name", "", "123456", orders = array)
 
         val violations = validator.validate(user)
 
@@ -57,7 +66,9 @@ class UserTest {
     fun userPasswordIsEmpty() {
         LOG.info("userPasswordIsEmpty")
 
-        val user = User(null, "test", "teste@test.com", "")
+        array.add("123")
+
+        val user = User(null, "test", "teste@test.com", "", orders = array)
 
         val violations = validator.validate(user)
 
@@ -74,7 +85,9 @@ class UserTest {
     fun userPasswordIsNotValid() {
         LOG.info("userPasswordIsNotValid")
 
-        val user = User(null, "test", "teste@test.com", "12")
+        array.add("123")
+
+        val user = User(null, "test", "teste@test.com", "12", orders = array)
 
         val violations = validator.validate(user)
 
