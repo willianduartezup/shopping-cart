@@ -1,11 +1,11 @@
 // Get the modal
-var modal = document.getElementById("myModal");
+const modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
@@ -181,11 +181,11 @@ function createOrder(form){
         if (document.getElementById("new_credit_card").style.display === 'block'){
             const credit_card= {};
 
-            credit_card.user_id = user_id;
-            credit_card.name = form.name.value;
+            credit_card.userId = user_id;
+            credit_card.cardName = form.name.value;
             credit_card.number = form.number.value;
             credit_card.cvv = form.cvv.value;
-            credit_card.expiration_date = form.expiration_date.value;
+            credit_card.expirationDate = form.expiration_date.value.replace("/","");
 
             creditCardFactory.create(credit_card, function (res) {
                 const cr_created = JSON.parse(res);
