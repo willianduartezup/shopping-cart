@@ -208,6 +208,13 @@ function createOrder(form){
     return false;
 }
 
+function validExpiration(input) {
+    const today = new Date();
+    const date = (today.getMonth()+1) + '' + today.getFullYear();
+    //alert(date);
+    //input.setCustomValidity('test')
+}
+
 function showNewCredit() {
 
     if (document.getElementById("new_credit_card").style.display === 'none'){

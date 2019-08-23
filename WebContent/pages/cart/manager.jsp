@@ -134,7 +134,7 @@
                         </td>
                         <td style="width: 45%;">
                             <label>
-                                <input type="text" style="width: 100%;" onkeyup="maskExpiration(this)" pattern="\d{1,2}/\d{4}" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/>
+                                <input type="text" style="width: 100%;" onkeyup="maskExpiration(this)" onchange="validExpiration(this)" pattern="\d{1,2}/\d{4}" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/>
                             </label>
                         </td>
                     </tr>

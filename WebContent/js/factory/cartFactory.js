@@ -1,7 +1,7 @@
 const cartFactory = {};
 
 cartFactory.get = function(userId, callback){
-    request.get("cart/"+ userId, null, callback);
+    request.get("cart", {userIdt:userId}, callback);
 };
 
 cartFactory.add = function (user_id, item, callback) {
