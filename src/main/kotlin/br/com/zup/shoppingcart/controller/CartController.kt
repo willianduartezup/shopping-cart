@@ -22,20 +22,12 @@ class CartController : HttpServlet() {
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
 
         try {
-
             val userId = req.pathInfo.replace("/", "")
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             this.service.add(userId, itemCart)
-
-            //resp.status = HttpServletResponse.SC_CREATED
-            manager.created(resp, "Item created success")
-
         } catch (e: Exception) {
-
-            //resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.message)
             manager.badRequest(resp, e)
         }
-
     }
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
@@ -43,19 +35,12 @@ class CartController : HttpServlet() {
 
             try {
                 val idUser = req.pathInfo.replace("/", "")
-                /*val jsonString = this.service.get(idUser)
-
-                resp.writer.write(jsonString)*/
                 manager.succcessObject(resp, this.service.get(idUser))
             } catch (e: Exception) {
-                //resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.message)
                 manager.badRequest(resp, e)
             }
         } else {
-
-            //resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cart not found!")
             manager.badRequest(resp, Exception("Cart not found!"))
-
         }
     }
 
@@ -64,12 +49,9 @@ class CartController : HttpServlet() {
         try {
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             this.service.edit(itemCart)
-            //resp.status = HttpServletResponse.SC_OK
-            manager.succcess(resp, "Item updated Success")
+            manager.succcess(resp, "Item updated")
 
         } catch (e: Exception) {
-
-            //resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.message)
             manager.badRequest(resp, e)
         }
     }
@@ -77,15 +59,9 @@ class CartController : HttpServlet() {
     override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
         try {
             val idItemCart = req.pathInfo.replace("/", "")
-
             this.service.remove(idItemCart)
-
-            //resp.status = HttpServletResponse.SC_OK
-            manager.succcess(resp, "Item deleted Success")
-
+            manager.succcess(resp, "Item deleted")
         } catch (e: Exception) {
-
-            //resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.message)
             manager.badRequest(resp, e)
         }
     }

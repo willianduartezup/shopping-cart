@@ -20,8 +20,9 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
         val credCart = CreditCard(
             rs.getString("id"),
             rs.getString("number"),
-            rs.getInt("expirationDate"),
-            rs.getString("cardName"),
+            rs.getString("expirationDate"),
+            rs.getInt("cardName"),
+            rs.getString("cvv"),
             rs.getString("cvv")
         )
 
@@ -79,9 +80,10 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
                 val card = CreditCard(
                     rs.getString("id"),
                     rs.getString("number"),
-                    rs.getInt("expirationDate"),
-                    rs.getString("cardName"),
-                    rs.getString("cvv")
+                    rs.getString("expirationDate"),
+                    rs.getInt("cardName"),
+                    rs.getString("cvv"),
+                    rs.getString("aa")
                 )
                 listCards.add(card)
             }

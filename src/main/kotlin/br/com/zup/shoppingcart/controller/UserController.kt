@@ -24,7 +24,7 @@ class UserController : HttpServlet() {
        try {
             val user: User = readPayload.mapper(request.inputStream)
             service.add(user)
-            manager.created(response, "User created success")
+            manager.created(response, "User created")
         } catch (e: Exception) {
             manager.badRequest(response, e)
         }
@@ -52,7 +52,7 @@ class UserController : HttpServlet() {
         try {
             val user = readPayload.mapper<User>(request.inputStream)
             this.service.edit(user)
-            manager.succcess(response, "User updated success")
+            manager.succcess(response, "User updated")
         } catch (e: Exception) {
             manager.badRequest(response, e )
         }
@@ -64,7 +64,7 @@ class UserController : HttpServlet() {
             val param = request.pathInfo.replace("/", "")
             try {
                 this.service.remove(param)
-                manager.succcess(response, "User successful removed")
+                manager.succcess(response, "User removed")
             } catch (e: Exception) {
                 manager.badRequest(response, e)
             }

@@ -42,7 +42,7 @@ class ProductController : HttpServlet() {
 
             productService.add(product)
 
-            manager.created(resp, "Product created success")
+            manager.created(resp, "Product created")
         }catch (ex: Exception){
             manager.badRequest(resp, ex)
         }
@@ -55,7 +55,7 @@ class ProductController : HttpServlet() {
 
             productService.edit(product)
 
-            manager.succcess(resp, "Product updated success")
+            manager.succcess(resp, "Product updated")
         }catch (ex: Exception){
             manager.badRequest(resp, ex)
         }
