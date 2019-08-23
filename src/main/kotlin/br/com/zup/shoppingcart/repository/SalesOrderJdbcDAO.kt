@@ -34,14 +34,14 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
         val listOrders = ArrayList<SalesOrder>()
 
         val query =
-            "select * from salesorder ic where ic.id in(select json_array_elements_text(orders) as id from user where id = ?)"
+            "select * from salesorder ic where ic.id in(select json_array_elements_text(orders) as id from users where id = ?)"
 
         val stm = connection.prepareStatement(query)
         stm.setString(1, id)
 
         val rs = stm.executeQuery()
 
-        while (!rs.next()){
+        while (rs.next()){
 
             val salesOrder = SalesOrder(
                 rs.getString("id"),
@@ -80,11 +80,10 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
     override fun add(e: SalesOrder): SalesOrder {
         val psmt =
-            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, number, date_generation) VALUES(?,?,?,?)")
+            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, date_generation) VALUES(?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.cart_id)
-        psmt.setInt(3, e.number as Int)
-        psmt.setDate(4, e.date_generation as Date)
+        psmt.setDate(3, e.date_generation as Date)
 
         psmt.execute()
         psmt.close()

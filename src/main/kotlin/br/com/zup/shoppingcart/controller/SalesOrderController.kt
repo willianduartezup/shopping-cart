@@ -4,6 +4,7 @@ import br.com.zup.shoppingcart.application.SalesOrderService
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
+import org.json.JSONObject
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -36,7 +37,9 @@ class SalesOrderController: HttpServlet() {
             val userId = req.pathInfo.replace("/", "")
             val orderId = this.service.addOrder(userId)
 
-            manager.created(resp, "Item created success -> orderId is: $orderId" )
+            val json = JSONObject()
+            json.put("id",orderId)
+            resp.writer.write(json.toString())
 
         } catch (e: Exception) {
 
