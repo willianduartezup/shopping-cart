@@ -129,7 +129,7 @@
                         </td>
                         <td style="width: 5%;">
                             <label>
-                                <input type="number" min="100" max="999" style="width: 90%;" id="cvv" name="cvv" placeholder="CVV"/>
+                                <input type="number" max="999" style="width: 90%;" id="cvv" name="cvv" placeholder="CVV"/>
                             </label>
                         </td>
                         <td style="width: 45%;">
