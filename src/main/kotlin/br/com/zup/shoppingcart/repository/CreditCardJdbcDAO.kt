@@ -21,7 +21,8 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
             rs.getString("id"),
             rs.getString("number"),
             rs.getInt("expirationDate"),
-            rs.getString("cardName")
+            rs.getString("cardName"),
+            rs.getString("cvv")
         )
 
         stm.close()
@@ -79,7 +80,8 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
                     rs.getString("id"),
                     rs.getString("number"),
                     rs.getInt("expirationDate"),
-                    rs.getString("cardName")
+                    rs.getString("cardName"),
+                    rs.getString("cvv")
                 )
                 listCards.add(card)
             }

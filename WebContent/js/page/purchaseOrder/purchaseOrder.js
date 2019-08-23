@@ -48,13 +48,14 @@ function getItems() {
 
                 const priceUnitProduct = newRow.insertCell(2);
                 priceUnitProduct.style.textAlign = "center";
-                priceUnitProduct.innerHTML = "" + item.unit_price;
+                const unitPriceToUser = item.unit_price/100;
+                priceUnitProduct.innerHTML = unitPriceToUser.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
 
-                const totalProduct = item.unit_price * item.quantity;
+                const totalProduct = (item.unit_price * item.quantity) / 100;
 
                 const priceTotalProduct = newRow.insertCell(3);
                 priceTotalProduct.style.textAlign = "center";
-                priceTotalProduct.innerHTML = "R$ " + totalProduct;
+                priceTotalProduct.innerHTML = totalProduct.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});;
 
                 orderPrice += item.unit_price * item.quantity;
 
@@ -63,7 +64,8 @@ function getItems() {
             const totalPriceCell = totalPrice.insertCell(-1);
             totalPriceCell.style.textAlign = "right";
             totalPriceCell.colSpan = 4;
-            totalPriceCell.innerHTML = "Total price: R$ " + orderPrice;
+            orderPrice = orderPrice/100;
+            totalPriceCell.innerHTML = orderPrice.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});;
         }
     });
 }

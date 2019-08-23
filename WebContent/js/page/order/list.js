@@ -56,7 +56,8 @@ function getOrders() {
 
                 let bTotal  = body.insertCell();
                 bTotal.style.textAlign = "center";
-                bTotal.innerHTML = order.total;
+                const priceToUser = order.total/100;
+                bTotal.innerHTML = priceToUser.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
 
                 if (!user_id) {
                     let bUser = body.insertCell();
