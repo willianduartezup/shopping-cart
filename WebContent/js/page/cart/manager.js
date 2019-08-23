@@ -210,9 +210,14 @@ function createOrder(form){
 
 function validExpiration(input) {
     const today = new Date();
-    const date = (today.getMonth()+1) + '' + today.getFullYear();
-    //alert(date);
-    //input.setCustomValidity('test')
+    const date = parseInt((today.getMonth()+1) + '' + today.getFullYear());
+    const dateInput = parseInt(input.value.replace("/",""));
+
+    if(dateInput < date){
+        input.setCustomValidity('expired card')
+    }else{
+        input.setCustomValidity('')
+    }
 }
 
 function showNewCredit() {
