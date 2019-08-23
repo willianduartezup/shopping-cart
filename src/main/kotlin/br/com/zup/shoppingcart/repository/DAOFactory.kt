@@ -10,6 +10,7 @@ class DAOFactory {
             CartDAO::class.java -> CartJdbcDAO(connection)
             ItemsCartDAO::class.java -> ItemsCartJdbcDAO(connection)
             SalesOrderDAO::class.java -> SalesOrderJdbcDAO(connection)
+            CreditCardDAO::class.java -> CreditCardJdbcDAO(connection)
             else ->  null
         }
     }

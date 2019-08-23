@@ -8,7 +8,6 @@ import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
 import br.com.zup.shoppingcart.repository.SalesOrderDAO
 import br.com.zup.shoppingcart.repository.SalesOrderJdbcDAO
-import br.com.zup.shoppingcart.repository.UserDAO
 import org.json.JSONArray
 import org.json.JSONObject
 

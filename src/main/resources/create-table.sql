@@ -9,6 +9,7 @@ CREATE TABLE users
     orders     json,
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
+
 CREATE TABLE product
 (
     id       varchar(60) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE cart
     canceledoractive bool        NOT NULL,
     CONSTRAINT cart_pkey PRIMARY KEY (id)
 );
+
 CREATE TABLE itemcart
 (
     id                 varchar(60) NOT NULL,
@@ -47,3 +49,12 @@ create table salesorder
     date_generation date        not null,
     constraint order_pkey primary key (id)
 );
+
+CREATE TABLE creditCard
+(
+    id              varchar(60) not null,
+    user_id         varchar(60) not null,
+    number          varchar(100) not null,
+    expiration_data date not null,
+    card_name       varchar(60) not null
+)

@@ -20,10 +20,6 @@ class OrdersHistoryController : HttpServlet() {
         if (req.pathInfo != null) {
             param = req.pathInfo.replace("/", "")
         }
-
             resp.writer.write(service.getOrdersUser(param).toString())
-
     }
-
-
 }
