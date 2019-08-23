@@ -48,7 +48,7 @@ function getItems() {
 
                 const priceUnitProduct = newRow.insertCell(2);
                 priceUnitProduct.style.textAlign = "center";
-                priceUnitProduct.innerHTML = "R$ " + item.unit_price;
+                priceUnitProduct.innerHTML = "" + item.unit_price;
 
                 const totalProduct = item.unit_price * item.quantity;
 

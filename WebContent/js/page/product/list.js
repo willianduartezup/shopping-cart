@@ -26,7 +26,7 @@ function loadProducts(){
 
                 const price  = newRow.insertCell(1);
                 price.style.textAlign = "center";
-                price.innerHTML = product.price;
+                price.innerHTML = product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
                 const unity  = newRow.insertCell(2);
                 unity.style.textAlign = "center";
@@ -34,7 +34,7 @@ function loadProducts(){
 
                 const quantity  = newRow.insertCell(3);
                 quantity.style.textAlign = "center";
-                quantity.innerHTML = product.quantity;
+                quantity.innerHTML = product.quantity.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
                 const actions  = newRow.insertCell(4);
                 actions.style.textAlign = "center";
