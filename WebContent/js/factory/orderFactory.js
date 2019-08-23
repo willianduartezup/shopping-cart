@@ -1,7 +1,7 @@
 const orderFactory = {};
 
-orderFactory.get = function (idUser, callback) {
-    request.get('sales/'+ idUser, {}, callback)
+orderFactory.get = function (idOrder, callback) {
+    request.get('sales/'+ idOrder, null, callback)
 };
 
 orderFactory.create = function (idUser, credit_id, callBack) {

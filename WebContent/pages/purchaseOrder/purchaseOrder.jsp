@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <div>
     <span id="userName"></span><br>
-    <span id="order"></span>
+    <span id="order"></span><br>
+    <span id="credit_card"></span>
 </div>
 
 <div>
