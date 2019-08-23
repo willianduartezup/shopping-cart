@@ -1,3 +1,40 @@
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+
+    const user_id = url.findGetParameter("user_id");
+
+    cartFactory.get(user_id, function(res){
+        const list = JSON.parse(res);
+
+        if (list.length > 0){
+            modal.style.display = "block";
+        }else{
+            alert('You do not have any items in your cart.');
+        }
+    });
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
 function getUser(){
     const user_id = url.findGetParameter("user_id");
 
@@ -141,17 +178,96 @@ function onUpdate(id, product_id, quantity){
     });
 }
 
-function createOrder(){
+function createOrder(form){
     if (confirm("Confirm buy cart?")){
         const user_id = url.findGetParameter("user_id");
 
-        orderFactory.create(user_id, function(res){
-            const order = JSON.parse(res);
-            window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
-        });
+        if (document.getElementById("new_credit_card").style.display === 'block'){
+            const credit_card= {};
+
+            credit_card.user_id = user_id;
+            credit_card.name = form.name.value;
+            credit_card.number = form.number.value;
+            credit_card.cvv = form.cvv.value;
+            credit_card.expiration_date = form.expiration_date.value;
+
+            creditCardFactory.create(credit_card, function (res) {
+                const cr_created = JSON.parse(res);
+
+                orderFactory.create(user_id, cr_created.id, function(res){
+                    const order = JSON.parse(res);
+                    window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
+                });
+            })
+        }else{
+            const idCredit = form.select_id_credit.value;
+
+            orderFactory.create(user_id, idCredit, function(res){
+                const order = JSON.parse(res);
+                window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
+            });
+        }
     }
+
+    return false;
+}
+
+function showNewCredit() {
+
+    if (document.getElementById("new_credit_card").style.display === 'none'){
+        document.getElementById("select_id_credit").required = false;
+
+        document.getElementById("name").required = true;
+        document.getElementById("expiration_date").required = true;
+        document.getElementById("number").required = true;
+        document.getElementById("cvv").required = true;
+        document.getElementById("new_credit_card").style.display = 'block';
+        document.getElementById("btnNewCredit").innerHTML = "Close Credit Card";
+    }else if (document.getElementById("new_credit_card").style.display === 'block'){
+        document.getElementById("select_id_credit").required = true;
+
+        document.getElementById("name").required = false;
+        document.getElementById("name").value = "";
+        document.getElementById("cvv").required = false;
+        document.getElementById("cvv").value = "";
+        document.getElementById("expiration_date").required = false;
+        document.getElementById("expiration_date").value = "";
+        document.getElementById("number").required = false;
+        document.getElementById("number").value = "";
+        document.getElementById("new_credit_card").style.display = 'none';
+        document.getElementById("btnNewCredit").innerHTML = "If your credit card is not in the options? register it by clicking here.";
+    }
+}
+
+function maskExpiration(input) {
+    let value = input.value;
+
+    value = value.replace(/\D/g,"");
+    value = value.replace(/(\d{2})(\d+)/g,"$1/$2");
+    value = value.replace(/(\d{2})\/(\d{4}).*/g,"$1/$2");
+
+    document.getElementById("expiration_date").value = value;
+}
+
+function getCreditCardUser() {
+    const user_id = url.findGetParameter("user_id");
+
+    creditCardFactory.list(user_id, function (res) {
+        const list = JSON.parse(res);
+
+        if (list.length > 0){
+            let options = "<option value=''>Credit Card</option>";
+
+            list.map(function (credit) {
+                options += "<option value='"+ credit.id +"'>"+ credit.name +"</option>";
+            });
+
+            document.getElementById("select_id_credit").innerHTML = options;
+        }
+    });
 }
 
 getUser();
 getProducts();
 getItens();
+getCreditCardUser();

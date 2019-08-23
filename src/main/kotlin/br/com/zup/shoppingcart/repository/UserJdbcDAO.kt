@@ -22,7 +22,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
                     rs.getString("password"),
                     rs.getBoolean("deleted"),
                     rs.getString("cart_id"),
-                    getArrayList(rs.getString("orders"))
+                    getArrayList(rs.getString("orders")),
+                    getArrayList(rs.getString("cards"))
                 )
 
                 listUser.add(user)
@@ -57,7 +58,8 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             "PRIVATE",
             rs.getBoolean("deleted"),
             rs.getString("cart_id"),
-            getArrayList(rs.getString("orders"))
+            getArrayList(rs.getString("orders")),
+            getArrayList(rs.getString("cards"))
         )
 
         stm.close()
@@ -69,7 +71,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
     override fun add(e: User): User {
 
         val psmt =
-            connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted, cart_id, orders) VALUES(?,?,?,?,?,?,?::json)")
+            connection.prepareStatement("INSERT INTO users(id, name, email, password, deleted, cart_id, orders, cards) VALUES(?,?,?,?,?,?,?::json,?::json)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.name)
         psmt.setString(3, e.email)
@@ -77,6 +79,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         psmt.setBoolean(5, false)
         psmt.setString(6, e.cart_id)
         psmt.setString(7, "[]")
+        psmt.setString(8, "[]")
 
         psmt.execute()
         psmt.close()
@@ -92,14 +95,21 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             e.orders = userB.orders
         }
 
+        if (e.cards.isNullOrEmpty()){
+            val userB = get(e.id.toString())
+
+            e.cards = userB.cards
+        }
+
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ?, orders = ?::json WHERE id like ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ?, orders = ?::json, cards = ?::json WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
         psmt.setString(4, e.cart_id)
         psmt.setString(5, e.orders?.toJson())
-        psmt.setString(6, e.id)
+        psmt.setString(6, e.cards?.toJson())
+        psmt.setString(7, e.id)
 
         psmt.execute()
         psmt.close()
@@ -143,7 +153,9 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             "PRIVATE",
             rs.getBoolean("deleted"),
             rs.getString("cart_id"),
-            getArrayList(rs.getString("orders"))
+            getArrayList(rs.getString("orders")),
+            getArrayList(rs.getString("cards"))
+
         )
 
         stm.close()
