@@ -1,10 +1,11 @@
 package br.com.zup.shoppingcart.domain
 
-import java.sql.Date
 import java.util.UUID
 import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.Positive
+import javax.validation.constraints.Size
 
 data class CreditCard (
 
@@ -24,6 +25,4 @@ data class CreditCard (
     var cardName : String,
 
     val cvv: String?
-
-    )
-
+)
