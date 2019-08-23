@@ -25,8 +25,11 @@ class SalesOrderService(
         val user = userService.getUserById(userId)
         val cart = cartService.get(userId)
         val order: SalesOrder
+
+        // TODO: alterar para receber ID
+
         if (user.cart_id != "" && !cart.isEmpty()) {
-            order = SalesOrder(cart_id = user.cart_id!!)
+            order = SalesOrder(cart_id = user.cart_id!!, card_id = "teste")
         } else throw Exception("Invalid cart")
 
         val connection = jdbc.getConnection()
