@@ -1,36 +1,27 @@
+function getOrder() {
+    const orderId = url.findGetParameter("order");
 
-function getUser(){
-    const user_id = url.findGetParameter("user_id");
-
-    if (user_id){
-        userFactory.get(user_id, function(res){
-            const user = JSON.parse(res);
-            if (user){
-                document.getElementById("userName").innerHTML = "User: "+user.name;
+    if (orderId) {
+        orderFactory.get(orderId, function (res) {
+            const order = JSON.parse(res);
+            if (order) {
+                document.getElementById("userName").innerHTML = "User: " + order.user.name;
+                document.getElementById("order").innerHTML = "Order: " + order.number;
             }
         });
-    }else{
+    } else {
         window.location.href = "index.jsp?page=cart/manager";
     }
 }
 
-function getOrderId(){
-    const user_id = url.findGetParameter("user_id");
-    orderFactory.get(user_id, function (res) {
-        const order = JSON.parse(res);
-        document.getElementById("order").innerHTML = "Order: "+order.number;
+function getItems() {
 
-    });
-}
-
-function getItems(){
-
-    const user_id = url.findGetParameter("user_id");
+    const orderId = url.findGetParameter("order");
 
     const tableRef = document.getElementById('purchaseOrder').getElementsByTagName('tbody')[0];
     tableRef.innerHTML = '';
 
-    const newRowNotFound   = tableRef.insertRow();
+    const newRowNotFound = tableRef.insertRow();
 
     const cell = newRowNotFound.insertCell(0);
 
@@ -38,49 +29,43 @@ function getItems(){
     cell.colSpan = 5;
     cell.innerHTML = "No products found";
 
-    cartFactory.get(user_id, function(res){
-        const list = JSON.parse(res);
-
-        if (list.length > 0){
+    orderFactory.get(orderId, function (res) {
+        const order = JSON.parse(res);
+        const list = order.cart.items;
+        if (list.length > 0) {
             tableRef.innerHTML = '';
-            let cartPrice = 0;
+            let orderPrice = 0;
             list.map(function (item) {
-                productFactory.get(item.product_id,function (res) {
-                    const product = JSON.parse(res);
+                const newRow = tableRef.insertRow();
 
-                    const newRow   = tableRef.insertRow();
+                const name = newRow.insertCell(0);
+                name.style.textAlign = "center";
+                name.innerHTML = item.name;
 
-                    const name  = newRow.insertCell(0);
-                    name.style.textAlign = "center";
-                    name.innerHTML = product.name;
+                const quantity = newRow.insertCell(1);
+                quantity.style.textAlign = "center";
+                quantity.innerHTML = item.quantity;
 
-                    const quantity  = newRow.insertCell(1);
-                    quantity.style.textAlign = "center";
-                    quantity.innerHTML = item.quantity;
+                const priceUnitProduct = newRow.insertCell(2);
+                priceUnitProduct.style.textAlign = "center";
+                priceUnitProduct.innerHTML = "R$ " + item.unit_price;
 
-                    const priceUnitProduct  = newRow.insertCell(2);
-                    priceUnitProduct.style.textAlign = "center";
-                    priceUnitProduct.innerHTML = "R$ "+ item.price_unit_product;
+                const totalProduct = item.unit_price * item.quantity;
 
-                    const totalProduct = item.price_unit_product * item.quantity;
+                const priceTotalProduct = newRow.insertCell(3);
+                priceTotalProduct.style.textAlign = "center";
+                priceTotalProduct.innerHTML = "R$ " + totalProduct;
 
-                    const priceTotalProduct  = newRow.insertCell(3);
-                    priceTotalProduct.style.textAlign = "center";
-                    priceTotalProduct.innerHTML = "R$ "+ totalProduct;
+                orderPrice += item.unit_price * item.quantity;
 
-                    cartPrice += item.price_unit_product * item.quantity;
-                });
             });
-            const totalPrice   = tableRef.insertRow();
+            const totalPrice = tableRef.insertRow();
             const totalPriceCell = totalPrice.insertCell(-1);
             totalPriceCell.style.textAlign = "right";
             totalPriceCell.colSpan = 4;
-            totalPriceCell.innerHTML = "Total price: R$ " + cartPrice;
+            totalPriceCell.innerHTML = "Total price: R$ " + orderPrice;
         }
-
     });
 }
-
-getUser();
+getOrder();
 getItems();
-getOrderId();

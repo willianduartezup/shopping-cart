@@ -6,6 +6,7 @@ import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
+import br.com.zup.shoppingcart.repository.SalesOrderDAO
 import br.com.zup.shoppingcart.repository.SalesOrderJdbcDAO
 import br.com.zup.shoppingcart.repository.UserDAO
 import org.json.JSONArray
@@ -31,14 +32,17 @@ class SalesOrderService(
 
         val connection = jdbc.getConnection()
         try {
-            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
-                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
+            val salesOrderJdbcDAO: SalesOrderDAO =
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
+
 
             salesOrderJdbcDAO.add(order)
 
-            connection.commit()
+            user.orders?.add(order.id.toString())
+            user.cart_id = ""
 
-            // FieldValidator.validate(product)
+            userService.edit(user)
+            connection.commit()
 
             return order.id!!
 
@@ -113,9 +117,9 @@ class SalesOrderService(
 
         try {
 
-            val salesOrderJdbcDAO: SalesOrderJdbcDAO =
-                factory.getInstanceOf(SalesOrderJdbcDAO::class.java, connection) as SalesOrderJdbcDAO
-            val order = salesOrderJdbcDAO.get(idOrder)
+            val salesOrderDAO: SalesOrderDAO =
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
+            val order = salesOrderDAO.get(idOrder)
 
             val cartDao: CartDAO = factory.getInstanceOf(CartDAO::class.java, connection) as CartDAO
             val cart = cartDao.get(order.cart_id)
@@ -126,7 +130,6 @@ class SalesOrderService(
             val jsonUser = JSONObject()
             val jsonOne = JSONObject()
             val jsonCart = JSONObject()
-            val jsonItems = JSONObject()
             val jsonArray = JSONArray()
 
             val user = userService.getUserById(cart.user_id)
@@ -140,6 +143,7 @@ class SalesOrderService(
 
                 val product = productDAO.get(items.product_id)
 
+                val jsonItems = JSONObject()
                 jsonItems.put("id", items.id)
                 jsonItems.put("name", product.name)
                 jsonItems.put("unit_price", items.price_unit_product)

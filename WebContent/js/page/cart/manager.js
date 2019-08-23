@@ -171,8 +171,9 @@ function createOrder(){
     if (confirm("Confirm buy cart?")){
         const user_id = url.findGetParameter("user_id");
 
-        orderFactory.create(user_id, function(){
-            window.location.href="index.jsp?page=purchaseOrder/purchaseOrder";
+        orderFactory.create(user_id, function(res){
+            const order = JSON.parse(res);
+            window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
         });
     }
 
