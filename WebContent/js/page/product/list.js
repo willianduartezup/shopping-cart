@@ -1,9 +1,9 @@
-function loadProducts(){
+function loadProducts() {
     const tableRef = document.getElementById('listProducts').getElementsByTagName('tbody')[0];
 
     tableRef.innerHTML = "";
 
-    const newRowNotFound   = tableRef.insertRow();
+    const newRowNotFound = tableRef.insertRow();
 
     const cell = newRowNotFound.insertCell(0);
 
@@ -14,31 +14,32 @@ function loadProducts(){
     productFactory.list(function (res) {
         const list = JSON.parse(res);
 
-        if (list.length > 0){
+        if (list.length > 0) {
             tableRef.innerHTML = "";
 
             list.map(function (product) {
-                const newRow   = tableRef.insertRow();
+                const newRow = tableRef.insertRow();
 
-                const name  = newRow.insertCell(0);
+                const name = newRow.insertCell(0);
                 name.style.textAlign = "center";
                 name.innerHTML = product.name;
 
-                const price  = newRow.insertCell(1);
+                const price = newRow.insertCell(1);
                 price.style.textAlign = "center";
-                price.innerHTML = product.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                const priceToUser = product.price / 100;
+                price.innerHTML = priceToUser.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
 
-                const unity  = newRow.insertCell(2);
+                const unity = newRow.insertCell(2);
                 unity.style.textAlign = "center";
                 unity.innerHTML = product.unit;
 
-                const quantity  = newRow.insertCell(3);
+                const quantity = newRow.insertCell(3);
                 quantity.style.textAlign = "center";
-                quantity.innerHTML = product.quantity.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+                quantity.innerHTML = product.quantity;
 
-                const actions  = newRow.insertCell(4);
+                const actions = newRow.insertCell(4);
                 actions.style.textAlign = "center";
-                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id="+ product.id +"\">update</a>\n";
+                actions.innerHTML = "<a href=\"index.jsp?page=product/form&id=" + product.id + "\">update</a>\n";
             });
         }
     });

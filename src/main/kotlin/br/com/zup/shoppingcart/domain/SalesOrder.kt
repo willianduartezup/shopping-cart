@@ -15,6 +15,9 @@ class SalesOrder(
 
     var number: Int? = -1,
 
-    var date_generation: Date? = Date(java.util.Date().time)
+    var date_generation: Date? = Date(java.util.Date().time),
+
+    @field:NotEmpty(message = "Card ID is empty!")
+    var card_id: String
 
 )
