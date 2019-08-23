@@ -188,12 +188,14 @@ function createOrder(form){
                     window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
                 });
             })
-        }
+        }else{
+            const idCredit = form.select_id_credit.value;
 
-        /*orderFactory.create(user_id, function(res){
-            const order = JSON.parse(res);
-            window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
-        });*/
+            orderFactory.create(user_id, idCredit, function(res){
+                const order = JSON.parse(res);
+                window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
+            });
+        }
     }
 
     return false;
@@ -209,7 +211,7 @@ function showNewCredit() {
         document.getElementById("number").required = true;
         document.getElementById("cvv").required = true;
         document.getElementById("new_credit_card").style.display = 'block';
-        document.getElementById("btnNewCredit").innerHTML = "Close New Credit Card";
+        document.getElementById("btnNewCredit").innerHTML = "Close Credit Card";
     }else if (document.getElementById("new_credit_card").style.display === 'block'){
         document.getElementById("select_id_credit").required = true;
 
@@ -222,7 +224,7 @@ function showNewCredit() {
         document.getElementById("number").required = false;
         document.getElementById("number").value = "";
         document.getElementById("new_credit_card").style.display = 'none';
-        document.getElementById("btnNewCredit").innerHTML = "New Credit Card";
+        document.getElementById("btnNewCredit").innerHTML = "If your credit card is not in the options? register it by clicking here.";
     }
 }
 

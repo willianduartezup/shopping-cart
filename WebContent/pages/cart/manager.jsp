@@ -105,7 +105,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <label>
-                                <button type="button" id="btnNewCredit" onclick="showNewCredit();" style="width: 100%;">New Credit Card</button>
+                                <button type="button" id="btnNewCredit" onclick="showNewCredit();" style="width: 100%;">If your credit card is not in the options? register it by clicking here.</button>
                             </label>
                         </td>
                     </tr>
