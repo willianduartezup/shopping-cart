@@ -28,6 +28,7 @@
                         <option value="Kilogram">Kilogram</option>
                         <option value="Gram">Gram</option>
                         <option value="Box">Box</option>
+                        <option value="m³">m³</option>
                     </select>
                 </label>
 

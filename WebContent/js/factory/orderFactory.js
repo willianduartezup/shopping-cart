@@ -4,8 +4,8 @@ orderFactory.get = function (idUser, callback) {
     request.get('sales/'+ idUser, {}, callback)
 };
 
-orderFactory.create = function (idUser, callBack) {
-    request.post('sales/'+ idUser, {}, callBack)
+orderFactory.create = function (idUser, credit_id, callBack) {
+    request.post('sales/'+ idUser, {credit_id : credit_id}, callBack)
 };
 
 orderFactory.list = function (idUser, callback) {

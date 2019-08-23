@@ -2,7 +2,9 @@ package br.com.zup.shoppingcart.service
 
 import br.com.zup.shoppingcart.ServletTestConfig
 import br.com.zup.shoppingcart.ServletTestConfig.Companion.LOG
+import br.com.zup.shoppingcart.ServletTestConfig.Companion.mapper
 import br.com.zup.shoppingcart.application.CartService
+import br.com.zup.shoppingcart.application.OrdersHistoryService
 import br.com.zup.shoppingcart.application.ProductService
 import br.com.zup.shoppingcart.application.SalesOrderService
 import br.com.zup.shoppingcart.application.UserService
@@ -11,6 +13,8 @@ import br.com.zup.shoppingcart.domain.Product
 import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
+import br.com.zup.shoppingcart.service.UserServiceTest.Companion.user
+import com.fasterxml.jackson.module.kotlin.convertValue
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.BeforeClass
@@ -30,7 +34,7 @@ class SalesOrderServiceTest {
 
         private val array = ArrayList<String>()
 
-        private val user: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
+        private val userA: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array )
         private val userB: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
         private val userC: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
         private val userD: User = User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
@@ -41,6 +45,7 @@ class SalesOrderServiceTest {
 
         private val appleCart = ItemCart(product_id = apple.id!!, price_unit_product = apple.price, quantity = 3)
         private val orangeCart = ItemCart(product_id = orange.id!!, price_unit_product = orange.price, quantity = 3)
+
         private val strawberryCart =
             ItemCart(product_id = strawberry.id!!, price_unit_product = strawberry.price, quantity = 5)
 
@@ -48,7 +53,9 @@ class SalesOrderServiceTest {
         private val productService = ProductService(jdbc, factory)
         private val cartService = CartService(jdbc, factory)
         private val salesOrderService = SalesOrderService(ConnectionFactory(), DAOFactory())
+        private val ordersHistoryService = OrdersHistoryService(ConnectionFactory(), DAOFactory())
 
+        private lateinit var orderId: String
 
         @BeforeClass
         @JvmStatic
@@ -57,11 +64,13 @@ class SalesOrderServiceTest {
             ServletTestConfig.LOG.info("Setup to CartServiceTest")
 
             try {
-                this.userService.add(user)
+                this.userService.add(userA)
                 this.userService.add(userB)
                 this.userService.add(userC)
+
                 this.productService.add(strawberry)
-                this.cartService.add(user.id!!, strawberryCart)
+
+                this.cartService.add(userA.id!!, strawberryCart)
 
             } catch (e: Exception) {
                 ServletTestConfig.LOG.error("Failed into prepare requirements for tests. Exception is $e")
@@ -99,10 +108,10 @@ class SalesOrderServiceTest {
         LOG.info("A | should successfully creates sales-order")
 
         try {
-            val orderId = salesOrderService.addOrder(user.id!!)
+            orderId = salesOrderService.addOrder(userA.id!!)
 
-            val userCart = userService.getUserById(user.id!!)
-            assertTrue(userCart.id == user.id && userCart.cart_id != "")
+            val userCart = userService.getUserById(userA.id!!)
+            assertTrue(userCart.id == userA.id && userCart.cart_id == "")
             LOG.info("SUCCESS")
 
         } catch (e: Exception) {
@@ -166,13 +175,12 @@ class SalesOrderServiceTest {
         }
     }
 
-    // REQUIRED REVIEW THE TESTS OF GET
     @Test
     fun `E | should successfully get order`() {
         LOG.info("E | should successfully get order")
 
         try {
-            val order = salesOrderService.getByOrderId(user.id!!)
+            val order = salesOrderService.getByOrderId(orderId)
             LOG.info("order is: $order")
 
         } catch (e: Exception) {
@@ -195,14 +203,48 @@ class SalesOrderServiceTest {
             assertTrue(false)
 
         } catch (e: Exception) {
-            assertEquals(e.message, "Order not found")
+            assertEquals(e.message, "Sales order not found")
             LOG.info("Failed into get order. Order not found. Exception is $e")
-            assertTrue(false)
 
         } finally {
             jdbc.closeConnection()
         }
 
+    }
+
+    @Test
+    fun `G | should successfully returns to all orders list`() {
+
+        LOG.info("should successful get user list")
+
+        try {
+
+            val jsonList = ordersHistoryService.getOrdersUser("")
+
+            LOG.info(" success! returns all orders list\n$jsonList")
+            assertTrue(!jsonList.isEmpty)
+
+        } catch (e: Exception) {
+
+            LOG.error("Error. Exception is $e")
+            Assert.assertTrue(false)
+        }
+    }
+
+    @Test
+    fun `H | should successful get list of orders per users`() {
+
+        LOG.info("should successful get user list")
+
+        try {
+            val jsonList = ordersHistoryService.getOrdersUser(userA.id!!)
+            LOG.info(" success! returns orders list of user\n$jsonList")
+
+        } catch (e: Exception) {
+
+            LOG.error("Error. Exception is $e")
+            Assert.assertTrue(false)
+        }
     }
 
 }

@@ -14,6 +14,7 @@
     <script type="text/javascript" src="js/factory/userFactory.js"></script>
     <script type="text/javascript" src="js/factory/cartFactory.js"></script>
     <script type="text/javascript" src="js/factory/orderFactory.js"></script>
+    <script type="text/javascript" src="js/factory/creditCardFactory.js"></script>
 </head>
 <body>
 <div>

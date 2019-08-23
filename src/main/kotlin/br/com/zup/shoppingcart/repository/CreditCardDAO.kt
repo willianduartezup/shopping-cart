@@ -5,7 +5,7 @@ import br.com.zup.shoppingcart.domain.CreditCard
 interface CreditCardDAO: CrudDAO<CreditCard, String> {
 
     @Throws(Exception::class)
-    fun listCardsByUser(): ArrayList<CreditCard>
+    fun listCardsByUser(userId: String): ArrayList<CreditCard>
 }
 
 

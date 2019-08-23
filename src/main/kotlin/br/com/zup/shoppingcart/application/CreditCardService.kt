@@ -47,10 +47,17 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
         }
     }
 
-    fun removeCard(){
+    fun removeCard(cardId: String){
         val connection: Connection = jdbc.getConnection()
         try{
-            val creditCardDAO: CreditCardDAO = factory.g
+            val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
+            creditCardDAO.remove(cardId)
+            connection.commit()
+        } catch (ex: Exception) {
+            connection.rollback()
+            throw ex
+        } finally {
+            jdbc.closeConnection()
         }
     }
 }

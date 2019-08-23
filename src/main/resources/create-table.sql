@@ -7,6 +7,7 @@ CREATE TABLE users
     deleted    bool         NOT NULL,
     cart_id    varchar(60)  NULL,
     orders     json,
+    cards      json,
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
@@ -57,4 +58,4 @@ CREATE TABLE creditCard
     number          varchar(100) not null,
     expiration_data date not null,
     card_name       varchar(60) not null
-)
+);
