@@ -167,14 +167,33 @@ function onUpdate(id, product_id, quantity){
     });
 }
 
-function createOrder(){
+function createOrder(form){
     if (confirm("Confirm buy cart?")){
         const user_id = url.findGetParameter("user_id");
 
-        orderFactory.create(user_id, function(res){
+        if (document.getElementById("new_credit_card").style.display === 'block'){
+            const credit_card= {};
+
+            credit_card.user_id = user_id;
+            credit_card.name = form.name.value;
+            credit_card.number = form.number.value;
+            credit_card.cvv = form.cvv.value;
+            credit_card.expiration_date = form.expiration_date.value;
+
+            creditCardFactory.create(credit_card, function (res) {
+                const cr_created = JSON.parse(res);
+
+                orderFactory.create(user_id, cr_created.id, function(res){
+                    const order = JSON.parse(res);
+                    window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
+                });
+            })
+        }
+
+        /*orderFactory.create(user_id, function(res){
             const order = JSON.parse(res);
             window.location.href="index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id;
-        });
+        });*/
     }
 
     return false;
@@ -217,6 +236,25 @@ function maskExpiration(input) {
     document.getElementById("expiration_date").value = value;
 }
 
+function getCreditCardUser() {
+    const user_id = url.findGetParameter("user_id");
+
+    creditCardFactory.list(user_id, function (res) {
+        const list = JSON.parse(res);
+
+        if (list.length > 0){
+            let options = "<option value=''>Credit Card</option>";
+
+            list.map(function (credit) {
+                options += "<option value='"+ credit.id +"'>"+ credit.name +"</option>";
+            });
+
+            document.getElementById("select_id_credit").innerHTML = options;
+        }
+    });
+}
+
 getUser();
 getProducts();
 getItens();
+getCreditCardUser();

@@ -90,7 +90,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form onsubmit="return createOrder();">
+        <form onsubmit="return createOrder(this);">
             <div>
                 <table style="width: 100%;">
                     <tr>
