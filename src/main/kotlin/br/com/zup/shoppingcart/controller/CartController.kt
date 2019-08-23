@@ -23,11 +23,10 @@ class CartController : HttpServlet() {
             val userId = req.pathInfo.replace("/", "")
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             this.service.add(userId, itemCart)
-            manager.created(resp, "Item created success")
+
         } catch (e: Exception) {
             manager.badRequest(resp, e)
         }
-
     }
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
@@ -48,7 +47,8 @@ class CartController : HttpServlet() {
         try {
             val itemCart = reader.mapper<ItemCart>(req.inputStream)
             this.service.edit(itemCart)
-            manager.succcess(resp, "Item updated Success")
+            manager.succcess(resp, "Item updated")
+
         } catch (e: Exception) {
             manager.badRequest(resp, e)
         }
@@ -58,7 +58,9 @@ class CartController : HttpServlet() {
         try {
             val idItemCart = req.pathInfo.replace("/", "")
             this.service.remove(idItemCart)
-            manager.succcess(resp, "Item deleted Success")
+
+            manager.succcess(resp, "Item deleted")
+
         } catch (e: Exception) {
             manager.badRequest(resp, e)
         }

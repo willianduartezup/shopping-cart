@@ -37,7 +37,8 @@ class ProductController : HttpServlet() {
         try {
             val product = readPayload.mapper<Product>(req.inputStream)
             productService.add(product)
-            manager.created(resp, "Product created success")
+
+            manager.created(resp, "Product created")
         }catch (ex: Exception){
             manager.badRequest(resp, ex)
         }
@@ -47,7 +48,8 @@ class ProductController : HttpServlet() {
         try {
             val product = readPayload.mapper<Product>(req.inputStream)
             productService.edit(product)
-            manager.succcess(resp, "Product updated success")
+          
+            manager.succcess(resp, "Product updated")
         }catch (ex: Exception){
             manager.badRequest(resp, ex)
         }

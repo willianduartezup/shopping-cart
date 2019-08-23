@@ -21,6 +21,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
             rs.getDate("expirationDate"),
             rs.getString("cardName"),
             null
+
         )
         stm.close()
         return credCart
@@ -75,6 +76,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
                     rs.getDate("expirationDate"),
                     rs.getString("cardName"),
                     null
+
                 )
                 listCards.add(card)
             }
