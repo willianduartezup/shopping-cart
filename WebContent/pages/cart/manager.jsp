@@ -53,7 +53,7 @@
                 </td>
                 <td>
                     <label>
-                        <input style="font-family:sans-serif;margin-bottom: 5px;width:65px; height: 25px" name="quantity" type="number" id="quantity" placeholder="quantity" min="1" required/>
+                        <input style="font-family:sans-serif;margin-bottom: 5px;width:65px; height: 25px" name="quantity" type="number" id="quantity" placeholder="quantity" min="1" max="100000" required/>
                     </label>
                 </td>
                 <td>

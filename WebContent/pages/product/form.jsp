@@ -5,7 +5,7 @@
             <td>Name:</td>
             <td>
                 <label>
-                    <input  type="text" name="name" id="name" required/>
+                    <input  type="text" name="name" id="name" maxlength="25"/>
                 </label>
             </td>
         </tr>
@@ -13,7 +13,7 @@
             <td>Price:</td>
             <td>
                 <label>
-                    <input type="number" name="price" id="price" required/>
+                    <input type="number" name="price" id="price" min="1" max="100000000" required/>
                 </label>
             </td>
         </tr>
@@ -28,7 +28,6 @@
                         <option value="Kilogram">Kilogram</option>
                         <option value="Gram">Gram</option>
                         <option value="Box">Box</option>
-                        <option value="m³">m³</option>
                     </select>
                 </label>
 
@@ -38,7 +37,7 @@
             <td>Quantity:</td>
             <td>
                 <label>
-                    <input type="number" name="quantity" id="quantity" required/>
+                    <input type="number" name="quantity" id="quantity" min="1" max="100000000" required/>
                 </label>
             </td>
         </tr>
