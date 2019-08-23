@@ -48,15 +48,15 @@ create table salesorder
     cart_id         varchar(60) not null,
     number          serial,
     date_generation date        not null,
+    card_id         varchar(60) not null,
     constraint order_pkey primary key (id)
 );
 
-CREATE TABLE creditCard
-(
-    id              varchar(60) not null,
-    user_id         varchar(60) not null,
-    number          varchar(100) not null,
-    expiration_data date not null,
-    card_name       varchar(60) not null,
-    cart_id         varchar(60) not null
-);
+    CREATE TABLE creditcard
+    (
+        id              varchar(60) not null,
+        user_id         varchar(60) not null,
+        number          varchar(100) not null,
+        expiration_data varchar(100) not null,
+        card_name       varchar(60) not null,
+    );

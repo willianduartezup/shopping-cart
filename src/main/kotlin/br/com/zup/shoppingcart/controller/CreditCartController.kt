@@ -20,6 +20,7 @@ class CreditCartController : HttpServlet() {
     private val service = CreditCardService(ConnectionFactory(), DAOFactory())
 
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
+
         if (request.pathInfo != null) {
             val param = request.pathInfo.replace("/", "")
             try {
@@ -29,7 +30,7 @@ class CreditCartController : HttpServlet() {
             }
         } else {
             try {
-                manager.succcessObject(response, service.getCreditCards())
+                manager.succcessObject(response, service.getCreditCards(""))
             } catch (e: Exception) {
                 manager.badRequest(response, e)
             }
@@ -39,7 +40,8 @@ class CreditCartController : HttpServlet() {
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
 
         try {
-            val card: CreditCard = readPayload.mapper(request.inputStream)
+            val card = readPayload.mapper<CreditCard>(request.inputStream)
+
             service.insertCard(card)
             manager.created(response, "Successfully registered card!")
         } catch (e: Exception) {
