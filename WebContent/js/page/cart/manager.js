@@ -49,7 +49,6 @@ function getItens(){
 
         if (list.length > 0){
             tableRef.innerHTML = '';
-            let i = 0;
             let cartPrice = 0;
             list.map(function (item) {
                 productFactory.get(item.product_id,function (res) {
@@ -67,32 +66,29 @@ function getItens(){
 
                     const priceUnitProduct  = newRow.insertCell(2);
                     priceUnitProduct.style.textAlign = "center";
-                    priceUnitProduct.innerHTML = "R$ "+ item.price_unit_product.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+                    const unitPriceToUser = item.price_unit_product/100;
+                    priceUnitProduct.innerHTML = unitPriceToUser.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
 
-                    const totalProduct = item.price_unit_product * item.quantity;
+                    const totalProduct = item.price_unit_product * item.quantity / 100;
 
                     const priceTotalProduct  = newRow.insertCell(3);
                     priceTotalProduct.style.textAlign = "center";
-                    priceTotalProduct.innerHTML = "R$ "+ totalProduct.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+                    priceTotalProduct.innerHTML = totalProduct.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
 
                     const actions  = newRow.insertCell(4);
                     actions.style.textAlign = "center";
                     actions.innerHTML = "<button class='remove_item' onclick='onRemove(\""+ item.id +"\")'>X</button>";
-                    i++;
 
                     cartPrice += item.price_unit_product * item.quantity;
-                    if(list.length === i){
-                        const totalPrice   = tableRef.insertRow();
-                        const totalPriceCell = totalPrice.insertCell(-1);
-                        totalPriceCell.style.textAlign = "right";
-                        totalPriceCell.colSpan = 5;
-                        totalPriceCell.innerHTML = "Total price: R$ " + cartPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
-
-                       
-
-                    }
                 });
             });
+            const totalPrice   = tableRef.insertRow();
+            const totalPriceCell = totalPrice.insertCell(-1);
+            totalPriceCell.style.textAlign = "right";
+            totalPriceCell.colSpan = 5;
+            cartPrice = cartPrice/100;
+            totalPriceCell.innerHTML = "Total price: " + cartPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+
         }
     });
 }
