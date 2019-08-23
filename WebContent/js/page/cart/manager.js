@@ -208,6 +208,18 @@ function createOrder(form){
     return false;
 }
 
+function validExpiration(input) {
+    const today = new Date();
+    const date = parseInt((today.getMonth()+1) + '' + today.getFullYear());
+    const dateInput = parseInt(input.value.replace("/",""));
+
+    if(dateInput < date){
+        input.setCustomValidity('expired card')
+    }else{
+        input.setCustomValidity('')
+    }
+}
+
 function showNewCredit() {
 
     if (document.getElementById("new_credit_card").style.display === 'none'){

@@ -1,7 +1,7 @@
 const creditCardFactory = {};
 
 creditCardFactory.list = function(user_id, callback){
-    request.get('creditCart/'+ user_id, null, callback);
+    request.get('creditCart', {userIdt: user_id}, callback);
 };
 
 creditCardFactory.create = function (credit_card, callback) {
