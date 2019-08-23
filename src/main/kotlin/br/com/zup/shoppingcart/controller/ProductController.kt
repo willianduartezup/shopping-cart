@@ -23,9 +23,7 @@ class ProductController : HttpServlet() {
         try {
             if (req.pathInfo != null) {
                 val id = req.pathInfo.replace("/", "")
-
                 val product = productService.getProductById(id)
-
                 manager.succcessObject(resp, product)
             } else {
                 manager.succcessObject(resp, this.productService.getListProducts())
@@ -36,10 +34,8 @@ class ProductController : HttpServlet() {
     }
 
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-
         try {
             val product = readPayload.mapper<Product>(req.inputStream)
-
             productService.add(product)
 
             manager.created(resp, "Product created")
@@ -49,12 +45,10 @@ class ProductController : HttpServlet() {
     }
 
     override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
-
         try {
             val product = readPayload.mapper<Product>(req.inputStream)
-
             productService.edit(product)
-
+          
             manager.succcess(resp, "Product updated")
         }catch (ex: Exception){
             manager.badRequest(resp, ex)

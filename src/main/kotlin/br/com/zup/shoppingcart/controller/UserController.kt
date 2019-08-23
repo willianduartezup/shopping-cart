@@ -18,9 +18,7 @@ class UserController : HttpServlet() {
     private val manager = ManagerResponseServlet()
     private val service = UserService(ConnectionFactory(), DAOFactory())
 
-
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-
        try {
             val user: User = readPayload.mapper(request.inputStream)
             service.add(user)
@@ -31,7 +29,6 @@ class UserController : HttpServlet() {
     }
 
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
-
         if (request.pathInfo != null) {
             val param = request.pathInfo.replace("/", "")
             try {
@@ -59,7 +56,6 @@ class UserController : HttpServlet() {
     }
 
     override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
-
         if (request.pathInfo != null) {
             val param = request.pathInfo.replace("/", "")
             try {

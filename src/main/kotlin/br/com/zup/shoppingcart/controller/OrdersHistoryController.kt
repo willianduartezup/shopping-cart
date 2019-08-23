@@ -14,9 +14,7 @@ class OrdersHistoryController : HttpServlet() {
     private val service = OrdersHistoryService(ConnectionFactory(), DAOFactory())
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-
         var param = ""
-
         if (req.pathInfo != null) {
             param = req.pathInfo.replace("/", "")
         }

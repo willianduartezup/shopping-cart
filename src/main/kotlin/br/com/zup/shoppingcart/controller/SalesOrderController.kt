@@ -17,35 +17,23 @@ class SalesOrderController: HttpServlet() {
     private val manager = ManagerResponseServlet()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-
         if (req.pathInfo != ""){
-
         val param = req.pathInfo.replace("/","")
-
         resp.writer.write(service.getByOrderId(param).toString())
-
         } else {
             resp.sendError(400,"User id not found")
         }
-
     }
 
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-
         try {
-
             val userId = req.pathInfo.replace("/", "")
             val orderId = this.service.addOrder(userId)
-
             val json = JSONObject()
             json.put("id",orderId)
             resp.writer.write(json.toString())
-
         } catch (e: Exception) {
-
             manager.badRequest(resp, e)
         }
-
     }
-
 }
