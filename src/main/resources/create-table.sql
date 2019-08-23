@@ -59,4 +59,4 @@ CREATE TABLE creditCard
     expiration_data date not null,
     card_name       varchar(60) not null,
     cart_id         varchar(60) not null
-)
+);

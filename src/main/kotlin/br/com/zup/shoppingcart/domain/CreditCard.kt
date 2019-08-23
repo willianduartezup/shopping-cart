@@ -19,11 +19,10 @@ data class CreditCard (
     val number: String,
 
     @field:[NotEmpty(message = "Validity cannot be empty!") NotBlank(message = "Validity cannot be blank!")]
-    val expirationDate: Int,
+    val expirationDate: Date,
 
     @field:[NotEmpty(message = "CVV cannot be empty!") NotBlank(message = "CVV cannot be blank!")]
     var cardName : String,
 
     val cvv: String?
-
 )
