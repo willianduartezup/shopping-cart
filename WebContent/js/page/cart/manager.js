@@ -9,7 +9,18 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-    modal.style.display = "block";
+
+    const user_id = url.findGetParameter("user_id");
+
+    cartFactory.get(user_id, function(res){
+        const list = JSON.parse(res);
+
+        if (list.length > 0){
+            modal.style.display = "block";
+        }else{
+            alert('You do not have any items in your cart.');
+        }
+    });
 };
 
 // When the user clicks on <span> (x), close the modal
