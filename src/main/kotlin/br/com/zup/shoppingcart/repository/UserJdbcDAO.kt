@@ -22,8 +22,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
                     rs.getString("password"),
                     rs.getBoolean("deleted"),
                     rs.getString("cart_id"),
-                    getArrayList(rs.getString("orders")),
-                    getArrayList(rs.getString("cards"))
+                    getArrayList(rs.getString("orders"))
                 )
 
                 listUser.add(user)
@@ -58,8 +57,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             "PRIVATE",
             rs.getBoolean("deleted"),
             rs.getString("cart_id"),
-            getArrayList(rs.getString("orders")),
-            getArrayList(rs.getString("cards"))
+            getArrayList(rs.getString("orders"))
         )
 
         stm.close()
@@ -95,21 +93,14 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             e.orders = userB.orders
         }
 
-        if (e.cards.isNullOrEmpty()){
-            val userB = get(e.id.toString())
-
-            e.cards = userB.cards
-        }
-
         val psmt =
-            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ?, orders = ?::json, cards = ?::json WHERE id like ?")
+            connection.prepareStatement("UPDATE users SET name = ?, email = ?, password = ?, deleted = false , cart_id = ?, orders = ?::json, WHERE id like ?")
         psmt.setString(1, e.name)
         psmt.setString(2, e.email)
         psmt.setString(3, e.password)
         psmt.setString(4, e.cart_id)
         psmt.setString(5, e.orders?.toJson())
-        psmt.setString(6, e.cards?.toJson())
-        psmt.setString(7, e.id)
+        psmt.setString(6, e.id)
 
         psmt.execute()
         psmt.close()
@@ -153,8 +144,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
             "PRIVATE",
             rs.getBoolean("deleted"),
             rs.getString("cart_id"),
-            getArrayList(rs.getString("orders")),
-            getArrayList(rs.getString("cards"))
+            getArrayList(rs.getString("orders"))
 
         )
 
