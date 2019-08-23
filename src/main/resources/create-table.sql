@@ -7,6 +7,7 @@ CREATE TABLE users
     deleted    bool         NOT NULL,
     cart_id    varchar(60)  NULL,
     orders     json,
+    cards      json,
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
