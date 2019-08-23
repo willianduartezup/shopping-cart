@@ -11,8 +11,19 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
     }
 
     override fun add(e: CreditCard): CreditCard {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val pstm = connection.prepareStatement("INSERT INTO creditcards (id, user_id, number, card_name) VALUES(?, ?, ?,?)")
+        pstm.setString(1, e.id)
+        pstm.setString(2, e.userId)
+        pstm.setString(3, e.number)
+        pstm.setString(4, e.cardName)
+
+        pstm.execute()
+        pstm.close()
+
+        return e
     }
+
 
     override fun edit(e: CreditCard): CreditCard {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -24,18 +35,20 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
 
     fun ArrayList<String>.toJson() = jacksonObjectMapper().writeValueAsString(this)
 
-    override fun listCards(): ArrayList<CreditCard> {
+    override fun listCardsByUser(): ArrayList<CreditCard> {
         val listCards = ArrayList<CreditCard>()
         try {
             val stm = connection.createStatement()
-            val rs = stm.executeQuery("Select * from creditCard")
+            val rs = stm.executeQuery("Select * from creditcard")
 
             while (rs.next()) {
                 val card = CreditCard(
                     rs.getString("id"),
-                    rs.getString("cardName"),
+                    rs.getString("userId"),
+                    rs.getString("number"),
                     rs.getDate("expirationDate"),
-                    rs.getString("cardName")
+                    rs.getString("cardName"),
+                    null
                 )
                 listCards.add(card)
             }

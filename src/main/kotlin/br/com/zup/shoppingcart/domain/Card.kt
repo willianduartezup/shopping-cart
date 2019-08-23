@@ -6,24 +6,20 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 
-data class CreditCard (
+class Card(
 
     @Id
     val id: String? = UUID.randomUUID().toString(),
 
     @field:[NotEmpty(message = "Number cannot be empty!") NotBlank(message = "Number cannot be blank!")]
-    val userId: String,
-
-    @field:[NotEmpty(message = "Number cannot be empty!") NotBlank(message = "Number cannot be blank!")]
-    val number: String,
+    val number: Number,
 
     @field:[NotEmpty(message = "Validity cannot be empty!") NotBlank(message = "Validity cannot be blank!")]
-    val expirationDate: Date,
+    val validity: Date,
 
     @field:[NotEmpty(message = "CVV cannot be empty!") NotBlank(message = "CVV cannot be blank!")]
-    var cardName : String,
+    val cvv: String,
 
-    val cvv: String?
-
-    )
-
+    @field:[NotEmpty(message = "CVV cannot be empty!") NotBlank(message = "CVV cannot be blank!")]
+    val userName: String
+)

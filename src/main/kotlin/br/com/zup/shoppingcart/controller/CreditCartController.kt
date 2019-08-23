@@ -1,6 +1,8 @@
 package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.CreditCardService
+import br.com.zup.shoppingcart.domain.CreditCard
+import br.com.zup.shoppingcart.domain.User
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
 import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
@@ -33,6 +35,18 @@ class CreditCartController : HttpServlet() {
             }
         }
     }
+
+    override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
+
+        try {
+            val card: CreditCard = readPayload.mapper(request.inputStream)
+            service.insertCard(card)
+            manager.created(response, "Successfully registered card!")
+        } catch (e: Exception) {
+            manager.badRequest(response, e)
+        }
+    }
+
 
 
 }
