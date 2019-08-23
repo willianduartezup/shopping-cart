@@ -24,13 +24,14 @@ class CreditCartController : HttpServlet() {
         if (request.pathInfo != null) {
             val param = request.pathInfo.replace("/", "")
             try {
-                manager.succcessObject(response, service.getCreditCardById(param))
+                manager.succcessObject(response, service.getCreditCards(param))
             } catch (e: Exception) {
                 manager.badRequest(response, e)
             }
         } else {
             try {
-                manager.succcessObject(response, service.getCreditCards(""))
+                manager.succcessObject(response, service.getCreditCardById(""))
+
             } catch (e: Exception) {
                 manager.badRequest(response, e)
             }
