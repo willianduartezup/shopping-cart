@@ -31,7 +31,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
 
         } catch (e: Exception) {
             e.printStackTrace()
-        }finally {
+        } finally {
 
             return listUser
 
@@ -151,6 +151,7 @@ class UserJdbcDAO(val connection: Connection) : UserDAO {
         return user
 
     }
+
     private fun getArrayList(listUser: String): ArrayList<String> {
         val mapper = jacksonObjectMapper()
         val listReturn = ArrayList<String>()

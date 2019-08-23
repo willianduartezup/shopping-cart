@@ -5,18 +5,11 @@ import br.com.zup.shoppingcart.infra.exception.FieldValidator
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
-import javax.validation.Validation
 
 class UserService(
     private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
-    /*companion object {
-        private val factory = DAOFactory()
-        private val jdbc = ConnectionFactory()
-        private val userDAO: UserDAO =
-            factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
-    }*/
 
     fun getUserById(param: String): User {
 
@@ -51,9 +44,7 @@ class UserService(
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
-
-            val user = userDAO.getRemovedUserById(param)
-            return user
+            return userDAO.getRemovedUserById(param)
 
         } catch (ex: Exception) {
 

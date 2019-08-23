@@ -11,5 +11,4 @@ interface UserDAO: CrudDAO<User, String> {
     fun getRemovedUserById(id: String): User
 
     fun listUsers(): ArrayList<User>
-
 }
