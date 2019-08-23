@@ -12,7 +12,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
 
     override fun add(e: CreditCard): CreditCard {
 
-        val pstm = connection.prepareStatement("INSERT INTO creditcards (id, user_id, number, card_name) VALUES(?, ?, ?,?)")
+        val pstm = connection.prepareStatement("INSERT INTO creditcard (id, user_id, number, card_name) VALUES(?, ?, ?,?)")
         pstm.setString(1, e.id)
         pstm.setString(2, e.userId)
         pstm.setString(3, e.number)
@@ -38,9 +38,10 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
     override fun listCardsByUser(): ArrayList<CreditCard> {
         val listCards = ArrayList<CreditCard>()
         try {
-            val stm = connection.createStatement()
-            val rs = stm.executeQuery("Select * from creditcard")
 
+            val pstm = connection.prepareStatement("SELECT * FROM creditcard WHERE user_id = ?")
+            pstm.setString(1, e.id)
+            val rs = pstm.executeQuery()
             while (rs.next()) {
                 val card = CreditCard(
                     rs.getString("id"),
@@ -52,7 +53,7 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
                 )
                 listCards.add(card)
             }
-            stm.close()
+            pstm.close()
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
