@@ -18,7 +18,8 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
                 rs.getString("id"),
                 rs.getString("cart_id"),
                 rs.getInt("number"),
-                rs.getDate("date_generation")
+                rs.getDate("date_generation"),
+                rs.getString("card_id")
             )
             listOrders.add(salesOrder)
         }
@@ -47,7 +48,8 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
                 rs.getString("id"),
                 rs.getString("cart_id"),
                 rs.getInt("number"),
-                rs.getDate("date_generation")
+                rs.getDate("date_generation"),
+                rs.getString("card_id")
             )
             listOrders.add(salesOrder)
         }
@@ -69,7 +71,8 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
             rs.getString("id"),
             rs.getString("cart_id"),
             rs.getInt("number"),
-            rs.getDate("date_generation")
+            rs.getDate("date_generation"),
+            rs.getString("card_id")
         )
 
         rs.close()
@@ -80,10 +83,11 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
     override fun add(e: SalesOrder): SalesOrder {
         val psmt =
-            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, date_generation) VALUES(?,?,?)")
+            connection.prepareStatement("INSERT INTO salesorder(id, cart_id, date_generation, card_id) VALUES(?,?,?,?)")
         psmt.setString(1, e.id)
         psmt.setString(2, e.cart_id)
         psmt.setDate(3, e.date_generation as Date)
+        psmt.setString(4, e.cart_id)
 
         psmt.execute()
         psmt.close()
@@ -93,11 +97,12 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
 
     override fun edit(e: SalesOrder): SalesOrder {
         val psmt =
-            connection.prepareStatement("UPDATE salesorder SET cart_id = ?, number = ?, date_generation = ?  WHERE id like ?")
+            connection.prepareStatement("UPDATE salesorder SET cart_id = ?, number = ?, date_generation = ?, card_id = ?  WHERE id like ?")
         psmt.setString(1, e.cart_id)
         psmt.setInt(2, e.number as Int)
         psmt.setDate(3, e.date_generation as Date)
-        psmt.setString(4, e.id)
+        psmt.setString(4, e.cart_id)
+        psmt.setString(5, e.id)
 
         psmt.execute()
         psmt.close()

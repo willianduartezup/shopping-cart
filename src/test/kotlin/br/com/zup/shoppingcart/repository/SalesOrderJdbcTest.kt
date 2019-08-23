@@ -12,7 +12,7 @@ class SalesOrderJdbcTest {
 
     companion object {
 
-        private val salesOrder = SalesOrder(id, "123456",-1)
+        private val salesOrder = SalesOrder(id, "123456",-1, card_id = "123321")
 
 
         @BeforeClass
@@ -90,7 +90,7 @@ class SalesOrderJdbcTest {
             val salesOrderDao: SalesOrderDAO =
                 factory.getInstanceOf(SalesOrderDAO::class.java, jdbc.getConnection()) as SalesOrderDAO
 
-            val salesOrder = SalesOrder(id, "123",-1)
+            val salesOrder = SalesOrder(id, "123",-1, card_id = "321")
 
             salesOrderDao.edit(salesOrder)
 
