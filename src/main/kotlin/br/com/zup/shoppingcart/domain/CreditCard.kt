@@ -1,6 +1,6 @@
 package br.com.zup.shoppingcart.domain
 
-import java.util.Date
+import java.sql.Date
 import java.util.UUID
 import javax.persistence.Id
 
@@ -10,7 +10,7 @@ data class CreditCard (
 
     var number: String,
 
-    var expirationDate: Date,
+    var expirationDate: Int,
 
     var cardName : String
 
