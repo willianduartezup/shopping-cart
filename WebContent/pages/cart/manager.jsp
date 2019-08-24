@@ -129,12 +129,13 @@
                         </td>
                         <td style="width: 5%;">
                             <label>
-                                <input type="number" max="999" style="width: 90%;" id="cvv" name="cvv" placeholder="CVV"/>
+                                <input type="text" onkeyup="maskNumber(this)" pattern="[0-9]{3}" maxlength="3" style="width: 90%;" id="cvv" name="cvv" placeholder="CVV"/>
                             </label>
                         </td>
                         <td style="width: 45%;">
                             <label>
-                                <input type="text" style="width: 100%;" onkeyup="maskExpiration(this)" onchange="validExpiration(this)" pattern="\d{1,2}/\d{4}" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/>
+                                <!--input type="text" style="width: 100%;" onkeyup="maskExpiration(this)" onchange="validExpiration(this)" pattern="\d{1,2}/\d{4}" id="expiration_date" name="expiration_date" placeholder="Expiration Date"/-->
+                                <input type="month" style="width: 100%;" onchange="validExpiration(this)" id="expiration_date" name="expiration_date" placeholder="Expiration Date" />
                             </label>
                         </td>
                     </tr>
