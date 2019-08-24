@@ -181,11 +181,14 @@ function createOrder(form){
         if (document.getElementById("new_credit_card").style.display === 'block'){
             const credit_card= {};
 
+            const expArr = form.expiration_date.value.split('-');
+            const expiration = expArr[1] + '' + expArr[0];
+
             credit_card.userId = user_id;
             credit_card.cardName = form.name.value;
             credit_card.number = form.number.value;
             credit_card.cvv = form.cvv.value;
-            credit_card.expirationDate = form.expiration_date.value.replace("/","");
+            credit_card.expirationDate = expiration;
 
             creditCardFactory.create(credit_card, function (res) {
                 const cr_created = JSON.parse(res);
@@ -209,17 +212,20 @@ function createOrder(form){
 }
 
 function validExpiration(input) {
-  /*  const today = new Date();
-    const date = parseInt((today.getMonth()+1) + '' + today.getFullYear());
-    const dateInput = parseInt(input.value.replace("/",""));
+    const expArr = input.value.split('-');
+    const expiration = new Date();
+    expiration.setFullYear(expArr[0], expArr[1], 1);
+    expiration.setHours(0,0,0);
+    const time = expiration.getTime() - 1000;
+    expiration.setTime(time);
 
-    if(dateInput < date){
+    const today = new Date();
+
+    if (expiration.getTime() < today.getTime()){
         input.setCustomValidity('expired card')
     }else{
         input.setCustomValidity('')
     }
-
-   */
 }
 
 function showNewCredit() {
@@ -249,14 +255,12 @@ function showNewCredit() {
     }
 }
 
-function maskExpiration(input) {
+function maskNumber(input) {
     let value = input.value;
 
     value = value.replace(/\D/g,"");
-    value = value.replace(/(\d{2})(\d+)/g,"$1/$2");
-    value = value.replace(/(\d{2})\/(\d{4}).*/g,"$1/$2");
 
-    document.getElementById("expiration_date").value = value;
+    input.value = value;
 }
 
 function getCreditCardUser() {
