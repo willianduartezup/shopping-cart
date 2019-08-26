@@ -5,6 +5,18 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.sql.Connection
 
 class UserJdbcDAO(val connection: Connection) : UserDAO {
+    override fun emailIsexist(user: User) {
+
+        val stm = connection.prepareStatement("SELECT email FROM users WHERE email = ? and deleted = false")
+        stm.setString(1, user.email)
+
+        val rs = stm.executeQuery()
+
+        if (rs.next()) {
+            throw Exception("email already registered for another user")
+        }
+
+    }
 
     fun ArrayList<String>.toJson() = jacksonObjectMapper().writeValueAsString(this)
 

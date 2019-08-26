@@ -62,6 +62,8 @@ class UserService(
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
+            userDAO.emailIsexist(user)
+
             userDAO.add(user)
             connection.commit()
         } catch (ex: Exception) {
