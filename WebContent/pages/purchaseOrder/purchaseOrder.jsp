@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <div>
-    <span id="userName"></span><br>
-    <span id="order"></span><br>
-    <span id="credit_card"></span>
+    <span id="userName" style="font-family: sans-serif;font-size:17px;color:#333333;"></span><br>
+    <span id="order" style="font-family: sans-serif;font-size:17px;color:#333333;"></span><br>
+    <span id="credit_card" style="font-family: sans-serif;font-size:17px;color:#333333;"></span>
 </div>
 
 <div>
