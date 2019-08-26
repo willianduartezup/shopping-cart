@@ -66,7 +66,7 @@ function getItems() {
             totalPriceCell.style.textAlign = "right";
             totalPriceCell.colSpan = 4;
             orderPrice = orderPrice/100;
-            totalPriceCell.innerHTML = orderPrice.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});;
+            totalPriceCell.innerHTML = orderPrice.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
         }
     });
 }

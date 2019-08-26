@@ -2,17 +2,17 @@ function getUser(user_id) {
     userFactory.get(user_id, function (res) {
         const user = JSON.parse(res);
 
-        document.getElementById("titleListOrder").innerHTML = "orders placed by user "+ user.name;
+        document.getElementById("titleListOrder").innerHTML = "Orders placed by user: " + user.name;
     })
 }
 
 function getOrders() {
     const user_id = url.findGetParameter('user_id');
 
-    if (user_id){
+    if (user_id) {
         getUser(user_id);
-    }else{
-        document.getElementById("titleListOrder").innerHTML = "orders placed";
+    } else {
+        document.getElementById("titleListOrder").innerHTML = "Orders placed";
     }
 
     const table = document.getElementById('listOrder');
@@ -29,10 +29,10 @@ function getOrders() {
 
     const header = thead.insertRow();
 
-    header.insertCell().outerHTML = "<th style='text-align: center;'>Order Number</th>";
+    header.insertCell().outerHTML = "<th style='text-align:center;'>Order Number</th>";
     header.insertCell().outerHTML = "<th style='text-align: center;'>Date</th>";
     header.insertCell().outerHTML = "<th style='text-align: center;'>Total</th>";
-    if (!user_id){
+    if (!user_id) {
         header.insertCell().outerHTML = "<th style='text-align: center;'>User</th>";
     }
     header.insertCell().outerHTML = "<th style='text-align: center;'>Action</th>";
@@ -40,23 +40,23 @@ function getOrders() {
     orderFactory.list(user_id, function (res) {
         const listOrder = JSON.parse(res);
 
-        if (listOrder.length > 0){
+        if (listOrder.length > 0) {
             tbody.innerHTML = '';
 
             listOrder.map(function (order) {
                 const body = tbody.insertRow();
 
-                let bNumber  = body.insertCell();
+                let bNumber = body.insertCell();
                 bNumber.style.textAlign = "center";
                 bNumber.innerHTML = order.number;
 
-                let bDate  = body.insertCell();
+                let bDate = body.insertCell();
                 bDate.style.textAlign = "center";
                 bDate.innerHTML = order.date;
 
-                let bTotal  = body.insertCell();
+                let bTotal = body.insertCell();
                 bTotal.style.textAlign = "center";
-                const priceToUser = order.total/100;
+                const priceToUser = order.total / 100;
                 bTotal.innerHTML = priceToUser.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
 
                 if (!user_id) {
@@ -67,7 +67,7 @@ function getOrders() {
 
                 let bActions = body.insertCell();
                 bActions.style.textAlign = "center";
-                bActions.innerHTML = "<a href=\"index.jsp?page=purchaseOrder/purchaseOrder&order="+ order.id +"\">View</a>";
+                bActions.innerHTML = "<a href=\"index.jsp?page=purchaseOrder/purchaseOrder&order=" + order.id + "\">View</a>";
             });
         }
     });
