@@ -1,9 +1,10 @@
 package br.com.zup.shoppingcart.infra.exception
 
+
 import javax.validation.Validation
 
 object FieldValidator {
-    fun validate(domain: Any){
+    fun validate(domain: Any) {
         val validator = Validation.buildDefaultValidatorFactory().validator
         val violations = validator.validate(domain)
         var message = ""
@@ -13,5 +14,6 @@ object FieldValidator {
             }
             throw Exception(message)
         }
+
     }
 }
