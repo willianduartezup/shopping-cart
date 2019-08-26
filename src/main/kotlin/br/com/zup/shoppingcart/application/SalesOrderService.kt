@@ -1,6 +1,7 @@
 package br.com.zup.shoppingcart.application
 
 import br.com.zup.shoppingcart.domain.SalesOrder
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.CreditCardDAO
@@ -19,6 +20,7 @@ class SalesOrderService(
 
     private val cartService = CartService(ConnectionFactory(), DAOFactory())
     private val userService = UserService(ConnectionFactory(), DAOFactory())
+    private val readPayload = ReadPayload()
 
 
     fun addOrder(userId: String, cardid: String): String {
@@ -139,7 +141,7 @@ class SalesOrderService(
 
             jsonCreditCard.put("id", credCard.id)
             jsonCreditCard.put("name", credCard.cardName)
-            jsonCreditCard.put("number", credCard.number)
+            jsonCreditCard.put("number", readPayload.editCard(credCard.number))
 
             val user = userService.getUserById(cart.user_id)
 
