@@ -3,6 +3,7 @@ package br.com.zup.shoppingcart.application
 import br.com.zup.shoppingcart.domain.SalesOrder
 import br.com.zup.shoppingcart.repository.CartDAO
 import br.com.zup.shoppingcart.repository.ConnectionFactory
+import br.com.zup.shoppingcart.repository.CreditCardDAO
 import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ItemsCartDAO
 import br.com.zup.shoppingcart.repository.ProductDAO
@@ -20,16 +21,14 @@ class SalesOrderService(
     private val userService = UserService(ConnectionFactory(), DAOFactory())
 
 
-    fun addOrder(userId: String): String {
+    fun addOrder(userId: String, cardid: String): String {
 
         val user = userService.getUserById(userId)
         val cart = cartService.get(userId)
         val order: SalesOrder
 
-        // TODO: alterar para receber ID
-
         if (user.cart_id != "" && !cart.isEmpty()) {
-            order = SalesOrder(cart_id = user.cart_id!!, card_id = "teste")
+            order = SalesOrder(cart_id = user.cart_id!!, card_id = cardid)
         } else throw Exception("Invalid cart")
 
         val connection = jdbc.getConnection()
@@ -129,10 +128,18 @@ class SalesOrderService(
             val itemCartDao: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
             val listItems = itemCartDao.listItemCart(order.cart_id)
 
+            val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
+            val credCard = creditCardDAO.get(order.card_id)
+
             val jsonUser = JSONObject()
             val jsonOne = JSONObject()
             val jsonCart = JSONObject()
+            val jsonCreditCard = JSONObject()
             val jsonArray = JSONArray()
+
+            jsonCreditCard.put("id", credCard.id)
+            jsonCreditCard.put("name", credCard.cardName)
+            jsonCreditCard.put("number", credCard.number)
 
             val user = userService.getUserById(cart.user_id)
 
@@ -163,6 +170,7 @@ class SalesOrderService(
             jsonOne.put("number", order.number)
             jsonOne.put("cart", jsonCart)
             jsonOne.put("user", jsonUser)
+            jsonOne.put("credit_card", jsonCreditCard)
 
             return jsonOne
 

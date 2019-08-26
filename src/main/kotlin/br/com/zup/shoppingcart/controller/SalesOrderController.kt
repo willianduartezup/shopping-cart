@@ -1,7 +1,9 @@
 package br.com.zup.shoppingcart.controller
 
 import br.com.zup.shoppingcart.application.SalesOrderService
+import br.com.zup.shoppingcart.infra.BodyCredCard
 import br.com.zup.shoppingcart.infra.ManagerResponseServlet
+import br.com.zup.shoppingcart.infra.ReadPayload
 import br.com.zup.shoppingcart.repository.ConnectionFactory
 import br.com.zup.shoppingcart.repository.DAOFactory
 import org.json.JSONObject
@@ -15,6 +17,7 @@ class SalesOrderController: HttpServlet() {
 
     private val service = SalesOrderService(ConnectionFactory(), DAOFactory())
     private val manager = ManagerResponseServlet()
+    private val readPayload = ReadPayload()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
         if (req.pathInfo != ""){
@@ -28,7 +31,13 @@ class SalesOrderController: HttpServlet() {
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
         try {
             val userId = req.pathInfo.replace("/", "")
-            val orderId = this.service.addOrder(userId)
+
+            val card = readPayload.mapper<BodyCredCard>(req.inputStream)
+
+            val cardId = card.credit_id
+
+            val orderId = this.service.addOrder(userId, cardId)
+
             val json = JSONObject()
             json.put("id",orderId)
             resp.writer.write(json.toString())
