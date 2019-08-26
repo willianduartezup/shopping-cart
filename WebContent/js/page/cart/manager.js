@@ -59,7 +59,7 @@ function getProducts(){
             let options = "<option value=''>Product</option>";
 
             list.map(function (product) {
-                options += "<option value='"+ product.id +"'>"+ product.name +" R$ "+ product.price +"</option>";
+                options += "<option value='"+ product.id +"'>"+ product.name +" R$ "+ (product.price/100).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }); +"</option>";
             });
 
             document.getElementById("listProduct").innerHTML = options;
@@ -104,13 +104,13 @@ function getItens(){
                     const priceUnitProduct  = newRow.insertCell(2);
                     priceUnitProduct.style.textAlign = "center";
                     const unitPriceToUser = item.price_unit_product/100;
-                    priceUnitProduct.innerHTML = unitPriceToUser.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+                    priceUnitProduct.innerHTML = unitPriceToUser.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
                     const totalProduct = item.price_unit_product * item.quantity / 100;
 
                     const priceTotalProduct  = newRow.insertCell(3);
                     priceTotalProduct.style.textAlign = "center";
-                    priceTotalProduct.innerHTML = totalProduct.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+                    priceTotalProduct.innerHTML = totalProduct.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
                     const actions  = newRow.insertCell(4);
                     actions.style.textAlign = "center";
@@ -124,7 +124,7 @@ function getItens(){
             totalPriceCell.style.textAlign = "right";
             totalPriceCell.colSpan = 5;
             cartPrice = cartPrice/100;
-            totalPriceCell.innerHTML = "Total price: " + cartPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });;
+            totalPriceCell.innerHTML = "Total price: " + cartPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
         }
     });
