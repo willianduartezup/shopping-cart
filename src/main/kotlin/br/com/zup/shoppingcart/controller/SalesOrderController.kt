@@ -13,18 +13,20 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @WebServlet(name = "SalesOrderController", value = ["/sales/*"])
-class SalesOrderController: HttpServlet() {
+class SalesOrderController : HttpServlet() {
 
     private val service = SalesOrderService(ConnectionFactory(), DAOFactory())
     private val manager = ManagerResponseServlet()
     private val readPayload = ReadPayload()
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        if (req.pathInfo != ""){
-        val param = req.pathInfo.replace("/","")
-        resp.writer.write(service.getByOrderId(param).toString())
+        if (req.pathInfo != "") {
+            val param = req.pathInfo.replace("/", "")
+            resp.contentType = "application/json; charset=utf-8";
+            resp.writer.write(service.getByOrderId(param).toString())
         } else {
-            resp.sendError(400,"User id not found")
+            resp.contentType = "application/json; charset=utf-8";
+            resp.sendError(400, "User id not found")
         }
     }
 
@@ -39,7 +41,7 @@ class SalesOrderController: HttpServlet() {
             val orderId = this.service.addOrder(userId, cardId)
 
             val json = JSONObject()
-            json.put("id",orderId)
+            json.put("id", orderId)
             resp.writer.write(json.toString())
         } catch (e: Exception) {
             manager.badRequest(resp, e)
