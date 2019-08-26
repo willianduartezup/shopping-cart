@@ -57,7 +57,6 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
         try {
 
             FieldValidator.validate(card)
-
             val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
 
             creditCardDAO.add(card)
