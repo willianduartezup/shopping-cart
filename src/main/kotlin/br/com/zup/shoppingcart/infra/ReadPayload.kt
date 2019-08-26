@@ -46,4 +46,28 @@ class ReadPayload {
 
         return payload
     }
+
+    fun editCard(card: String): String{
+
+        var charArray = card.toCharArray()
+        var cardEdt = ""
+        var finalNumber = ""
+
+        for (i in 0 until card.length) {
+
+            if (i < 12) {
+                if (i == 4 || i == 8 || i == 12) {
+                    cardEdt += "-"
+                }
+                cardEdt += "X"
+            } else {
+
+                finalNumber += charArray[i]
+            }
+
+        }
+        return "$cardEdt-$finalNumber"
+
+    }
+
 }
