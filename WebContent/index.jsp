@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="pt-br">
     <link rel="stylesheet" href="pages/style.css">
     <title style="font-family:sans-serif;">Shopping Cart</title>
 
