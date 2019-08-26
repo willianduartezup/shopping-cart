@@ -273,7 +273,7 @@ function getCreditCardUser() {
             let options = "<option value=''>Credit Card</option>";
 
             list.map(function (credit) {
-                options += "<option value='"+ credit.id +"'>"+ credit.cardName +"</option>";
+                options += "<option value='"+ credit.id +"'>"+ credit.cardName +" - "+ credit.number +"</option>";
             });
 
             document.getElementById("select_id_credit").innerHTML = options;
