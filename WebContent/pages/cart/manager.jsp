@@ -124,7 +124,7 @@
                     <tr>
                         <td style="width: 45%;">
                             <label>
-                                <input type="text" style="width: 99%;" id="number" name="number" placeholder="Number" pattern="[0-9]{16}" maxlength="16" required>
+                                <input type="text" style="width: 99%;" id="number" name="number" placeholder="Number" pattern="[0-9]{16}" maxlength="16">
                             </label>
                         </td>
                         <td style="width: 5%;">
