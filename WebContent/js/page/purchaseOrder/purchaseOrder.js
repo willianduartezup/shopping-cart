@@ -7,7 +7,7 @@ function getOrder() {
             if (order) {
                 document.getElementById("userName").innerHTML = "User: " + order.user.name;
                 document.getElementById("order").innerHTML = "Order: " + order.number;
-                document.getElementById("credit_card").innerHTML = "Paid for by credit card: "+ order.credit_card.name;
+                document.getElementById("credit_card").innerHTML = "Paid for by credit card: "+ order.credit_card.name +" - "+ order.credit_card.number;
             }
         });
     } else {
