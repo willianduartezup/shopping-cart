@@ -12,14 +12,14 @@ class CreditCardJdbcDAO(val connection: Connection) : CreditCardDAO {
         stm.setString(1, id)
         val rs = stm.executeQuery()
         if (!rs.next()) {
-            throw Exception("User not found")
+            throw Exception("Card not found")
         }
         val credCart = CreditCard(
             rs.getString("id"),
-            rs.getString("userId"),
+            rs.getString("user_id"),
             rs.getString("number"),
-            rs.getInt("expirationDate"),
-            rs.getString("cardName"),
+            rs.getInt("expiration_data"),
+            rs.getString("card_name"),
             null
 
         )

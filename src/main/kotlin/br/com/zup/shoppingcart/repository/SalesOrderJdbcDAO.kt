@@ -87,7 +87,7 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
         psmt.setString(1, e.id)
         psmt.setString(2, e.cart_id)
         psmt.setDate(3, e.date_generation as Date)
-        psmt.setString(4, e.cart_id)
+        psmt.setString(4, e.card_id)
 
         psmt.execute()
         psmt.close()
@@ -101,7 +101,7 @@ class SalesOrderJdbcDAO(val connection: Connection): SalesOrderDAO {
         psmt.setString(1, e.cart_id)
         psmt.setInt(2, e.number as Int)
         psmt.setDate(3, e.date_generation as Date)
-        psmt.setString(4, e.cart_id)
+        psmt.setString(4, e.card_id)
         psmt.setString(5, e.id)
 
         psmt.execute()
