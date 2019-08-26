@@ -108,7 +108,7 @@ class SalesOrderServiceTest {
         LOG.info("A | should successfully creates sales-order")
 
         try {
-            orderId = salesOrderService.addOrder(userA.id!!)
+            orderId = salesOrderService.addOrder(userA.id!!, "123")
 
             val userCart = userService.getUserById(userA.id!!)
             assertTrue(userCart.id == userA.id && userCart.cart_id == "")
@@ -130,7 +130,7 @@ class SalesOrderServiceTest {
         LOG.info("B | should result error on create sale-order because cart is Empty")
 
         try {
-            val orderId = salesOrderService.addOrder(userB.id!!)
+            val orderId = salesOrderService.addOrder(userB.id!!, "123")
             assertTrue(false)
 
         } catch (e: Exception) {
@@ -147,7 +147,7 @@ class SalesOrderServiceTest {
     fun `C | should result error on create sale-order because cart is invalid`() {
         LOG.info("C | should result error on create sale-order because cart is invalid`")
         try {
-            val orderId = salesOrderService.addOrder(userC.id!!)
+            val orderId = salesOrderService.addOrder(userC.id!!, "123")
             assertTrue(false)
 
         } catch (e: Exception) {
@@ -163,7 +163,7 @@ class SalesOrderServiceTest {
     fun `D | should result error on create sale-order because user not found`() {
         LOG.info("D | should result error on create sale-order because user not found")
         try {
-            val orderId = salesOrderService.addOrder(userD.id!!)
+            val orderId = salesOrderService.addOrder(userD.id!!, "123")
             assertTrue(false)
 
         } catch (e: Exception) {
