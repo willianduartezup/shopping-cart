@@ -44,7 +44,7 @@ class CreditCartController : HttpServlet() {
             val card = readPayload.mapper<CreditCard>(request.inputStream)
 
             service.insertCard(card)
-            manager.created(response, card.id.toString())
+            manager.createdId(response, card.id.toString())
         } catch (e: Exception) {
             manager.badRequest(response, e)
         }
