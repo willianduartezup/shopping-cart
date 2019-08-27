@@ -1,7 +1,9 @@
 package br.com.zup.shoppingcart.repository
 
 import org.postgresql.ds.PGConnectionPoolDataSource
+import org.postgresql.jdbc3.Jdbc3PoolingDataSource
 import java.sql.Connection
+import javax.sql.DataSource
 
 class ConnectionFactory {
 
@@ -11,6 +13,7 @@ class ConnectionFactory {
     //private lateinit var connection: Connection
     private val pool = PGConnectionPoolDataSource()
 
+
     init {
         pool.serverName = "localhost"
         pool.portNumber = 5432
@@ -19,6 +22,7 @@ class ConnectionFactory {
         pool.password = "postgres"
         pool.loginTimeout = 20
         pool.socketTimeout = 20
+
     }
 
 

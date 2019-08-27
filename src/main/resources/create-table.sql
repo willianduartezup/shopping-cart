@@ -58,5 +58,5 @@ create table salesorder
         user_id         varchar(60) not null,
         number          varchar(100) not null,
         expiration_data varchar(100) not null,
-        card_name       varchar(60) not null,
+        card_name       varchar(60) not null
     );
