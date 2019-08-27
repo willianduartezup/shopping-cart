@@ -98,7 +98,7 @@ class CartService(
             throw e
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -176,7 +176,7 @@ class CartService(
 
         } finally {
 
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
 
         }
 
@@ -216,7 +216,7 @@ class CartService(
 
         } finally {
 
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
 
         }
     }
@@ -240,7 +240,7 @@ class CartService(
 
         } finally {
 
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
 
         }
     }

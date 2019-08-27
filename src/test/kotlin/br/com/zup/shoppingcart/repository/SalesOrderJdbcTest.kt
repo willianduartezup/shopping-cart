@@ -21,16 +21,17 @@ class SalesOrderJdbcTest {
             LOG.info("Insert Sales Order Test")
 
             val jdbc = ConnectionFactory()
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val salesOrderDao: SalesOrderDAO =
-                    factory.getInstanceOf(SalesOrderDAO::class.java, jdbc.getConnection()) as SalesOrderDAO
+                    factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
                 salesOrderDao.add(salesOrder)
             } catch (ex: Exception) {
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
 
@@ -41,18 +42,18 @@ class SalesOrderJdbcTest {
             LOG.info("Delete Sales Order Test")
 
             val jdbc = ConnectionFactory()
-
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val salesOrderDao: SalesOrderDAO =
-                    factory.getInstanceOf(SalesOrderDAO::class.java, jdbc.getConnection()) as SalesOrderDAO
+                    factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
                 salesOrderDao.remove(id)
 
             } catch (ex: Exception) {
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
 
@@ -63,10 +64,11 @@ class SalesOrderJdbcTest {
         LOG.info("Validate Insert Sales Order")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val salesOrderDao: SalesOrderDAO =
-                factory.getInstanceOf(SalesOrderDAO::class.java, jdbc.getConnection()) as SalesOrderDAO
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
             val result = salesOrderDao.add(salesOrder)
             assertEquals(result.id, salesOrder.id)
@@ -74,7 +76,7 @@ class SalesOrderJdbcTest {
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -85,10 +87,11 @@ class SalesOrderJdbcTest {
         LOG.info("Update Sales Order")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val salesOrderDao: SalesOrderDAO =
-                factory.getInstanceOf(SalesOrderDAO::class.java, jdbc.getConnection()) as SalesOrderDAO
+                factory.getInstanceOf(SalesOrderDAO::class.java, connection) as SalesOrderDAO
 
             val salesOrder = SalesOrder(id, "123",-1, card_id = "321")
 
@@ -98,7 +101,7 @@ class SalesOrderJdbcTest {
             ex.printStackTrace()
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 

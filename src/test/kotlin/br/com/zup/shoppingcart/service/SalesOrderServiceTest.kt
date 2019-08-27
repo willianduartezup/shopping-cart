@@ -77,8 +77,6 @@ class SalesOrderServiceTest {
                 Assert.assertTrue(false)
                 e.printStackTrace()
 
-            } finally {
-                jdbc.closeConnection()
             }
 
         }
@@ -94,8 +92,6 @@ class SalesOrderServiceTest {
                 LOG.error("Failure to remove test requirements")
                 e.printStackTrace()
 
-            } finally {
-                jdbc.closeConnection()
             }
         }
 
@@ -120,8 +116,6 @@ class SalesOrderServiceTest {
             Assert.assertTrue(false)
             e.printStackTrace()
 
-        } finally {
-            jdbc.closeConnection()
         }
     }
 
@@ -137,8 +131,6 @@ class SalesOrderServiceTest {
             assertEquals(e.message, "Invalid cart")
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
-        } finally {
-            jdbc.closeConnection()
         }
 
     }
@@ -154,8 +146,6 @@ class SalesOrderServiceTest {
             assertEquals(e.message, "Invalid cart")
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
-        } finally {
-            jdbc.closeConnection()
         }
     }
 
@@ -170,8 +160,6 @@ class SalesOrderServiceTest {
             assertEquals(e.message, "User not found")
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
-        } finally {
-            jdbc.closeConnection()
         }
     }
 
@@ -187,8 +175,6 @@ class SalesOrderServiceTest {
             LOG.error("Failed into get order. Exception is $e")
             assertTrue(false)
 
-        } finally {
-            jdbc.closeConnection()
         }
 
     }
@@ -206,8 +192,6 @@ class SalesOrderServiceTest {
             assertEquals(e.message, "Sales order not found")
             LOG.info("Failed into get order. Order not found. Exception is $e")
 
-        } finally {
-            jdbc.closeConnection()
         }
 
     }

@@ -20,7 +20,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
         } catch (ex: Exception) {
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
     fun getCreditCards(idUser: String): ArrayList<CreditCard> {
@@ -47,7 +47,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
         } catch (ex: Exception) {
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -65,7 +65,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
             connection.rollback()
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -79,7 +79,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
             connection.rollback()
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 }

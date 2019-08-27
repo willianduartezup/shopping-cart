@@ -31,7 +31,7 @@ class ProductJdbcTest {
                 connection.rollback()
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
 
@@ -53,7 +53,7 @@ class ProductJdbcTest {
                 connection.rollback()
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
     }
@@ -64,17 +64,18 @@ class ProductJdbcTest {
         LOG.info("Validate Insert Product Test")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val productDAO: ProductDAO =
-                factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
             assertEquals(product.id, productDAO.get(product.id!!).id)
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
             assertEquals(product.id, "")
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -100,7 +101,7 @@ class ProductJdbcTest {
             ex.printStackTrace()
             assertEquals("", "error")
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 }

@@ -55,7 +55,7 @@ class SalesOrderService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -179,7 +179,7 @@ class SalesOrderService(
         } catch (e: Exception) {
             throw e
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
 
     }

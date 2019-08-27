@@ -41,7 +41,7 @@ class ItemCartJdbcTest {
                 LOG.info("error on 'Insert Item Cart' test. Exception is $e")
 
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
 
@@ -66,7 +66,7 @@ class ItemCartJdbcTest {
                 LOG.info("error on 'Insert Item Cart' test. Exception is $e")
 
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
     }
@@ -76,9 +76,10 @@ class ItemCartJdbcTest {
         LOG.info("Validate Insert Item Cart")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
-            val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, jdbc.getConnection()) as ItemsCartDAO
+            val itemsCartDAO: ItemsCartDAO = factory.getInstanceOf(ItemsCartDAO::class.java, connection) as ItemsCartDAO
 
             assertEquals(id, itemsCartDAO.get(id).id)
         } catch (e: Exception) {
@@ -89,7 +90,7 @@ class ItemCartJdbcTest {
 
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -118,7 +119,7 @@ class ItemCartJdbcTest {
             LOG.error("Error on 'Validate Update Item Cart' test. Exception is $e")
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 }
