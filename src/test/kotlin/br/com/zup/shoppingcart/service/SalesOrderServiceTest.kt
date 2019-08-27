@@ -78,7 +78,7 @@ class SalesOrderServiceTest {
                 e.printStackTrace()
 
             } finally {
-                jdbc.closeConnection()
+                //jdbc.closeConnection()
             }
 
         }
@@ -95,7 +95,7 @@ class SalesOrderServiceTest {
                 e.printStackTrace()
 
             } finally {
-                jdbc.closeConnection()
+                //jdbc.closeConnection()
             }
         }
 
@@ -121,7 +121,7 @@ class SalesOrderServiceTest {
             e.printStackTrace()
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -138,7 +138,7 @@ class SalesOrderServiceTest {
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -155,7 +155,7 @@ class SalesOrderServiceTest {
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -171,7 +171,7 @@ class SalesOrderServiceTest {
             LOG.info("Failed successfully into creates sales-order. Exception is $e")
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -188,7 +188,7 @@ class SalesOrderServiceTest {
             assertTrue(false)
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -207,7 +207,7 @@ class SalesOrderServiceTest {
             LOG.info("Failed into get order. Order not found. Exception is $e")
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }

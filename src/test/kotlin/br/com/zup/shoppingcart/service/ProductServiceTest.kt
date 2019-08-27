@@ -32,18 +32,18 @@ class ProductServiceTest {
             LOG.info("Delete Product Test")
 
             val jdbc = ConnectionFactory()
-
+            val connection = jdbc.getConnection()
             try {
                 val factory = DAOFactory()
                 val productDAO: ProductDAO =
-                        factory.getInstanceOf(ProductDAO::class.java, jdbc.getConnection()) as ProductDAO
+                        factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
 
                 productDAO.remove(id)
 
             } catch (ex: Exception) {
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
     }

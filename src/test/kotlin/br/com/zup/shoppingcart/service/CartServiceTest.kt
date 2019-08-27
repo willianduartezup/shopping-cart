@@ -65,7 +65,7 @@ class CartServiceTest {
                 e.printStackTrace()
 
             } finally {
-                jdbc.closeConnection()
+                //jdbc.closeConnection()
             }
 
         }
@@ -82,7 +82,7 @@ class CartServiceTest {
                 e.printStackTrace()
 
             } finally {
-                jdbc.closeConnection()
+                //jdbc.closeConnection()
             }
         }
 
@@ -112,7 +112,7 @@ class CartServiceTest {
             io.printStackTrace()
 
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -139,7 +139,7 @@ class CartServiceTest {
         } catch (e: Exception) {
             LOG.info("Successfully on return error because not sufficient stock. Exception is $e")
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -160,7 +160,7 @@ class CartServiceTest {
             LOG.error("Failed into edit itemCart Exception is $e")
             assertTrue(false)
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -180,7 +180,7 @@ class CartServiceTest {
         } catch (e: Exception) {
             LOG.info(" Success on failure returns into edit itemCart. Exception is $e")
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -199,7 +199,7 @@ class CartServiceTest {
             LOG.error("Failed. Exception is $e")
             assertTrue(false)
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
 
     }
@@ -217,7 +217,7 @@ class CartServiceTest {
             LOG.error("Failed. Exception is $e")
             assertTrue(false)
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -237,7 +237,7 @@ class CartServiceTest {
             LOG.info("Failed. Exception is $e")
             assertEquals(e.message, "Item Cart not found")
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -249,7 +249,7 @@ class CartServiceTest {
             LOG.error("Failed. Exception is $e")
             assertTrue(false)
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -265,7 +265,7 @@ class CartServiceTest {
             LOG.error("Failed. Exception is $e")
             assertTrue(false)
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 
@@ -283,7 +283,7 @@ class CartServiceTest {
         } catch (e: Exception) {
             LOG.info("Failure in get list of the cart because user not have valid cart. Exception is $e")
         } finally {
-            jdbc.closeConnection()
+            //jdbc.closeConnection()
         }
     }
 

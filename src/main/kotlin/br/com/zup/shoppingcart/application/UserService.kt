@@ -21,7 +21,7 @@ class UserService(
         } catch (ex: Exception) {
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -35,7 +35,7 @@ class UserService(
         } catch (ex: Exception) {
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -52,7 +52,7 @@ class UserService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -70,7 +70,7 @@ class UserService(
             connection.rollback()
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -86,7 +86,7 @@ class UserService(
             connection.rollback()
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -102,7 +102,7 @@ class UserService(
             connection.rollback()
             throw ex
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 }

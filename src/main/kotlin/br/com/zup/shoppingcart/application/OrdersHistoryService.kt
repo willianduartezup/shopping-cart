@@ -61,7 +61,7 @@ class OrdersHistoryService (
         }catch (e: Exception) {
             throw e
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
 
     }

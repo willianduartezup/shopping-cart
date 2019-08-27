@@ -35,7 +35,7 @@ class UserJdbcTest {
                 connection.rollback()
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
 
@@ -59,7 +59,7 @@ class UserJdbcTest {
                 connection.rollback()
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
     }
@@ -70,17 +70,18 @@ class UserJdbcTest {
         LOG.info("Validate Insert User")
 
         val jdbc = ConnectionFactory()
+        val connection = jdbc.getConnection()
         try {
             val factory = DAOFactory()
             val userDAO: UserDAO =
-                factory.getInstanceOf(UserDAO::class.java, jdbc.getConnection()) as UserDAO
+                factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
 
             assertEquals(id, userDAO.get(id).id)
 
         } catch (ex: java.lang.Exception) {
             ex.printStackTrace()
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -106,7 +107,7 @@ class UserJdbcTest {
             ex.printStackTrace()
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 

@@ -48,7 +48,7 @@ class UserServiceTest {
                 connection.rollback()
                 ex.printStackTrace()
             } finally {
-                jdbc.closeConnection()
+                jdbc.closeConnection(connection)
             }
         }
     }

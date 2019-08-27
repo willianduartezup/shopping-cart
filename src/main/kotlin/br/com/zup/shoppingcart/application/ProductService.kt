@@ -27,7 +27,7 @@ class ProductService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -45,7 +45,7 @@ class ProductService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -63,7 +63,7 @@ class ProductService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
@@ -85,7 +85,7 @@ class ProductService(
             throw ex
 
         } finally {
-            jdbc.closeConnection()
+            jdbc.closeConnection(connection)
         }
     }
 
