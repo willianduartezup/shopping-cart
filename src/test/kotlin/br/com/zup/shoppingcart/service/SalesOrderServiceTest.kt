@@ -30,7 +30,6 @@ class SalesOrderServiceTest {
     companion object {
 
         private val factory = DAOFactory()
-        private val jdbc = ConnectionFactory()
 
         private val array = ArrayList<String>()
 
@@ -49,11 +48,11 @@ class SalesOrderServiceTest {
         private val strawberryCart =
             ItemCart(product_id = strawberry.id!!, price_unit_product = strawberry.price, quantity = 5)
 
-        private val userService = UserService(jdbc, factory)
-        private val productService = ProductService(jdbc, factory)
-        private val cartService = CartService(jdbc, factory)
-        private val salesOrderService = SalesOrderService(ConnectionFactory(), DAOFactory())
-        private val ordersHistoryService = OrdersHistoryService(ConnectionFactory(), DAOFactory())
+        private val userService = UserService(factory)
+        private val productService = ProductService(factory)
+        private val cartService = CartService(factory)
+        private val salesOrderService = SalesOrderService(DAOFactory())
+        private val ordersHistoryService = OrdersHistoryService(DAOFactory())
 
         private lateinit var orderId: String
 

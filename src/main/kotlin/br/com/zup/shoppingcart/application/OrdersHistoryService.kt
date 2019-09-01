@@ -13,12 +13,12 @@ import org.json.JSONString
 import java.util.ArrayList
 
 class OrdersHistoryService (
-    private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
 
     fun getOrdersUser(idUser: String): JSONArray{
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try{

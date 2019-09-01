@@ -26,7 +26,7 @@ class OrdersHistoryServiceTest {
             User(name = "User Test", email = "test@user.com", password = "PRIVATE", orders = array)
 
 
-        private val salesOrderService = SalesOrderService(ConnectionFactory(), DAOFactory())
+        private val salesOrderService = SalesOrderService(DAOFactory())
 
         private lateinit var orderId: String
 

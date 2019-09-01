@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
 @WebServlet(name = "ProductController", value = ["/product/*"])
 class ProductController : HttpServlet() {
 
-    private val productService = ProductService(ConnectionFactory(), DAOFactory())
+    private val productService = ProductService(DAOFactory())
     private val readPayload = ReadPayload()
     private val manager = ManagerResponseServlet()
 

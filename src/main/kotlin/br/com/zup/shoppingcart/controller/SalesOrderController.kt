@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
 @WebServlet(name = "SalesOrderController", value = ["/sales/*"])
 class SalesOrderController : HttpServlet() {
 
-    private val service = SalesOrderService(ConnectionFactory(), DAOFactory())
+    private val service = SalesOrderService(DAOFactory())
     private val manager = ManagerResponseServlet()
     private val readPayload = ReadPayload()
 
