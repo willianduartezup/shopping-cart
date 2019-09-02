@@ -27,7 +27,6 @@ class CartServiceTest {
     companion object {
 
         private val factory = DAOFactory()
-        private val jdbc = ConnectionFactory()
 
         private val array = ArrayList<String>()
 
@@ -41,9 +40,9 @@ class CartServiceTest {
         private val orangeCart = ItemCart(product_id = orange.id!!, price_unit_product = orange.price, quantity = 3)
         private val strawberryCart = ItemCart(product_id = strawberry.id!!, price_unit_product = strawberry.price, quantity = 5)
 
-        private val userService = UserService(jdbc, factory)
-        private val productService = ProductService(jdbc, factory)
-        private val cartService = CartService(jdbc, factory)
+        private val userService = UserService(factory)
+        private val productService = ProductService(factory)
+        private val cartService = CartService(factory)
 
         @BeforeClass
         @JvmStatic

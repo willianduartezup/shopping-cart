@@ -17,7 +17,6 @@ import java.util.ArrayList
 
 
 class CartService(
-    private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
 
@@ -38,6 +37,7 @@ class CartService(
         var idCart = ""
         var idItemCartAdd = ""
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         val userCart: User
@@ -105,6 +105,7 @@ class CartService(
 
     private fun groupItemsCart(idCart: String, itemCart: ItemCart, connection: Connection): String {
 
+        val jdbc = ConnectionFactory()
         var idItemCart = ""
 
         try {
@@ -154,6 +155,7 @@ class CartService(
 
     fun remove(idItemCart: String) {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {
@@ -184,6 +186,7 @@ class CartService(
 
     fun edit(itemCart: ItemCart) {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         val operator = getOperatorStock(itemCart.id.toString(), itemCart.quantity, connection)
@@ -223,6 +226,7 @@ class CartService(
 
     fun get(idUser: String): ArrayList<ItemCart> {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {

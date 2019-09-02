@@ -7,12 +7,12 @@ import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.ProductDAO
 
 class ProductService(
-    private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
 
     fun add(product: Product) {
         FieldValidator.validate(product)
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val productDAO: ProductDAO = factory.getInstanceOf(ProductDAO::class.java, connection) as ProductDAO
@@ -33,6 +33,7 @@ class ProductService(
 
     fun getProductById(id: String): Product {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {
@@ -51,6 +52,7 @@ class ProductService(
 
     fun getListProducts(): ArrayList<Product> {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {
@@ -69,6 +71,7 @@ class ProductService(
 
     fun edit(product: Product) {
         FieldValidator.validate(product)
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {

@@ -7,12 +7,12 @@ import br.com.zup.shoppingcart.repository.DAOFactory
 import br.com.zup.shoppingcart.repository.UserDAO
 
 class UserService(
-    private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
 
     fun getUserById(param: String): User {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -27,6 +27,7 @@ class UserService(
 
     fun getListUser(): ArrayList<User> {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -41,6 +42,7 @@ class UserService(
 
     @Throws(Exception::class)
     fun getRemovedUserById(param: String): User {
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -58,6 +60,7 @@ class UserService(
 
     fun add(user: User) {
         FieldValidator.validate(user)
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -76,6 +79,7 @@ class UserService(
 
     fun edit(user: User) {
         FieldValidator.validate(user)
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO
@@ -92,6 +96,7 @@ class UserService(
 
     fun remove(param: String) {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val userDAO: UserDAO = factory.getInstanceOf(UserDAO::class.java, connection) as UserDAO

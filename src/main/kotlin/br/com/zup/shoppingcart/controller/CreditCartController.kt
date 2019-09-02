@@ -17,7 +17,7 @@ class CreditCartController : HttpServlet() {
 
     private val readPayload = ReadPayload()
     private val manager = ManagerResponseServlet()
-    private val service = CreditCardService(ConnectionFactory(), DAOFactory())
+    private val service = CreditCardService(DAOFactory())
 
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
 

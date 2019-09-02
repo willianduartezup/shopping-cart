@@ -8,11 +8,12 @@ import br.com.zup.shoppingcart.repository.CreditCardDAO
 import br.com.zup.shoppingcart.repository.DAOFactory
 import java.sql.Connection
 
-class CreditCardService(private val jdbc: ConnectionFactory, private val factory: DAOFactory) {
+class CreditCardService(private val factory: DAOFactory) {
 
     private val readPayload = ReadPayload()
 
     fun getCreditCardById(param: String): CreditCard {
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val creditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
@@ -24,6 +25,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
         }
     }
     fun getCreditCards(idUser: String): ArrayList<CreditCard> {
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO
@@ -53,6 +55,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
 
     fun insertCard(card: CreditCard){
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
 
@@ -70,6 +73,7 @@ class CreditCardService(private val jdbc: ConnectionFactory, private val factory
     }
 
     fun removeCard(cardId: String){
+        val jdbc = ConnectionFactory()
         val connection: Connection = jdbc.getConnection()
         try{
             val creditCardDAO: CreditCardDAO = factory.getInstanceOf(CreditCardDAO::class.java, connection) as CreditCardDAO

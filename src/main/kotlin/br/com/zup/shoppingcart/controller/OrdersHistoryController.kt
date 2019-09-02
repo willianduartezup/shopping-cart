@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 @WebServlet(name = "OrdersHistory", value = ["/history/*"])
 class OrdersHistoryController : HttpServlet() {
 
-    private val service = OrdersHistoryService(ConnectionFactory(), DAOFactory())
+    private val service = OrdersHistoryService(DAOFactory())
 
     override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
         var param = ""

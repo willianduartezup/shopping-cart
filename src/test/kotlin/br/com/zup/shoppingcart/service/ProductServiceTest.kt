@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
 class ProductServiceTest {
     companion object {
         private val product = Product(id, "Apple", 2, "piece", 1)
-        private val service = ProductService(ConnectionFactory(), DAOFactory())
+        private val service = ProductService(DAOFactory())
 
         @BeforeClass
         @JvmStatic

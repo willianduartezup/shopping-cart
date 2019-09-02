@@ -16,7 +16,7 @@ class CartController : HttpServlet() {
 
     private val reader = ReadPayload()
     private val manager = ManagerResponseServlet()
-    private val service = CartService(ConnectionFactory(), DAOFactory())
+    private val service = CartService(DAOFactory())
 
     override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
         try {

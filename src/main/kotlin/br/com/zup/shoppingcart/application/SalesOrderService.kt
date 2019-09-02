@@ -14,12 +14,11 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class SalesOrderService(
-    private val jdbc: ConnectionFactory,
     private val factory: DAOFactory
 ) {
 
-    private val cartService = CartService(ConnectionFactory(), DAOFactory())
-    private val userService = UserService(ConnectionFactory(), DAOFactory())
+    private val cartService = CartService(DAOFactory())
+    private val userService = UserService(DAOFactory())
     private val readPayload = ReadPayload()
 
 
@@ -33,6 +32,7 @@ class SalesOrderService(
             order = SalesOrder(cart_id = user.cart_id!!, card_id = cardid)
         } else throw Exception("Invalid cart")
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
         try {
             val salesOrderJdbcDAO: SalesOrderDAO =
@@ -116,6 +116,7 @@ class SalesOrderService(
 
     fun getByOrderId(idOrder: String): JSONObject {
 
+        val jdbc = ConnectionFactory()
         val connection = jdbc.getConnection()
 
         try {

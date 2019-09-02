@@ -25,7 +25,7 @@ class UserServiceTest {
 
         val user: User =
             User(name = "User Test", email = "test@user.com", password = "PRIVATE", cart_id = "", orders = array)
-        private val service = UserService(ConnectionFactory(), DAOFactory())
+        private val service = UserService(DAOFactory())
 
 
         @AfterClass
